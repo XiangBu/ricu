@@ -136,8 +136,122 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-data-loading" class="hasAnchor"><a href="#section-data-loading" class="anchor"></a>Data loading</h2>
+          <p class="section-desc"><p>Data can be loaded from cofigured datasources, either in the form of data concepts or by directly querying one of the underlying tables. Depending on what route is taken for loading, data is returned either as <code>data.table</code> or as one of the <code>ricu</code>-provided tabular data types <code>id_tbl</code> or <code>ts_tbl</code>.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-concept-loading" class="hasAnchor"><a href="#section-concept-loading" class="anchor"></a>Concept loading</h3>
+          <p class="section-desc"><p>Data concepts in <code>ricu</code> provide an abstraction that allows to define how a clinical concept (such as heart rate) can be retrieved from a data source. Once defined, concepts can be loaded in a data source agnostic and concise manner.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="load_concepts.html">load_concepts()</a></code> <code><a href="load_concepts.html">progress_msg()</a></code> </p>
+        </td>
+        <td><p>Load concept data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_concepts.html">new_cncpt()</a></code> <code><a href="data_concepts.html">is_cncpt()</a></code> <code><a href="data_concepts.html">init_cncpt()</a></code> <code><a href="data_concepts.html">new_concept()</a></code> <code><a href="data_concepts.html">concept()</a></code> <code><a href="data_concepts.html">is_concept()</a></code> </p>
+        </td>
+        <td><p>Data concept</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_items.html">new_itm()</a></code> <code><a href="data_items.html">is_itm()</a></code> <code><a href="data_items.html">init_itm()</a></code> <code><a href="data_items.html">new_item()</a></code> <code><a href="data_items.html">item()</a></code> <code><a href="data_items.html">as_item()</a></code> <code><a href="data_items.html">is_item()</a></code> </p>
+        </td>
+        <td><p>Data item</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="concept_dictionary.html">load_dictionary()</a></code> </p>
+        </td>
+        <td><p>Load concept dictionaries</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-callback-functions" class="hasAnchor"><a href="#section-callback-functions" class="anchor"></a>Callback functions</h3>
+          <p class="section-desc"><p>To provided the required flexibility for defining data concepts, individual items can specify callback functions that are used for post-processing steps for loaded data. Some function fatories are provided for creating simple callback functions and more involved scenarios, such as a SOFA score concept require specialized functions, which might even expose function arguments which can be used to fine-tune the concept bahavior.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="callback_utils.html">transform_fun()</a></code> <code><a href="callback_utils.html">binary_op()</a></code> <code><a href="callback_utils.html">comp_na()</a></code> <code><a href="callback_utils.html">apply_map()</a></code> <code><a href="callback_utils.html">convert_unit()</a></code> </p>
+        </td>
+        <td><p>Callback utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="label_sofa.html">sofa_score()</a></code> <code><a href="label_sofa.html">sofa_pafi()</a></code> <code><a href="label_sofa.html">sofa_vent()</a></code> <code><a href="label_sofa.html">sofa_gcs()</a></code> <code><a href="label_sofa.html">sofa_urine()</a></code> <code><a href="label_sofa.html">sofa_window()</a></code> <code><a href="label_sofa.html">sofa_compute()</a></code> </p>
+        </td>
+        <td><p>SOFA score label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="label_sirs.html">sirs_score()</a></code> <code><a href="label_sirs.html">supp_o2()</a></code> <code><a href="label_sirs.html">avpu()</a></code> <code><a href="label_sirs.html">news_score()</a></code> <code><a href="label_sirs.html">mews_score()</a></code> </p>
+        </td>
+        <td><p>SIRS score label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="label_si.html">susp_inf()</a></code> <code><a href="label_si.html">si_calc()</a></code> </p>
+        </td>
+        <td><p>Suspicion of infection label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="label_sep3.html">sepsis_3()</a></code> <code><a href="label_sep3.html">delta_cummin()</a></code> <code><a href="label_sep3.html">delta_start()</a></code> <code><a href="label_sep3.html">delta_min()</a></code> </p>
+        </td>
+        <td><p>Sepsis 3 label</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-query-loading" class="hasAnchor"><a href="#section-query-loading" class="anchor"></a>Query loading</h3>
+          <p class="section-desc"><p>Tables can be queried directly by creating an R expression that evaluates to a logical vector indicating which rows to load. The expression is evaluated within the data context, powered by the non-standard evaluation framework provided by <code>rlang</code>.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="load_tbl.html">load_id()</a></code> <code><a href="load_tbl.html">load_ts()</a></code> </p>
+        </td>
+        <td><p>Load data as <code>id_tbl</code> or <code>ts_tbl</code> objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_src.html">load_src()</a></code> <code><a href="load_src.html">load_difftime()</a></code> </p>
+        </td>
+        <td><p>Low level functions for loading data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tabular-icu-data" class="hasAnchor"><a href="#section-tabular-icu-data" class="anchor"></a>Tabular ICU data</h2>
+          <p class="section-desc"><p>Inheriting from <code>data.table</code>, <code>ricu</code> provides classes intended to simplify handling of tabular ICU data. For dynamic (i.e. time-varying) data (such as vital sign data), <code>ts_tbl</code> is used and for static data (for example an admission diagnonsis), <code>id_tbl</code> objects are used. Alongside these data structures, several utility functions are provided.</p></p>
         </th>
       </tr>
       
@@ -148,117 +262,9 @@
       <tr>
         
         <td>
-          <p><code><a href="attach_src.html">data</a></code> <code><a href="attach_src.html">as_src_tbl()</a></code> <code><a href="attach_src.html">as_src_env()</a></code> <code><a href="attach_src.html">attach_src()</a></code> <code><a href="attach_src.html">setup_src_env()</a></code> </p>
-        </td>
-        <td><p>Data attach utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="cfg_utils.html">src_name()</a></code> <code><a href="cfg_utils.html">tbl_name()</a></code> </p>
-        </td>
-        <td><p>Get default columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="change_id.html">change_id()</a></code> <code><a href="change_id.html">upgrade_id()</a></code> <code><a href="change_id.html">downgrade_id()</a></code> </p>
-        </td>
-        <td><p>Switch between id types</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_concepts.html">item()</a></code> <code><a href="data_concepts.html">as_item()</a></code> <code><a href="data_concepts.html">n_tick()</a></code> <code><a href="data_concepts.html">new_cncpt()</a></code> <code><a href="data_concepts.html">is_cncpt()</a></code> <code><a href="data_concepts.html">init_cncpt()</a></code> <code><a href="data_concepts.html">src_name(<i>&lt;cncpt&gt;</i>)</a></code> <code><a href="data_concepts.html">new_concept()</a></code> <code><a href="data_concepts.html">concept()</a></code> <code><a href="data_concepts.html">is_concept()</a></code> <code><a href="data_concepts.html">load_dictionary()</a></code> </p>
-        </td>
-        <td><p>Data concept</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data_items.html">new_itm()</a></code> <code><a href="data_items.html">is_itm()</a></code> <code><a href="data_items.html">init_itm()</a></code> <code><a href="data_items.html">new_item()</a></code> <code><a href="data_items.html">is_item()</a></code> </p>
-        </td>
-        <td><p>Data item</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="difftime.html">secs()</a></code> <code><a href="difftime.html">mins()</a></code> <code><a href="difftime.html">hours()</a></code> <code><a href="difftime.html">days()</a></code> <code><a href="difftime.html">weeks()</a></code> </p>
-        </td>
-        <td><p>Difftime utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download.html">download_src()</a></code> </p>
-        </td>
-        <td><p>Data download utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="file_utils.html">data_dir()</a></code> <code><a href="file_utils.html">get_config()</a></code> <code><a href="file_utils.html">set_config()</a></code> </p>
-        </td>
-        <td><p>File system utilities</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="id_tbl.html">id_tbl()</a></code> <code><a href="id_tbl.html">is_id_tbl()</a></code> <code><a href="id_tbl.html">as_id_tbl()</a></code> <code><a href="id_tbl.html">ts_tbl()</a></code> <code><a href="id_tbl.html">is_ts_tbl()</a></code> <code><a href="id_tbl.html">as_ts_tbl()</a></code> <code><a href="id_tbl.html">unclass_tbl()</a></code> <code><a href="id_tbl.html">reclass_tbl()</a></code> <code><a href="id_tbl.html">as_ptype()</a></code> <code><a href="id_tbl.html">validate_tbl()</a></code> </p>
         </td>
         <td><p>Tabular ICU data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="import.html">import_src()</a></code> <code><a href="import.html">import_tbl()</a></code> </p>
-        </td>
-        <td><p>Data import utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="label_si.html">susp_inf()</a></code> <code><a href="label_si.html">si_calc()</a></code> </p>
-        </td>
-        <td><p>Suspicion of infection label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="label_sirs.html">sirs_score()</a></code> <code><a href="label_sirs.html">supp_o2()</a></code> <code><a href="label_sirs.html">avpu()</a></code> <code><a href="label_sirs.html">news_score()</a></code> <code><a href="label_sirs.html">mews_score()</a></code> </p>
-        </td>
-        <td><p>SIRS score label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="label_sofa.html">sofa_score()</a></code> <code><a href="label_sofa.html">sofa_pafi()</a></code> <code><a href="label_sofa.html">sofa_vent()</a></code> <code><a href="label_sofa.html">sofa_gcs()</a></code> <code><a href="label_sofa.html">sofa_urine()</a></code> <code><a href="label_sofa.html">sofa_window()</a></code> <code><a href="label_sofa.html">sofa_compute()</a></code> </p>
-        </td>
-        <td><p>SOFA score label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_concepts.html">load_concepts()</a></code> <code><a href="load_concepts.html">progress_msg()</a></code> </p>
-        </td>
-        <td><p>Load concept data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_src.html">load_src()</a></code> <code><a href="load_src.html">load_difftime()</a></code> <code><a href="load_src.html">load_id()</a></code> <code><a href="load_src.html">load_ts()</a></code> <code><a href="load_src.html">data_id()</a></code> <code><a href="load_src.html">data_ts()</a></code> </p>
-        </td>
-        <td><p>Low level functions for loading data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_src_cfg.html">load_src_cfg()</a></code> </p>
-        </td>
-        <td><p>Load configuration for a data source</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sep3_label.html">sepsis_3()</a></code> <code><a href="sep3_label.html">delta_cummin()</a></code> <code><a href="sep3_label.html">delta_start()</a></code> <code><a href="sep3_label.html">delta_min()</a></code> </p>
-        </td>
-        <td><p>Sepsis 3 label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stay_windows.html">stay_windows()</a></code> </p>
-        </td>
-        <td><p>Stays</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tbl_meta.html">write_psv()</a></code> <code><a href="tbl_meta.html">read_psv()</a></code> </p>
-        </td>
-        <td><p>Read and write utilities</p></td>
       </tr><tr>
         
         <td>
@@ -274,9 +280,95 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="change_id.html">change_id()</a></code> <code><a href="change_id.html">upgrade_id()</a></code> <code><a href="change_id.html">downgrade_id()</a></code> </p>
+        </td>
+        <td><p>Switch between id types</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stay_windows.html">stay_windows()</a></code> </p>
+        </td>
+        <td><p>Stays</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-source-setup" class="hasAnchor"><a href="#section-data-source-setup" class="anchor"></a>Data source setup</h2>
+          <p class="section-desc"><p>For a data source to be usable via <code>ricu</code>, a JSON-based configuration is required and some preprocessing is carried out by <code>ricu</code> as an initial setup step by [import_src()] and for data sets hosted on <a href="https://physionet.org">Physionet</a>, a downloader is available as [download_src()]. As a final step, making data available to <code>ricu</code>, [attach_src()] is automatically called for configured data sources at package loading.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="download.html">download_src()</a></code> </p>
+        </td>
+        <td><p>Data download utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="import.html">import_src()</a></code> <code><a href="import.html">import_tbl()</a></code> </p>
+        </td>
+        <td><p>Data import utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="attach_src.html">data</a></code> <code><a href="attach_src.html">as_src_tbl()</a></code> <code><a href="attach_src.html">as_src_env()</a></code> <code><a href="attach_src.html">attach_src()</a></code> <code><a href="attach_src.html">setup_src_env()</a></code> </p>
+        </td>
+        <td><p>Data attach utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_src_cfg.html">load_src_cfg()</a></code> </p>
+        </td>
+        <td><p>Load configuration for a data source</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="file_utils.html">data_dir()</a></code> <code><a href="file_utils.html">get_config()</a></code> <code><a href="file_utils.html">set_config()</a></code> </p>
+        </td>
+        <td><p>File system utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cfg_utils.html">src_name()</a></code> <code><a href="cfg_utils.html">tbl_name()</a></code> </p>
+        </td>
+        <td><p>Get default columns</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="difftime.html">secs()</a></code> <code><a href="difftime.html">mins()</a></code> <code><a href="difftime.html">hours()</a></code> <code><a href="difftime.html">days()</a></code> <code><a href="difftime.html">weeks()</a></code> </p>
+        </td>
+        <td><p>Difftime utilities</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="utils.html">min_or_na()</a></code> <code><a href="utils.html">max_or_na()</a></code> <code><a href="utils.html">sum_or_na()</a></code> <code><a href="utils.html">is_val()</a></code> <code><a href="utils.html">not_val()</a></code> <code><a href="utils.html">is_true()</a></code> <code><a href="utils.html">last_elem()</a></code> <code><a href="utils.html">first_elem()</a></code> <code><a href="utils.html">replace_na()</a></code> </p>
         </td>
         <td><p>Utility functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tbl_meta.html">write_psv()</a></code> <code><a href="tbl_meta.html">read_psv()</a></code> </p>
+        </td>
+        <td><p>Read and write utilities</p></td>
       </tr>
     </tbody>
     </table>

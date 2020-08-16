@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data item — new_itm • ICU data with R</title>
+<title>Load concept dictionaries — load_dictionary • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Data item — new_itm" />
-<meta property="og:description" content="In order to specify the location of data items in data sets, item objects
-are used." />
+<meta property="og:title" content="Load concept dictionaries — load_dictionary" />
+<meta property="og:description" content="Data can be specified in JSON format and parsed into concept objects." />
 
 
 <meta name="robots" content="noindex">
@@ -124,130 +123,41 @@ are used." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Data item</h1>
+    <h1>Load concept dictionaries</h1>
     
-    <div class="hidden name"><code>data_items.Rd</code></div>
+    <div class="hidden name"><code>concept_dictionary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In order to specify the location of data items in data sets, <code>item</code> objects
-are used.</p>
+    <p>Data can be specified in JSON format and parsed into <code>concept</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, target = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ts_tbl"</span>, <span class='st'>"id_tbl"</span>), class = <span class='st'>"sel_itm"</span>)
-
-<span class='fu'>is_itm</span>(<span class='kw'>x</span>)
-
-<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for sel_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  <span class='kw'>sub_var</span>,
-  <span class='kw'>ids</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for col_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  unit_val = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for rgx_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  <span class='kw'>sub_var</span>,
-  <span class='kw'>regex</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for fun_itm</span>
-<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>callback</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for itm</span>
-<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='fu'>new_item</span>(<span class='kw'>x</span>, target = <span class='kw'>NULL</span>)
-
-<span class='fu'>item</span>(<span class='kw'>...</span>)
-
-<span class='fu'>as_item</span>(<span class='kw'>x</span>)
-
-<span class='fu'>is_item</span>(<span class='kw'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>load_dictionary</span>(
+  src = <span class='kw'>NULL</span>,
+  concepts = <span class='kw'>NULL</span>,
+  name = <span class='st'>"concept-dict"</span>,
+  file = <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>src</th>
-      <td><p>The data source name</p></td>
+      <td><p><code>NULL</code> or the name of a data source</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Further specification of the <code>itm</code> object (passed to
-<code>init_itm()</code>)</p></td>
+      <th>concepts</th>
+      <td><p>A character vector used to subset the concept dictionary or
+<code>NULL</code> indicating no subsetting</p></td>
     </tr>
     <tr>
-      <th>target</th>
-      <td><p>The target object yielded by loading</p></td>
+      <th>name</th>
+      <td><p>Name of the dictionary to be read</p></td>
     </tr>
     <tr>
-      <th>class</th>
-      <td><p>Sub class for customizing <code>itm</code> behavior</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Object to query/dispatch on</p></td>
-    </tr>
-    <tr>
-      <th>table</th>
-      <td><p>Name of the table containing the data</p></td>
-    </tr>
-    <tr>
-      <th>sub_var</th>
-      <td><p>Column name used for subsetting</p></td>
-    </tr>
-    <tr>
-      <th>ids</th>
-      <td><p>Vector of ids used to subset table rows. If <code>NULL</code>, all rows are
-considered corresponding to the data item</p></td>
-    </tr>
-    <tr>
-      <th>itm_vars</th>
-      <td><p>Columns returned as <code><a href='id_vars.html'>data_vars()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>index_var</th>
-      <td><p>Column used as index</p></td>
-    </tr>
-    <tr>
-      <th>callback</th>
-      <td><p>Name of a function to be called on the returned data used
-for data cleanup operations (or a string that evaluates to a function)</p></td>
-    </tr>
-    <tr>
-      <th>unit_val</th>
-      <td><p>String valued unit to be used in case no <code>unit_var</code> is
-available for the given table</p></td>
-    </tr>
-    <tr>
-      <th>regex</th>
-      <td><p>String-valued regular expression which will be evaluated by
-<code><a href='https://rdrr.io/r/base/grep.html'>base::grepl()</a></code> with <code>ignore.case = TRUE</code></p></td>
+      <th>file</th>
+      <td><p>File name of the dictionary</p></td>
     </tr>
     </table>
 

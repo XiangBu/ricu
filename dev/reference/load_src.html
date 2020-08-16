@@ -179,44 +179,7 @@ mechanisms for loading data.</p>
 )
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
-
-<span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_tbl</span>
-<span class='fu'>load_id</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_var = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  interval = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>1L</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
-
-<span class='fu'>load_ts</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_tbl</span>
-<span class='fu'>load_ts</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_var = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  index_var = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>index_var</a></span>(<span class='kw'>x</span>),
-  interval = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>1L</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>load_ts</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
-
-<span class='fu'>data_id</span>(<span class='kw'>source</span>, <span class='kw'>table</span>, <span class='kw'>...</span>)
-
-<span class='fu'>data_ts</span>(<span class='kw'>source</span>, <span class='kw'>table</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,27 +212,6 @@ mechanisms for loading data.</p>
       <th>time_vars</th>
       <td><p>Character vector enumerating the columns to be treated as
 timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> vectors</p></td>
-    </tr>
-    <tr>
-      <th>id_var</th>
-      <td><p>The column defining the id of <code>ts_tbl</code> and <code>id_tbl</code> objects</p></td>
-    </tr>
-    <tr>
-      <th>interval</th>
-      <td><p>The time interval used to discretize time stamps with,
-specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> object</p></td>
-    </tr>
-    <tr>
-      <th>index_var</th>
-      <td><p>The column defining the index of <code>ts_tbl</code> objects</p></td>
-    </tr>
-    <tr>
-      <th>source</th>
-      <td><p>String specifying the data source</p></td>
-    </tr>
-    <tr>
-      <th>table</th>
-      <td><p>String specifying the table from which to load data</p></td>
     </tr>
     </table>
 

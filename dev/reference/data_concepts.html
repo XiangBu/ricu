@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data concept — item • ICU data with R</title>
+<title>Data concept — new_cncpt • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Data concept — item" />
+<meta property="og:title" content="Data concept — new_cncpt" />
 <meta property="og:description" content="Clinical concepts are represented by concept objects." />
 
 
@@ -132,19 +132,7 @@
     <p>Clinical concepts are represented by <code>concept</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>item</span>(<span class='kw'>...</span>)
-
-<span class='fu'>as_item</span>(<span class='kw'>x</span>)
-
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for itm</span>
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for item</span>
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
-<span class='fu'>new_cncpt</span>(
+    <pre class="usage"><span class='fu'>new_cncpt</span>(
   <span class='kw'>name</span>,
   <span class='kw'>items</span>,
   description = <span class='kw'>NULL</span>,
@@ -169,43 +157,18 @@
 <span class='co'># S3 method for rec_cncpt</span>
 <span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>callback</span>, target = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ts_tbl"</span>, <span class='st'>"id_tbl"</span>), interval = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
 
-<span class='co'># S3 method for cncpt</span>
-<span class='fu'><a href='src_name.html'>src_name</a></span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for cncpt</span>
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
 <span class='fu'>new_concept</span>(<span class='kw'>x</span>)
 
 <span class='fu'>concept</span>(<span class='kw'>...</span>)
 
-<span class='fu'>is_concept</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for concept</span>
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
-<span class='fu'>load_dictionary</span>(
-  src = <span class='kw'>NULL</span>,
-  concepts = <span class='kw'>NULL</span>,
-  name = <span class='st'>"concept-dict"</span>,
-  file = <span class='kw'>NULL</span>
-)</pre>
+<span class='fu'>is_concept</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Further specification of the <code>cncpt</code> object (passed to
-<code>init_cncpt()</code>)</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Object to query/dispatch on</p></td>
-    </tr>
-    <tr>
       <th>name</th>
-      <td><p>Name of the dictionary to be read</p></td>
+      <td><p>The name of the concept</p></td>
     </tr>
     <tr>
       <th>items</th>
@@ -221,9 +184,18 @@
 id and if applicable per time step</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>Further specification of the <code>cncpt</code> object (passed to
+<code>init_cncpt()</code>)</p></td>
+    </tr>
+    <tr>
       <th>class</th>
       <td><p><code>NULL</code> or a string-valued sub-class name used for customizing
 concept behavior</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Object to query/dispatch on</p></td>
     </tr>
     <tr>
       <th>unit</th>
@@ -252,19 +224,6 @@ for data cleanup operations</p></td>
       <th>interval</th>
       <td><p>Time interval used for data loading; if NULL, the respective
 interval passed as argument to <code><a href='load_concepts.html'>load_concepts()</a></code> is taken</p></td>
-    </tr>
-    <tr>
-      <th>src</th>
-      <td><p><code>NULL</code> or the name of a data source</p></td>
-    </tr>
-    <tr>
-      <th>concepts</th>
-      <td><p>A character vector used to subset the concept dictionary or
-<code>NULL</code> indicating no subsetting</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>File name of the dictionary</p></td>
     </tr>
     </table>
 

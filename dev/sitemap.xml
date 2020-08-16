@@ -7,6 +7,9 @@
     <loc>https://septic-tank.github.io/ricu/reference/attach_src.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/callback_utils.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/cfg_utils.html</loc>
   </url>
   <url>
@@ -14,6 +17,9 @@
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/col_cfg.html</loc>
+  </url>
+  <url>
+    <loc>https://septic-tank.github.io/ricu/reference/concept_dictionary.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/data_concepts.html</loc>
@@ -46,6 +52,9 @@
     <loc>https://septic-tank.github.io/ricu/reference/item_utils.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/label_sep3.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/label_si.html</loc>
   </url>
   <url>
@@ -64,7 +73,7 @@
     <loc>https://septic-tank.github.io/ricu/reference/load_src_cfg.html</loc>
   </url>
   <url>
-    <loc>https://septic-tank.github.io/ricu/reference/sep3_label.html</loc>
+    <loc>https://septic-tank.github.io/ricu/reference/load_tbl.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/src_cfg.html</loc>
