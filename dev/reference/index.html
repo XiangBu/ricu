@@ -137,7 +137,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-data-loading" class="hasAnchor"><a href="#section-data-loading" class="anchor"></a>Data loading</h2>
-          <p class="section-desc"><p>Data can be loaded from cofigured datasources, either in the form of data concepts or by directly querying one of the underlying tables. Depending on what route is taken for loading, data is returned either as <code>data.table</code> or as one of the <code>ricu</code>-provided tabular data types <code>id_tbl</code> or <code>ts_tbl</code>.</p></p>
+          <p class="section-desc"><p>Data can be loaded from cofigured data sources, either in the form of data concepts or by directly querying one of the underlying tables. Depending on what route is taken for loading, data is returned either as <code>data.table</code> or as one of the <code>ricu</code>-provided tabular data types <code>id_tbl</code> or <code>ts_tbl</code>.</p></p>
         </th>
       </tr>
       
@@ -157,7 +157,7 @@
       <tr>
         
         <td>
-          <p><code><a href="load_concepts.html">load_concepts()</a></code> <code><a href="load_concepts.html">progress_msg()</a></code> </p>
+          <p><code><a href="load_concepts.html">load_concepts()</a></code> </p>
         </td>
         <td><p>Load concept data</p></td>
       </tr><tr>
@@ -197,6 +197,12 @@
           <p><code><a href="callback_utils.html">transform_fun()</a></code> <code><a href="callback_utils.html">binary_op()</a></code> <code><a href="callback_utils.html">comp_na()</a></code> <code><a href="callback_utils.html">apply_map()</a></code> <code><a href="callback_utils.html">convert_unit()</a></code> </p>
         </td>
         <td><p>Callback utilities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="msg_progress.html">msg_progress()</a></code> </p>
+        </td>
+        <td><p>Message signaling nested with progress reporting</p></td>
       </tr><tr>
         
         <td>
@@ -294,7 +300,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-data-source-setup" class="hasAnchor"><a href="#section-data-source-setup" class="anchor"></a>Data source setup</h2>
-          <p class="section-desc"><p>For a data source to be usable via <code>ricu</code>, a JSON-based configuration is required and some preprocessing is carried out by <code>ricu</code> as an initial setup step by [import_src()] and for data sets hosted on <a href="https://physionet.org">Physionet</a>, a downloader is available as [download_src()]. As a final step, making data available to <code>ricu</code>, [attach_src()] is automatically called for configured data sources at package loading.</p></p>
+          <p class="section-desc"><p>For a data source to be usable via <code>ricu</code>, a JSON-based configuration is required and some preprocessing is carried out by <code>ricu</code> as an initial setup step by <code><a href="../reference/import_src.html">import_src()</a></code> and for data sets hosted on <a href="https://physionet.org">Physionet</a>, a downloader is available as <code><a href="../reference/download_src.html">download_src()</a></code>. As a final step, making data available to <code>ricu</code>, <code><a href="../reference/data.html">attach_src()</a></code> is automatically called for configured data sources at package loading.</p></p>
         </th>
       </tr>
       
@@ -384,7 +390,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Drago Plecko, Nicolas Bennett.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
 </div>
 
 <div class="pkgdown">

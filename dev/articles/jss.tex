@@ -186,6 +186,11 @@ choose one of mimic_demo
 \end{CodeOutput}
 
 \begin{CodeOutput}
+Data aggregation cannot be disabled (i.e. passing an `aggregate` value of
+`FALSE` for at least one concept) when data merging is enabled.
+\end{CodeOutput}
+
+\begin{CodeOutput}
 No overlap between configured id var options and available columns for table
 `labevents` in mimic_demo
 \end{CodeOutput}
@@ -222,19 +227,11 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-No overlap between configured id var options and available columns for table
-`labevents` in mimic_demo
+removed 32 (2.77%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
-cannot mix interval lengths when row-binding
-cannot mix interval lengths when row-binding
-cannot mix interval lengths when row-binding
+not all units are in [mmHg]: mm Hg (99.82%), MM HG (0.18%)
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -251,6 +248,37 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
+removed 4 (1.18%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
+not all units are in [%]: NA (18.26%)
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+cannot mix interval lengths when row-binding
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+No overlap between configured id var options and available columns for table
+`labevents` in mimic_demo
+\end{CodeOutput}
+
+\begin{CodeOutput}
+index is not compatible with an interval of 1 mins
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 3 (0.19%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
 No overlap between configured id var options and available columns for table
 `labevents` in mimic_demo
 \end{CodeOutput}
@@ -269,7 +297,21 @@ index is not compatible with an interval of 1 mins
 
 \begin{CodeOutput}
 cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 35 (0.22%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
 cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 1 (0.26%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
 cannot mix interval lengths when row-binding
 cannot mix interval lengths when row-binding
 cannot mix interval lengths when row-binding
@@ -284,11 +326,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
+removed 2 (0.05%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -300,11 +338,31 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
+removed 5 (0.13%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
 index is not compatible with an interval of 1 mins
 \end{CodeOutput}
 
 \begin{CodeOutput}
 cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 7 (0.18%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
+index is not compatible with an interval of 1 mins
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 2 (0.1%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -354,11 +412,23 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
+removed 2 (0.12%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
 index is not compatible with an interval of 1 mins
 \end{CodeOutput}
 
 \begin{CodeOutput}
 cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 21 (0.23%) of rows due to out of range entries
+\end{CodeOutput}
+
+\begin{CodeOutput}
+not all units are in [mL]: NA (0.08%)
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -455,7 +525,7 @@ We visualize the results of the model
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpApxJmY/file3af422c0b92/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
+\begin{center}\includegraphics{/tmp/Rtmp8mJJyn/file7abf37b04254/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
 
 \end{CodeChunk}
 
@@ -485,6 +555,11 @@ R> ins_treat <- load_concepts("insulin", source, verbose = FALSE)
 \begin{CodeOutput}
 Only concept data from a single data source can be loaded a the time. Please
 choose one of mimic_demo
+\end{CodeOutput}
+
+\begin{CodeOutput}
+Data aggregation cannot be disabled (i.e. passing an `aggregate` value of
+`FALSE` for at least one concept) when data merging is enabled.
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -521,7 +596,7 @@ a histogram:
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpApxJmY/file3af422c0b92/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
+\begin{center}\includegraphics{/tmp/Rtmp8mJJyn/file7abf37b04254/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
 
 \end{CodeChunk}
 

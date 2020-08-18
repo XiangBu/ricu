@@ -40,8 +40,16 @@
 
 
 <meta property="og:title" content="Load concept data — load_concepts" />
-<meta property="og:description" content="Data specified as concept objects is loaded, aggregated per combination
-of id and time-step and merged into wide format." />
+<meta property="og:description" content="Concept objects are used in ricu as a way to specify how a clinical
+concept, such as heart rate can be loaded from a data source. Building on
+this abstraction, load_concepts() powers concise loading of data with
+data source specific pre-processing hidden away from the user, thereby
+providing a data source agnostic interface to data loading. At default
+value of the argument merge_data, a tabular data structure (either a
+ts_tbl or an id_tbl, depending on what kind of
+concepts are requested), inheriting from
+data.table, is returned, representing the data
+in wide format (i.e. returning concepts as columns)." />
 
 
 <meta name="robots" content="noindex">
@@ -130,8 +138,16 @@ of id and time-step and merged into wide format." />
     </div>
 
     <div class="ref-description">
-    <p>Data specified as <code>concept</code> objects is loaded, aggregated per combination
-of id and time-step and merged into wide format.</p>
+    <p>Concept objects are used in <code>ricu</code> as a way to specify how a clinical
+concept, such as heart rate can be loaded from a data source. Building on
+this abstraction, <code>load_concepts()</code> powers concise loading of data with
+data source specific pre-processing hidden away from the user, thereby
+providing a data source agnostic interface to data loading. At default
+value of the argument <code>merge_data</code>, a tabular data structure (either a
+<code><a href='id_tbl.html'>ts_tbl</a></code> or an <code><a href='id_tbl.html'>id_tbl</a></code>, depending on what kind of
+concepts are requested), inheriting from
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>, is returned, representing the data
+in wide format (i.e. returning concepts as columns).</p>
     </div>
 
     <pre class="usage"><span class='fu'>load_concepts</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -147,7 +163,14 @@ of id and time-step and merged into wide format.</p>
 )
 
 <span class='co'># S3 method for concept</span>
-<span class='fu'>load_concepts</span>(<span class='kw'>x</span>, aggregate = <span class='kw'>NULL</span>, merge_data = <span class='fl'>TRUE</span>, verbose = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
+<span class='fu'>load_concepts</span>(
+  <span class='kw'>x</span>,
+  src = <span class='kw'>NULL</span>,
+  aggregate = <span class='kw'>NULL</span>,
+  merge_data = <span class='fl'>TRUE</span>,
+  verbose = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
+)
 
 <span class='co'># S3 method for cncpt</span>
 <span class='fu'>load_concepts</span>(<span class='kw'>x</span>, aggregate = <span class='kw'>NULL</span>, <span class='kw'>...</span>, progress = <span class='kw'>NULL</span>)
@@ -222,9 +245,7 @@ of id and time-step and merged into wide format.</p>
   id_type = <span class='st'>"icustay"</span>,
   interval = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>1L</span>),
   <span class='kw'>...</span>
-)
-
-<span class='fu'>progress_msg</span>(<span class='kw'>...</span>)</pre>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -286,7 +307,132 @@ specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    
+
+<p>In order to allow for a large degree of flexibility (and extensibility),
+which is much needed owing to considerable heterogeneity presented by
+different data sources, several nested S3 classes are involved in
+representing a concept and <code>load_concepts()</code> follows this hierarchy of
+classes recursively when
+resolving a concept. An outline of this hierarchy can be described as</p><ul>
+<li><p><code>concept</code>: contains many <code>cncpt</code> objects (of potentially differing
+sub-types), each comprising of some meta-data and an <code>item</code> object</p></li>
+<li><p><code>item</code>: contains many <code>itm</code> objects (of potentially differing
+sub-types), each encoding how to retrieve a data item.</p></li>
+</ul>
+
+<p>The design choice for wrapping a vector of <code>cncpt</code> objects with a container
+class <code>concept</code> is motivated by the requirement of having several different
+sub-types of <code>cncpt</code> objects (all inheriting from the parent type <code>cncpt</code>),
+while retaining control over how this homogeneous w.r.t. parent type, but
+heterogeneous w.r.t. sub-type vector of objects behaves in terms of S3
+generic functions.</p>
+    <h2 class="hasAnchor" id="concept"><a class="anchor" href="#concept"></a>Concept</h2>
+
+    
+
+<p>Top-level entry points are either a character vector, which is used to
+subset a <code>concept</code> object or an entire <a href='load_dictionary.html'>concept dictionary</a>, or a <code>concept</code> object. When passing a
+character vector as first argument, the most important further arguments at
+that level control from where the dictionary is taken (<code>dict_name</code> or
+<code>dict_file</code>). At <code>concept</code> level, the most important additional arguments
+control the result structure: data merging can be disabled using
+<code>merge_data</code> and data aggregation is governed by the <code>aggregate</code> argument.</p>
+<p>Data aggregation is important for merging several concepts into a
+wide-format table, as this requires data to be unique per observation (i.e.
+by either id or combination of id and index). Several value types are
+acceptable as <code>aggregate</code> argument, the most important being <code>FALSE</code>, which
+disables aggregation, NULL, which auto-determines a suitable aggregation
+function or a string which is ultimately passed to <code><a href='id_vars.html'>dt_gforce()</a></code> where it
+identifies a function such as <code><a href='https://rdrr.io/r/base/sum.html'>sum()</a></code>, <code><a href='https://rdrr.io/r/base/mean.html'>mean()</a></code>, <code><a href='https://rdrr.io/r/base/Extremes.html'>min()</a></code> or <code><a href='https://rdrr.io/r/base/Extremes.html'>max()</a></code>. More
+information on aggregation is available as <code><a href='id_vars.html'>make_unique()</a></code>. If the object
+passed as <code>aggregate</code> is scalar, it is applied to all requested concepts in
+the same way. In order to customize aggregation per concept, a named object
+(with names corresponding to concepts) of the same length as the number of
+requested concepts may be passed.</p>
+<p>Under the hood, a <code>concept</code> object comprises of several <code>cncpt</code> objects
+with varying sub-types (for example <code>num_cncpt</code>, representing continuous
+numeric data or <code>fct_cncpt</code> representing categorical data). This
+implementation detail is of no further importance for understanding concept
+loading and for more information, please refer to the
+<code><a href='new_cncpt.html'>concept</a></code> documentation. The only argument that is introduced
+at <code>cncpt</code> level is <code>progress</code>, which controls progress reporting. If
+called directly, the default value of <code>NULL</code> yields messages, sent to the
+terminal. Internally, if called from <code>load_concepts()</code> at <code>concept</code> level
+(with <code>verbose</code> set to <code>TRUE</code>), a <a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress::progress_bar</a> is set up in a
+way that allows nested messages to be captured and not interrupt progress
+reporting (see <code><a href='msg_progress.html'>msg_progress()</a></code>).</p>
+    <h2 class="hasAnchor" id="item"><a class="anchor" href="#item"></a>Item</h2>
+
+    
+
+<p>A single <code>cncpt</code> object contains an <code>item</code> object, which in turn is
+composed of several <code>itm</code> objects with varying sub-types, the relationship
+<code>item</code> to <code>itm</code> being that of <code>concept</code> to <code>cncpt</code> and the rationale for
+this implementation choice is the same as previously: a container class
+used representing a vector of objects of varying sub-types, all inheriting
+form a common super-type. For more information on the <code>item</code> class, please
+refer to the <a href='new_itm.html'>relevant documentation</a>. Arguments introduced at <code>item</code>
+level include <code>patient_ids</code>, <code>id_type</code> and <code>interval</code>. Acceptable values for
+<code>interval</code> are scalar-valued <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> objects (see also helper
+functions such as <code><a href='secs.html'>hours()</a></code>) and this argument essentially controls the
+time-resolution of the returned time-series. Of course, the limiting factor
+raw time resolution which is on the order of hours for data sets like
+<a href='https://physionet.org/content/mimiciii/'>MIMIC-III</a> or
+<a href='https://physionet.org/content/eicu-crd'>eICU</a> but can be much higher for a
+data set like <a href='https://physionet.org/content/hirid/'>HiRID</a>. The argument
+<code>id_type</code> is used to specify what kind of id system should be used to
+identify different time series in the returned data. A data set like
+MIMIC-III, for example, makes possible the resolution of data to 3 nested
+ID systems:</p><ul>
+<li><p><code>patient</code> (<code>subject_id</code>): identifies a person</p></li>
+<li><p><code>hadm</code> (<code>hadm_id</code>): identifies a hospital admission (several of which are
+possible for a given person)</p></li>
+<li><p><code>icustay</code> (<code>icustay_id</code>): identifies an admission to an ICU and again has
+a one-to-many relationship to <code>hadm</code>.</p></li>
+</ul>
+
+<p>Acceptable argument values are strings that match ID systems as specified
+by the <a href='load_src_cfg.html'>data source configuration</a>. Finally, <code>patient_ids</code>
+is used to define a patient cohort for which data can be requested. Values
+may either be a vector of IDs (which are assumed to be of the same type as
+specified by the <code>id_type</code> argument) or a tabular object inheriting from
+<code>data.frame</code>, which must contain a column named after the data set-specific
+ID system identifier (for MIIMIC-III and an <code>id_type</code> argument of <code>hadm</code>,
+for example, that would be <code>hadm_id</code>).</p>
+    <h2 class="hasAnchor" id="extensions"><a class="anchor" href="#extensions"></a>Extensions</h2>
+
+    
+
+<p>The presented hierarchy of S3 classes is designed with extensibility in
+mind: while the current range of functionality covers settings encountered
+when dealing with the included concepts and datasets, further data sets
+and/or clinical concepts might necessitate different behavior for data
+loading. For this reason, various parts in the cascade of calls to
+<code>load_concepts()</code> can be adapted for new requirements by defining new sub-
+classes to <code>cncpt</code> or <code>itm</code> and  providing methods for the generic function
+<code>load_concepts()</code>specific to these new classes. If no class-specific method
+is provided, method dispatch defaults to <code>load_concepts.cncpt()</code> and
+<code>load_concepts.itm()</code>. Roughly speaking, the semantics for the two
+functions are as follows:</p><ul>
+<li><p><code>cncpt</code>: Called with arguments <code>x</code> (the current <code>cncpt</code> object),
+<code>aggregate</code> (controlling how aggregation per time-point and ID is handled),
+<code>...</code> (further arguments passed to downstream methods) and <code>progress</code>
+(controlling progress reporting), this function should be able to load and
+aggregate data for the given concept. Usually this involves extracting the
+<code>item</code> object and calling <code>load_concepts()</code> again, dispatching on the <code>item</code>
+class with arguments <code>x</code> (the given <code>item</code>), arguments passed as <code>...</code>, as
+well as <code>progress</code>.</p></li>
+</ul>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>load_concepts</span>(<span class='st'>"hr"</span>, <span class='st'>"mimic_demo"</span>)</div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
+#&gt; <span class='message'>choose one of mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
+#&gt; <span class='message'>`FALSE` for at least one concept) when data merging is enabled.</span></div><div class='output co'>#&gt; <span class='message'>── Loading 1 concept ───────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>index is not compatible with an interval of 1 mins</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 5 (0.03%) of rows due to out of range entries</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>For automatically determining an aggregation function, either all of or none of</span>
+#&gt; <span class='message'>vars `hr` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -298,7 +444,7 @@ specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime
 
       <footer>
       <div class="copyright">
-  <p>Developed by Drago Plecko, Nicolas Bennett.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
 </div>
 
 <div class="pkgdown">

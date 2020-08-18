@@ -115,8 +115,11 @@
 )
 <span class="co">#&gt; Only concept data from a single data source can be loaded a the time. Please</span>
 <span class="co">#&gt; choose one of mimic_demo</span>
+<span class="co">#&gt; Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
+<span class="co">#&gt; `FALSE` for at least one concept) when data merging is enabled.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 35 (0.22%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `map` are expected to be of numeric type</span>
 <span class="co">#&gt; No overlap between configured id var options and available columns for table</span>
@@ -129,6 +132,7 @@
 <span class="co">#&gt; `labevents` in mimic_demo</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 2 (0.12%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `creatinine` are expected to be of numeric type</span>
 <span class="co">#&gt; No overlap between configured id var options and available columns for table</span>
@@ -141,6 +145,7 @@
 <span class="co">#&gt; `labevents` in mimic_demo</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 3 (0.19%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `platelet_count` are expected to be of numeric type</span>
 <span class="co">#&gt; x does not contain column `icustay_id`</span>
@@ -153,6 +158,8 @@
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
 <span class="co">#&gt; Only concept data from a single data source can be loaded a the time. Please</span>
 <span class="co">#&gt; choose one of eicu_demo</span>
+<span class="co">#&gt; Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
+<span class="co">#&gt; `FALSE` for at least one concept) when data merging is enabled.</span>
 <span class="co">#&gt; In order to return relative times, a single ID var `patientunitstayid` is</span>
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
@@ -160,30 +167,47 @@
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 1437979 (75.32%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `map` are expected to be of numeric type</span>
 <span class="co">#&gt; In order to return relative times, a single ID var `patientunitstayid` is</span>
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 19 (0.93%) of rows due to out of range entries</span>
+<span class="co">#&gt; not all units are in [mmol/L]: mEq/L (0.79%), mmole/L (0.1%), MMOLL (0.64%)</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `lactate` are expected to be of numeric type</span>
 <span class="co">#&gt; In order to return relative times, a single ID var `patientunitstayid` is</span>
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 36 (0.25%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `creatinine` are expected to be of numeric type</span>
 <span class="co">#&gt; In order to return relative times, a single ID var `patientunitstayid` is</span>
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 19 (0.35%) of rows due to out of range entries</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `bilirubin_total` are expected to be of numeric type</span>
 <span class="co">#&gt; In order to return relative times, a single ID var `patientunitstayid` is</span>
 <span class="co">#&gt; required.</span>
 <span class="co">#&gt; index is not compatible with an interval of 1 mins</span>
 <span class="co">#&gt; cannot mix interval lengths when row-binding</span>
+<span class="co">#&gt; removed 54 (0.42%) of rows due to out of range entries</span>
+<span class="co">#&gt; not all units are in [K/uL]: *10^3/uL (0.65%), /nL (0.79%), 10 (1.23%),</span>
+<span class="co">#&gt; 10(3)/mcL (1.39%), 10(3)mcL (0.97%), 10*3/uL (1.17%), 10*9/l (0.5%), 1000/cmm</span>
+<span class="co">#&gt; (0.35%), 10E3 (0.23%), 10E3/mcL (2.74%), 10E3/uL (0.1%), 10X3 (0.26%), 10x3/uL</span>
+<span class="co">#&gt; (0.39%), bil/L (0.08%), K/cmm (3.61%), K/CMM (1.82%), K/cumm (0.01%), K/mcL</span>
+<span class="co">#&gt; (8.81%), k/mm cu (5.38%), k/mm3 (0.27%), K/mm3 (1.21%), K/MM3 (8.39%), TH/cmm</span>
+<span class="co">#&gt; (1.2%), th/cumm (0.73%), th/mm3 (0.95%), th/uL (3.11%), TH/uL (2.8%), THD/UL</span>
+<span class="co">#&gt; (0.65%), thou/cmm (0.36%), Thou/cmm (0.61%), thou/cumm (1.66%), thou/mm3</span>
+<span class="co">#&gt; (0.15%), thou/uL (0.41%), THOU/UL (1.66%), Thousand (0.33%), THS/uL (0.39%), X</span>
+<span class="co">#&gt; 10 3 (0.44%), x(10)3/uL (0.63%), x10 (3) (0.74%), x10 3/uL (2.7%), X10-3</span>
+<span class="co">#&gt; (0.5%), X10"3 (0.59%), x10(3)/mcL (0.6%), x10*3 (0.28%), x10^3/uL (0.64%),</span>
+<span class="co">#&gt; X1000 (0.35%), x10E3/uL (0.82%), NA (0.01%)</span>
 <span class="co">#&gt; For automatically determining an aggregation function, either all of or none of</span>
 <span class="co">#&gt; vars `platelet_count` are expected to be of numeric type</span>
 <span class="co">#&gt; x does not contain column `patientunitstayid`</span>
@@ -259,7 +283,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Drago Plecko, Nicolas Bennett.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
 </div>
 
 <div class="pkgdown">

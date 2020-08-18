@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Low level functions for loading data — load_src • ICU data with R</title>
+<title>Message signaling nested with progress reporting — msg_progress • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,11 @@
 
 
 
-<meta property="og:title" content="Low level functions for loading data — load_src" />
-<meta property="og:description" content="Depending on the desired return type (ts_tbl, id_tbl or plain
-data.table) and on whether the row-subsetting argument is a quoted
-expression (suffix _quo), this set of functions provides the basic
-mechanisms for loading data." />
+<meta property="og:title" content="Message signaling nested with progress reporting — msg_progress" />
+<meta property="og:description" content="In order to not interrupt progress reporting by a progress::progress_bar,
+messages are wrapped with class msg_progress which causes them to be
+captured printed after progress bar completion. This function is intended to
+be used when signaling messages in callback functions." />
 
 
 <meta name="robots" content="noindex">
@@ -126,96 +126,37 @@ mechanisms for loading data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Low level functions for loading data</h1>
+    <h1>Message signaling nested with progress reporting</h1>
     
-    <div class="hidden name"><code>load_src.Rd</code></div>
+    <div class="hidden name"><code>msg_progress.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Depending on the desired return type (<code>ts_tbl</code>, <code>id_tbl</code> or plain
-<code>data.table</code>) and on whether the row-subsetting argument is a quoted
-expression (suffix <code>_quo</code>), this set of functions provides the basic
-mechanisms for loading data.</p>
+    <p>In order to not interrupt progress reporting by a <a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress::progress_bar</a>,
+messages are wrapped with class <code>msg_progress</code> which causes them to be
+captured printed after progress bar completion. This function is intended to
+be used when signaling messages in callback functions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_tbl</span>
-<span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>rows</span>, cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
-
-<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for mimic_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for eicu_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for hirid_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>msg_progress</span>(<span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Object for which to load data</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Generic consistency</p></td>
-    </tr>
-    <tr>
-      <th>rows</th>
-      <td><p>Expression used for row subsetting (NSE)</p></td>
-    </tr>
-    <tr>
-      <th>cols</th>
-      <td><p>Character vector of column names</p></td>
-    </tr>
-    <tr>
-      <th>src</th>
-      <td><p>Passed to <code><a href='data.html'>as_src_tbl()</a></code> in order to determine the data source</p></td>
-    </tr>
-    <tr>
-      <th>id_hint</th>
-      <td><p>String valued id column selection (not necessarily honored)</p></td>
-    </tr>
-    <tr>
-      <th>time_vars</th>
-      <td><p>Character vector enumerating the columns to be treated as
-timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> vectors</p></td>
+      <td><p>Passed to <code><a href='https://rdrr.io/r/base/message.html'>base::.makeMessage()</a></code></p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>)</div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='output co'>#&gt; </div><div class='input'>
+<span class='kw'>capt_fun</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) {
+  <span class='kw'>rlang</span>::<span class='fu'><a href='https://rlang.r-lib.org/reference/abort.html'>inform</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"captured:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>conditionMessage</a></span>(<span class='kw'>x</span>)))
+}
+
+<span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(<span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>), msg_progress = <span class='kw'>capt_fun</span>)</div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='output co'>#&gt; <span class='message'>captured: </span></div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
