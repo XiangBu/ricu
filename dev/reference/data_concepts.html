@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data concept — new_cncpt • ICU data with R</title>
+<title>Data items — new_cncpt • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,12 @@
 
 
 
-<meta property="og:title" content="Data concept — new_cncpt" />
-<meta property="og:description" content="Clinical concepts are represented by concept objects." />
+<meta property="og:title" content="Data items — new_cncpt" />
+<meta property="og:description" content="Concept objects are used in ricu as a way to specify how a clinical
+concept, such as heart rate can be loaded from a data source and are mainly
+consumed by load_concepts(). Several functions are avialable for
+constructing concept (and related auxillary) objects either from code or
+by parsing a JSON formatted concept dictionary using load_dicionary()." />
 
 
 <meta name="robots" content="noindex">
@@ -123,13 +127,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Data concept</h1>
+    <h1>Data items</h1>
     
     <div class="hidden name"><code>data_concepts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Clinical concepts are represented by <code>concept</code> objects.</p>
+    <p>Concept objects are used in <code>ricu</code> as a way to specify how a clinical
+concept, such as heart rate can be loaded from a data source and are mainly
+consumed by <code><a href='load_concepts.html'>load_concepts()</a></code>. Several functions are avialable for
+constructing <code>concept</code> (and related auxillary) objects either from code or
+by parsing a JSON formatted concept dictionary using <code>load_dicionary()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>new_cncpt</span>(
@@ -227,6 +235,25 @@ interval passed as argument to <code><a href='load_concepts.html'>load_concepts(
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>:
+In order to allow for a large degree of flexibility (and extensibility),
+which is much needed owing to considerable heterogeneity presented by
+different data sources, several nested S3 classes are involved in
+representing a concept. An outline of this hierarchy can be described as</p><ul>
+<li><p><code>concept</code>: contains many <code>cncpt</code> objects (of potentially differing
+sub-types), each comprising of some meta-data and an <code>item</code> object</p></li>
+<li><p><code>item</code>: contains many <code>itm</code> objects (of potentially differing
+sub-types), each encoding how to retrieve a data item.</p></li>
+</ul>
+
+<p>The design choice for wrapping a vector of <code>cncpt</code> objects with a container
+class <code>concept</code> is motivated by the requirement of having several different
+sub-types of <code>cncpt</code> objects (all inheriting from the parent type <code>cncpt</code>),
+while retaining control over how this homogeneous w.r.t. parent type, but
+heterogeneous w.r.t. sub-type vector of objects behaves in terms of S3
+generic functions.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

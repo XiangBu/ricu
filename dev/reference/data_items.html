@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data item — new_itm • ICU data with R</title>
+<title>Data items — new_itm • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,13 @@
 
 
 
-<meta property="og:title" content="Data item — new_itm" />
-<meta property="og:description" content="In order to specify the location of data items in data sets, item objects
-are used." />
+<meta property="og:title" content="Data items — new_itm" />
+<meta property="og:description" content="Item objects are used in ricu as a way to specify how individual data
+items corresponding to clinical concepts (see also concept()), such as
+heart rate can be loaded from a data source. Several functions are
+available for constructing item (and related auxillary) objects either
+from code or by parsing a JSON formatted concept dictionary using
+load_dicionary()." />
 
 
 <meta name="robots" content="noindex">
@@ -124,14 +128,18 @@ are used." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Data item</h1>
+    <h1>Data items</h1>
     
     <div class="hidden name"><code>data_items.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In order to specify the location of data items in data sets, <code>item</code> objects
-are used.</p>
+    <p>Item objects are used in <code>ricu</code> as a way to specify how individual data
+items corresponding to clinical concepts (see also <code><a href='new_cncpt.html'>concept()</a></code>), such as
+heart rate can be loaded from a data source. Several functions are
+available for constructing <code>item</code> (and related auxillary) objects either
+from code or by parsing a JSON formatted concept dictionary using
+<code>load_dicionary()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, target = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ts_tbl"</span>, <span class='st'>"id_tbl"</span>), class = <span class='st'>"sel_itm"</span>)
@@ -250,6 +258,47 @@ available for the given table</p></td>
 <code><a href='https://rdrr.io/r/base/grep.html'>base::grepl()</a></code> with <code>ignore.case = TRUE</code></p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In order to allow for a large degree of flexibility (and extensibility),
+which is much needed owing to considerable heterogeneity presented by
+different data sources, several nested S3 classes are involved in
+representing a concept. An outline of this hierarchy can be described as</p><ul>
+<li><p><code>concept</code>: contains many <code>cncpt</code> objects (of potentially differing
+sub-types), each comprising of some meta-data and an <code>item</code> object</p></li>
+<li><p><code>item</code>: contains many <code>itm</code> objects (of potentially differing
+sub-types), each encoding how to retrieve a data item.</p></li>
+</ul>
+
+<p>The design choice for wrapping a vector of <code>itm</code> objects with a container
+class <code>item</code> is motivated by the requirement of having several different
+sub-types of <code>itm</code> objects (all inheriting from the parent type <code>itm</code>),
+while retaining control over how this homogeneous w.r.t. parent type, but
+heterogeneous w.r.t. sub-type vector of objects behaves in terms of S3
+generic functions.</p>
+<p>The following sub-classes to <code>itm</code> are available, each representing a
+different data-scenario:</p><ul>
+<li><p><code>sel_itm</code>: The most widely used item class is intended for the situation
+where rows of interest can be identified by looking for occurrences of a
+set of IDs (<code>ids</code>) in a column (<code>sub_var</code>). An example for this is heart
+rate <code>hr</code> on mimic, where the IDs <code>211</code> and 220045<code>are looked up in the</code>itemid<code>column of</code>chartevents`.</p></li>
+<li><p><code>col_itm</code>: This item class can be used if no row-subsetting is required.
+An example for this is heart rate (<code>hr</code>) on <code>eicu</code>, where the table
+<code>vitalperiodic</code> contains an entire column dedicated to heart rate
+measurements.</p></li>
+<li><p><code>rgx_itm</code>: As alternative to the value-matching approach of <code>sel_itm</code>
+objects, this class identifies rows using regular expressions. Used for
+example for insulin in <code>eicu</code>, where the regular expression <code>^insulin (250.+)?\\(((ml|units)/hr)?\\)$</code> is matched against the <code>drugname</code> column
+of <code>infusiondrug</code>. The regular expression is evaluated by <code><a href='https://rdrr.io/r/base/grep.html'>base::grepl()</a></code>
+with <code>ignore.case = TRUE</code>.</p></li>
+<li><p><code>fun_itm</code>: Intended for the scenario where data of interest is not
+directly available from a table, this <code>itm</code> class offers most flexbility. A
+function can be specified as <code>callback</code> and this function will be called
+with arguments <code>x</code> (the object itself), <code>patient_ids</code>, <code>id_type</code> and
+<code>interval</code> (see <code><a href='load_concepts.html'>load_concepts()</a></code>) and is expected to return an object as
+specified by the <code>target</code> entry.</p></li>
+</ul>
 
 
   </div>
