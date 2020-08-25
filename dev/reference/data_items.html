@@ -45,7 +45,7 @@ items corresponding to clinical concepts (see also concept()), such as
 heart rate can be loaded from a data source. Several functions are
 available for constructing item (and related auxillary) objects either
 from code or by parsing a JSON formatted concept dictionary using
-load_dicionary()." />
+load_dictionary()." />
 
 
 <meta name="robots" content="noindex">
@@ -139,49 +139,26 @@ items corresponding to clinical concepts (see also <code><a href='new_cncpt.html
 heart rate can be loaded from a data source. Several functions are
 available for constructing <code>item</code> (and related auxillary) objects either
 from code or by parsing a JSON formatted concept dictionary using
-<code>load_dicionary()</code>.</p>
+<code><a href='load_dictionary.html'>load_dictionary()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, target = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ts_tbl"</span>, <span class='st'>"id_tbl"</span>), class = <span class='st'>"sel_itm"</span>)
+    <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, class = <span class='st'>"sel_itm"</span>)
 
 <span class='fu'>is_itm</span>(<span class='kw'>x</span>)
 
 <span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for sel_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  <span class='kw'>sub_var</span>,
-  <span class='kw'>ids</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>table</span>, <span class='kw'>sub_var</span>, <span class='kw'>ids</span>, callback = <span class='st'>"identity_callback"</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for hrd_itm</span>
+<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>table</span>, <span class='kw'>sub_var</span>, <span class='kw'>ids</span>, callback = <span class='st'>"identity_callback"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for col_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  unit_val = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>table</span>, unit_val = <span class='kw'>NULL</span>, callback = <span class='st'>"identity_callback"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for rgx_itm</span>
-<span class='fu'>init_itm</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>table</span>,
-  <span class='kw'>sub_var</span>,
-  <span class='kw'>regex</span>,
-  itm_vars = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  callback = <span class='st'>"identity_callback"</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>table</span>, <span class='kw'>sub_var</span>, <span class='kw'>regex</span>, callback = <span class='st'>"identity_callback"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for fun_itm</span>
 <span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>callback</span>, <span class='kw'>...</span>)
@@ -189,7 +166,7 @@ from code or by parsing a JSON formatted concept dictionary using
 <span class='co'># S3 method for itm</span>
 <span class='fu'>init_itm</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
-<span class='fu'>new_item</span>(<span class='kw'>x</span>, target = <span class='kw'>NULL</span>)
+<span class='fu'>new_item</span>(<span class='kw'>x</span>)
 
 <span class='fu'>item</span>(<span class='kw'>...</span>)
 
@@ -208,10 +185,6 @@ from code or by parsing a JSON formatted concept dictionary using
       <th>...</th>
       <td><p>Further specification of the <code>itm</code> object (passed to
 <code>init_itm()</code>)</p></td>
-    </tr>
-    <tr>
-      <th>target</th>
-      <td><p>The target object yielded by loading</p></td>
     </tr>
     <tr>
       <th>class</th>
@@ -233,14 +206,6 @@ from code or by parsing a JSON formatted concept dictionary using
       <th>ids</th>
       <td><p>Vector of ids used to subset table rows. If <code>NULL</code>, all rows are
 considered corresponding to the data item</p></td>
-    </tr>
-    <tr>
-      <th>itm_vars</th>
-      <td><p>Columns returned as <code><a href='id_vars.html'>data_vars()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>index_var</th>
-      <td><p>Column used as index</p></td>
     </tr>
     <tr>
       <th>callback</th>
@@ -265,8 +230,9 @@ available for the given table</p></td>
 which is much needed owing to considerable heterogeneity presented by
 different data sources, several nested S3 classes are involved in
 representing a concept. An outline of this hierarchy can be described as</p><ul>
-<li><p><code>concept</code>: contains many <code>cncpt</code> objects (of potentially differing
-sub-types), each comprising of some meta-data and an <code>item</code> object</p></li>
+<li><p><code><a href='new_cncpt.html'>concept</a></code>: contains many <code>cncpt</code> objects (of potentially
+differing sub-types), each comprising of some meta-data and an <code>item</code>
+object</p></li>
 <li><p><code>item</code>: contains many <code>itm</code> objects (of potentially differing
 sub-types), each encoding how to retrieve a data item.</p></li>
 </ul>
@@ -293,14 +259,21 @@ example for insulin in <code>eicu</code>, where the regular expression <code>^in
 of <code>infusiondrug</code>. The regular expression is evaluated by <code><a href='https://rdrr.io/r/base/grep.html'>base::grepl()</a></code>
 with <code>ignore.case = TRUE</code>.</p></li>
 <li><p><code>fun_itm</code>: Intended for the scenario where data of interest is not
-directly available from a table, this <code>itm</code> class offers most flexbility. A
-function can be specified as <code>callback</code> and this function will be called
+directly available from a table, this <code>itm</code> class offers most flexbility.
+A function can be specified as <code>callback</code> and this function will be called
 with arguments <code>x</code> (the object itself), <code>patient_ids</code>, <code>id_type</code> and
 <code>interval</code> (see <code><a href='load_concepts.html'>load_concepts()</a></code>) and is expected to return an object as
 specified by the <code>target</code> entry.</p></li>
 </ul>
 
+<p>All <code>itm</code> objects have to specify a data source (<code>src</code>) and a target type
+(<code>target</code>), which specifies the expected object</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)))
+
+<span class='fu'>is_item</span>(<span class='kw'>gluc</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'>as_item</span>(<span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>)))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -312,7 +285,7 @@ specified by the <code>target</code> entry.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">

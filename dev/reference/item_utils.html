@@ -134,7 +134,17 @@
 
     <pre class="usage"><span class='fu'>prepare_query</span>(<span class='kw'>x</span>)
 
-<span class='fu'>add_unit_var</span>(<span class='kw'>x</span>)
+<span class='fu'>try_add_vars</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='fu'>get_itm_var</span>(<span class='kw'>x</span>, var = <span class='kw'>NULL</span>)
+
+<span class='fu'>set_itm_callback</span>(<span class='kw'>x</span>, <span class='kw'>fun</span>)
+
+<span class='fu'>get_itm_callback</span>(<span class='kw'>x</span>)
+
+<span class='fu'>set_id_opts</span>(<span class='kw'>x</span>)
+
+<span class='fu'>lookup_id_type</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='fu'>n_tick</span>(<span class='kw'>x</span>)
 
@@ -146,6 +156,14 @@
     <tr>
       <th>x</th>
       <td><p>Object defining the row-subsetting</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Variable name</p></td>
+    </tr>
+    <tr>
+      <th>fun</th>
+      <td><p>Callback function (passed as string)</p></td>
     </tr>
     </table>
 
@@ -161,7 +179,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">

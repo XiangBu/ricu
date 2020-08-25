@@ -135,14 +135,14 @@ increase in SOFA score.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sepsis_3</span>(
-  <span class='kw'>sofa_score</span>,
+  <span class='kw'>sofa</span>,
   <span class='kw'>susp_inf</span>,
   si_window = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"first"</span>, <span class='st'>"last"</span>, <span class='st'>"any"</span>),
   delta_fun = <span class='kw'>delta_cummin</span>,
   sofa_thresh = <span class='fl'>2L</span>,
   si_lwr = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>48L</span>),
   si_upr = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
-  interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>sofa_score</span>)
+  interval = <span class='kw'>NULL</span>
 )
 
 <span class='fu'>delta_cummin</span>(<span class='kw'>x</span>)
@@ -155,8 +155,8 @@ increase in SOFA score.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sofa_score</th>
-      <td><p><code>ts_tbl</code> with a column <code>sofa_score</code></p></td>
+      <th>sofa</th>
+      <td><p><code>ts_tbl</code> with a column <code>sofa</code></p></td>
     </tr>
     <tr>
       <th>susp_inf</th>
@@ -231,7 +231,7 @@ Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA.
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Time series utility functions — extend_ts • ICU data with R</title>
+<title>Time series utility functions — expand • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Time series utility functions — extend_ts" />
+<meta property="og:title" content="Time series utility functions — expand" />
 <meta property="og:description" content="Time series utility functions" />
 
 
@@ -132,13 +132,13 @@
     <p>Time series utility functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>extend_ts</span>(
+    <pre class="usage"><span class='fu'>expand</span>(
   <span class='kw'>x</span>,
-  min_col = <span class='st'>"min"</span>,
-  max_col = <span class='st'>"max"</span>,
-  step_size = <span class='fl'>1L</span>,
-  id_vars = <span class='kw'>NULL</span>,
-  new_col = <span class='st'>"hadm_time"</span>
+  <span class='kw'>min_col</span>,
+  <span class='kw'>max_col</span>,
+  step_size = <span class='fu'><a href='id_vars.html'>time_step</a></span>(<span class='kw'>x</span>),
+  new_index = <span class='fu'><a href='id_vars.html'>index_var</a></span>(<span class='kw'>x</span>),
+  keep_vars = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>)
 )
 
 <span class='fu'>has_no_gaps</span>(<span class='kw'>x</span>)
@@ -158,6 +158,8 @@
   full_window = <span class='fl'>FALSE</span>,
   lwr_col = <span class='st'>"min_time"</span>,
   upr_col = <span class='st'>"max_time"</span>,
+  left_closed = <span class='fl'>TRUE</span>,
+  right_closed = <span class='fl'>TRUE</span>,
   nomatch = <span class='kw'>NULL</span>,
   eval_env = <span class='kw'>NULL</span>
 )</pre>
@@ -180,12 +182,12 @@ windows bounds</p></td>
 <code>min_col</code> and <code>max_col</code></p></td>
     </tr>
     <tr>
-      <th>id_vars</th>
-      <td><p>Names of the id columns</p></td>
+      <th>new_index</th>
+      <td><p>Name of the new index column</p></td>
     </tr>
     <tr>
-      <th>new_col</th>
-      <td><p>Name of the new index column</p></td>
+      <th>keep_vars</th>
+      <td><p>Names of the columns to hold onto</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -224,6 +226,11 @@ where the sliding window extends beyond available data</p></td>
 window bounds</p></td>
     </tr>
     <tr>
+      <th>left_closed, right_closed</th>
+      <td><p>Logical flag indicating whether intervals
+are closed (default) or open.</p></td>
+    </tr>
+    <tr>
       <th>nomatch</th>
       <td><p>Forwarded to <code>data.table::[()</code></p></td>
     </tr>
@@ -246,7 +253,7 @@ to the environment in which <code>expr</code> was created</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">

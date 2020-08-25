@@ -135,38 +135,35 @@ assessment tool used to track a patient's well-being in an ICU.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sirs_score</span>(
-  <span class='kw'>respiratory_rate</span>,
   <span class='kw'>...</span>,
   win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
   keep_components = <span class='fl'>FALSE</span>,
-  interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>respiratory_rate</span>)
+  interval = <span class='kw'>NULL</span>
 )
 
-<span class='fu'>supp_o2</span>(<span class='kw'>vent_ind</span>, <span class='kw'>fi_o2</span>, interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>vent_ind</span>))
+<span class='fu'>supp_o2</span>(<span class='kw'>vent</span>, <span class='kw'>fio2</span>, interval = <span class='kw'>NULL</span>)
 
-<span class='fu'>avpu</span>(<span class='kw'>gcs</span>, interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>gcs</span>), by_ref = <span class='fl'>TRUE</span>)
+<span class='fu'>avpu</span>(<span class='kw'>gcs</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>TRUE</span>)
 
 <span class='fu'>news_score</span>(
-  <span class='kw'>respiratory_rate</span>,
   <span class='kw'>...</span>,
   win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
   keep_components = <span class='fl'>FALSE</span>,
-  interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>respiratory_rate</span>)
+  interval = <span class='kw'>NULL</span>
 )
 
 <span class='fu'>mews_score</span>(
-  <span class='kw'>respiratory_rate</span>,
   <span class='kw'>...</span>,
   win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
   keep_components = <span class='fl'>FALSE</span>,
-  interval = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>interval</a></span>(<span class='kw'>respiratory_rate</span>)
+  interval = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>respiratory_rate, vent_ind, fi_o2, gcs, ...</th>
+      <th>...</th>
       <td><p>Data input used for score
 evaluation</p></td>
     </tr>
@@ -183,6 +180,11 @@ individual components alongside the aggregated score</p></td>
       <th>interval</th>
       <td><p>Time series interval (only used for checking consistency
 of input data)</p></td>
+    </tr>
+    <tr>
+      <th>vent, fio2, gcs</th>
+      <td><p>Data as returned by <code><a href='load_concepts.html'>load_concepts()</a></code> used for score
+calculation</p></td>
     </tr>
     <tr>
       <th>by_ref</th>
@@ -203,7 +205,7 @@ reference</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">

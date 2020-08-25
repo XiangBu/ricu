@@ -417,20 +417,20 @@ new class is provided, while at <code>itm</code> level, no default function is
 available.</p>
 <p>Roughly speaking, the semantics for the two functions are as follows:</p><ul>
 <li><p><code>cncpt</code>: Called with arguments <code>x</code> (the current <code>cncpt</code> object),
-<code>aggregate</code> (controlling how aggregation per time-point and ID is handled),
-<code>...</code> (further arguments passed to downstream methods) and <code>progress</code>
-(controlling progress reporting), this function should be able to load and
-aggregate data for the given concept. Usually this involves extracting the
-<code>item</code> object and calling <code>load_concepts()</code> again, dispatching on the <code>item</code>
-class with arguments <code>x</code> (the given <code>item</code>), arguments passed as <code>...</code>, as
-well as <code>progress</code>.</p></li>
+<code>aggregate</code> (controlling how aggregation per time-point and ID is
+handled), <code>...</code> (further arguments passed to downstream methods) and
+<code>progress</code> (controlling progress reporting), this function should be able
+to load and aggregate data for the given concept. Usually this involves
+extracting the <code>item</code> object and calling <code>load_concepts()</code> again,
+dispatching on the <code>item</code> class with arguments <code>x</code> (the given <code>item</code>),
+arguments passed as <code>...</code>, as well as <code>progress</code>.</p></li>
 <li><p><code>itm</code>: Called with arguments <code>x</code> (the current object inheriting from
 <code>itm</code>, <code>patient_ids</code> (<code>NULL</code> or a patient ID selection), <code>id_type</code> (a
 string specifying what ID system to retrieve), and <code>interval</code> (the time
 series interval), this function actually carries out the loading of
-individual data items, using the specified ID system, rounding times to the
-correct interval and subsetting on patient IDs. As return value, on object
-of class as specified by the <code>target</code> entry is expected and all
+individual data items, using the specified ID system, rounding times to
+the correct interval and subsetting on patient IDs. As return value, on
+object of class as specified by the <code>target</code> entry is expected and all
 <code><a href='id_vars.html'>data_vars()</a></code> should be named consistently, as data corresponding to
 multiple <code>itm</code> objects concatenated in row-wise fashion as in
 <code><a href='https://rdrr.io/r/base/cbind.html'>base::rbind()</a></code>.</p></li>
@@ -438,11 +438,11 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>load_concepts</span>(<span class='st'>"glucose"</span>, <span class='st'>"mimic_demo"</span>)</div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
+    <pre class="examples"><div class='input'><span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>load_concepts</span>(<span class='st'>"glu"</span>, <span class='st'>"mimic_demo"</span>)</div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
 #&gt; <span class='message'>choose one of mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
 #&gt; <span class='message'>`FALSE` for at least one concept) when data merging is enabled.</span></div><div class='output co'>#&gt; <span class='message'>── Loading 1 concept ───────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
 #&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>index is not compatible with an interval of 1 mins</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 2 (0.1%) of rows due to out of range entries</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>For automatically determining an aggregation function, either all of or none of</span>
-#&gt; <span class='message'>vars `glucose` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='input'>
+#&gt; <span class='message'>vars `glu` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='input'>
 <span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_cncpt.html'>concept</a></span>(<span class='st'>"gluc"</span>,
   <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)))
 )
@@ -469,7 +469,7 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 
       <footer>
       <div class="copyright">
-  <p>Developed by Nicolas Bennett, Drago Plecko.</p>
+  <p>Developed by Nicolas Bennett, Drago Plecko, Ida-Fong Ukor.</p>
 </div>
 
 <div class="pkgdown">
