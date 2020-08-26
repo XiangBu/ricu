@@ -264,16 +264,36 @@ A function can be specified as <code>callback</code> and this function will be c
 with arguments <code>x</code> (the object itself), <code>patient_ids</code>, <code>id_type</code> and
 <code>interval</code> (see <code><a href='load_concepts.html'>load_concepts()</a></code>) and is expected to return an object as
 specified by the <code>target</code> entry.</p></li>
+<li><p><code>hrd_itm</code>: A special case of <code>sel_itm</code> for HiRID data where measurement
+units are not available as separate column, but as separate table with
+units fixed per concept.</p></li>
 </ul>
 
-<p>All <code>itm</code> objects have to specify a data source (<code>src</code>) and a target type
-(<code>target</code>), which specifies the expected object</p>
+<p>All <code>itm</code> objects have to specify a data source (<code>src</code>) as well as a
+sub-class. Further arguments then are specific to the selected sub-class
+and the S3 generic function <code>init_itm()</code> is responsible for input
+validation of class-specific arguments as well as class initialization. A
+list of <code>itm</code> objects can be passed to <code>new_item</code> in order to instantiate
+an <code>item</code> object. An alternative constructor for <code>item</code> objects is given
+by <code>item()</code> which</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)))
+    <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)),
+             unit_var = <span class='fl'>TRUE</span>, index_var = <span class='fl'>TRUE</span>)
 
 <span class='fu'>is_item</span>(<span class='kw'>gluc</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'>as_item</span>(<span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>)))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'>as_item</span>(<span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>)))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='kw'>hr1</span> <span class='op'>&lt;-</span> <span class='fu'>new_itm</span>(src = <span class='st'>"mimic_demo"</span>, table = <span class='st'>"chartevents"</span>,
+               sub_var = <span class='st'>"itemid"</span>, ids = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>211L</span>, <span class='fl'>220045L</span>))
+
+<span class='kw'>hr2</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(src = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"eicu_demo"</span>),
+            table = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"chartevents"</span>, <span class='st'>"vitalperiodic"</span>),
+            sub_var = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"itemid"</span>, <span class='kw'>NULL</span>),
+            val_var = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>NULL</span>, <span class='st'>"heartrate"</span>),
+            ids = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>211L</span>, <span class='fl'>220045L</span>), <span class='kw'>NULL</span>),
+            class = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sel_itm"</span>, <span class='st'>"col_itm"</span>))
+
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>as_item</span>(<span class='kw'>hr1</span>), <span class='kw'>hr2</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>new_item</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>hr1</span>)), <span class='kw'>hr2</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
