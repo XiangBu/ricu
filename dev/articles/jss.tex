@@ -32,19 +32,19 @@ The abstract of the article.
 
 \Address{
     Nicolas Bennett\\
-  ETH Zürich\\
-  Seminar for Statistics Rämistrasse 101 CH-8092 Zurich\\
+    ETH Zürich\\
+    Seminar for Statistics Rämistrasse 101 CH-8092 Zurich\\
   E-mail: \email{nicolas.bennett@stat.math.ethz.ch}\\
   
       Drago PLecko\\
-  ETH Zürich\\
-  Seminar for Statistics Rämistrasse 101 CH-8092 Zurich\\
+    ETH Zürich\\
+    Seminar for Statistics Rämistrasse 101 CH-8092 Zurich\\
   E-mail: \email{drago.plecko@stat.math.ethz.ch}\\
   
       Ida-Fong Ukor\\
-  East Kent Hospitals\\
-  NHS University Foundation Trust William Harvey Hospital Kennington Road,
-  Willesborough Ashford TN24 0LZ\\
+    East Kent Hospitals\\
+    NHS University Foundation Trust William Harvey Hospital Kennington Road,
+Willesborough Ashford TN24 0LZ\\
   E-mail: \email{idafong.ukor@nhs.net}\\
   
   }
@@ -177,7 +177,7 @@ severity.
 R> source <- "mimic_demo"
 R> # data loading
 R> tbl <- load_concepts(c("lact", "death", "sofa"), source,
-R+                      verbose = FALSE)
++                      verbose = FALSE)
 \end{CodeInput}
 
 \begin{CodeOutput}
@@ -598,9 +598,9 @@ R> tbl[, event := last_event(event), by = c(id_vars(tbl))]
 R> tbl[, next_charttime := charttime+1L]
 R> # model fitting
 R> cox_time_mod <- coxph(
-R+   Surv(charttime, next_charttime, event) ~ lact + sofa,
-R+   data = tbl
-R+ )
++   Surv(charttime, next_charttime, event) ~ lact + sofa,
++   data = tbl
++ )
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -609,7 +609,7 @@ We visualize the results of the model
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpRWY1PP/file39ef57396b91/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
+\begin{center}\includegraphics{/tmp/RtmpFoRTYd/file3bc6199856fd/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
 
 \end{CodeChunk}
 
@@ -671,9 +671,9 @@ vars `ins` are expected to be of numeric type
 R> ins_treat <- ins_treat[get(index_var(ins_treat)) <= 24L]
 R> 
 R> ins_treat <- ins_treat[,
-R+   list(ins_sum = .bincode(sum(ins), breaks = c(-Inf, ins_breaks, Inf)) - 1),
-R+   by = c(id_vars(ins_treat))
-R+ ]
++   list(ins_sum = .bincode(sum(ins), breaks = c(-Inf, ins_breaks, Inf)) - 1),
++   by = c(id_vars(ins_treat))
++ ]
 \end{CodeInput}
 
 \begin{CodeOutput}
@@ -701,7 +701,7 @@ a histogram:
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpRWY1PP/file39ef57396b91/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
+\begin{center}\includegraphics{/tmp/RtmpFoRTYd/file3bc6199856fd/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
 
 \end{CodeChunk}
 

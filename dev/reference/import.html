@@ -203,9 +203,11 @@ a list node defining a single column is a named list with a required,
 string-valued <code>type</code> entry which is interpreted as <code>readr</code> column
 specification function (see <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code>). Further list entries will be
 passed as arguments to the column specification function. A column defined
-as</p><pre><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(type = <span class='st'>"col_datetime"</span>, format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)</pre>
+as</p><pre><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(type = <span class='st'>"col_datetime"</span>, format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)
+</pre>
 
-<p>will therefore result in a <code>readr</code> column specification like</p><pre><span class='fu'>col_datetime</span>(format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)</pre>
+<p>will therefore result in a <code>readr</code> column specification like</p><pre><span class='fu'>col_datetime</span>(format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)
+</pre>
 
 <p>Entries controlling the partitioning of tables, specified as <code>partitioning</code>
 list nodes are expected to be named lists of length 1, where the name
@@ -230,7 +232,8 @@ that partitions can only be created on integer valued columns.</p>
     ),
     <span class='kw'>...</span>
   )
-)</pre>
+)
+</pre>
 
 <p>Configurations for the MIMIC-III and eICU databases are available in
 <code>extdata/config</code> as JSON files and can be read in using <code><a href='data_dir.html'>get_config()</a></code>.</p>
@@ -250,6 +253,7 @@ that partitions can only be created on integer valued columns.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>dir</span>, recursive = <span class='fl'>TRUE</span>)
 
 }
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

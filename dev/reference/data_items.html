@@ -281,8 +281,10 @@ by <code>item()</code> which</p>
     <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)),
              unit_var = <span class='fl'>TRUE</span>, index_var = <span class='fl'>TRUE</span>)
 
-<span class='fu'>is_item</span>(<span class='kw'>gluc</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'>as_item</span>(<span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>)))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>is_item</span>(<span class='kw'>gluc</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'>as_item</span>(<span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>)))
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='kw'>hr1</span> <span class='op'>&lt;-</span> <span class='fu'>new_itm</span>(src = <span class='st'>"mimic_demo"</span>, table = <span class='st'>"chartevents"</span>,
                sub_var = <span class='st'>"itemid"</span>, ids = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>211L</span>, <span class='fl'>220045L</span>))
 
@@ -293,7 +295,10 @@ by <code>item()</code> which</p>
             ids = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>211L</span>, <span class='fl'>220045L</span>), <span class='kw'>NULL</span>),
             class = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sel_itm"</span>, <span class='st'>"col_itm"</span>))
 
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>as_item</span>(<span class='kw'>hr1</span>), <span class='kw'>hr2</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>new_item</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>hr1</span>)), <span class='kw'>hr2</span>[<span class='fl'>1</span>])</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>as_item</span>(<span class='kw'>hr1</span>), <span class='kw'>hr2</span>[<span class='fl'>1</span>])
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>new_item</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>hr1</span>)), <span class='kw'>hr2</span>[<span class='fl'>1</span>])
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
