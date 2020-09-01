@@ -165,13 +165,15 @@ by parsing a JSON formatted concept dictionary using <code><a href='load_diction
 <span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for rec_cncpt</span>
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>callback</span>, target = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ts_tbl"</span>, <span class='st'>"id_tbl"</span>), interval = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, callback = <span class='st'>"identity_callback"</span>, interval = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
 
 <span class='fu'>new_concept</span>(<span class='kw'>x</span>)
 
 <span class='fu'>concept</span>(<span class='kw'>...</span>)
 
-<span class='fu'>is_concept</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>is_concept</span>(<span class='kw'>x</span>)
+
+<span class='fu'>as_concept</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -243,8 +245,7 @@ interval passed as argument to <code><a href='load_concepts.html'>load_concepts(
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>:
-In order to allow for a large degree of flexibility (and extensibility),
+    <p>In order to allow for a large degree of flexibility (and extensibility),
 which is much needed owing to considerable heterogeneity presented by
 different data sources, several nested S3 classes are involved in
 representing a concept. An outline of this hierarchy can be described as</p><ul>
@@ -260,7 +261,71 @@ sub-types of <code>cncpt</code> objects (all inheriting from the parent type <co
 while retaining control over how this homogeneous w.r.t. parent type, but
 heterogeneous w.r.t. sub-type vector of objects behaves in terms of S3
 generic functions.</p>
+<p>Each individual <code>cncpt</code> object contains the following information: a string-
+valued name, an <code><a href='new_itm.html'>item</a></code> vector containing <code><a href='new_itm.html'>itm</a></code>
+objects, a string-valued description (can be missing), a string-valued
+category designation (can be missing), a character vector-valued
+specification for an aggregation function and a target class specification
+(e.g. <code><a href='id_tbl.html'>id_tbl</a></code> or <code><a href='id_tbl.html'>ts_tbl</a></code>). Additionally, a sub-
+class to <code>cncpt</code> has to be specified, each representing a different
+data-scenario and holding further class-specific information. The following
+sub-classes to <code>cncpt</code> are available:</p><ul>
+<li><p><code>num_cncpt</code>: The most widely used concept type is indented for concepts
+representing numerical measurements. Additional information that can be
+specified includes a string-valued unit specification, alongside a
+plausible range which can be used during data loading.</p></li>
+<li><p><code>fct_cncpt</code>: In case of categorical concepts, such as <code>sex</code>, a set of
+factor levels can be specified, against which the loaded data is checked.</p></li>
+<li><p><code>rec_cncpt</code>: More involved concepts, such as a <a href='sofa_score.html'>SOFA score</a>
+can pull in other concepts. Recursive concepts can build on other
+recursive concepts up to arbitrary recursion depth. Owing to the more
+complicated nature of such concepts, a <code>callback</code> function can be
+specified which is used in data loading for concept-specific post-
+processing steps.</p></li>
+</ul>
 
+<p>Class instatiation is organized in the same fashion as for
+<a href='new_itm.html'><code>item</code>/<code>itm</code></a> objects: <code>concept()</code> maps vector-valued arguments
+to <code>new_cncpt()</code>, which internally calls the S3 generic function
+<code>init_cncpt()</code>, while <code>new_concept()</code> instantiates a <code>concept</code> object from
+a list of <code>cncpt</code> objects (created by calls to <code>new_cncpt()</code>). Coercion is
+only possible from <code>list</code> and <code>cncpt</code>, by calling <code>as_concept()</code> and
+inheritance can be checked using <code>is_concept()</code> or <code>is_cncpt()</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span>(<span class='st'>"glu"</span>,
+  <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
+  description = <span class='st'>"glucose"</span>, category = <span class='st'>"chemistry"</span>,
+  unit = <span class='st'>"mg/dL"</span>, min = <span class='fl'>0</span>, max = <span class='fl'>1000</span>
+)
+
+<span class='fu'>is_concept</span>(<span class='kw'>gluc</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>))
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='kw'>gl1</span> <span class='op'>&lt;-</span> <span class='fu'>new_cncpt</span>(<span class='st'>"glu"</span>,
+  <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
+  description = <span class='st'>"glucose"</span>
+)
+
+<span class='fu'>is_cncpt</span>(<span class='kw'>gl1</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_concept</span>(<span class='kw'>gl1</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='kw'>conc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"glu"</span>, <span class='st'>"lact"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
+    <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fl'>50813L</span>)
+  ),
+  description = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"glucose"</span>, <span class='st'>"lactate"</span>)
+)
+
+<span class='kw'>conc</span>
+</div><div class='output co'>#&gt; &lt;concept[2]&gt;
+#&gt;                    glu                   lact 
+#&gt; glucose &lt;num_cncpt[1]&gt; lactate &lt;num_cncpt[1]&gt; </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>as_concept</span>(<span class='kw'>gl1</span>), <span class='kw'>conc</span>[<span class='fl'>1L</span>])
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

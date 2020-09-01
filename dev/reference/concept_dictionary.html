@@ -40,7 +40,12 @@
 
 
 <meta property="og:title" content="Load concept dictionaries — load_dictionary" />
-<meta property="og:description" content="Data can be specified in JSON format and parsed into concept objects." />
+<meta property="og:description" content="Data concepts can be specified in JSON format as a concept dictionary which
+can be read and parsed into concept/item objects. Dictionary loading
+can either be performed on the default included dictionary or on a user-
+specified custom dictionary. Furthermore, a mechanism is provided for adding
+concepts and/or data sources to the existing dictionary (see the Details
+section)." />
 
 
 <meta name="robots" content="noindex">
@@ -129,7 +134,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Data can be specified in JSON format and parsed into <code>concept</code> objects.</p>
+    <p>Data concepts can be specified in JSON format as a concept dictionary which
+can be read and parsed into <code>concept</code>/<code>item</code> objects. Dictionary loading
+can either be performed on the default included dictionary or on a user-
+specified custom dictionary. Furthermore, a mechanism is provided for adding
+concepts and/or data sources to the existing dictionary (see the Details
+section).</p>
     </div>
 
     <pre class="usage"><span class='fu'>load_dictionary</span>(
@@ -161,7 +171,66 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>A default dictionary is provided at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"concept-dict.json"</span>),
+  package = <span class='st'>"ricu"</span>
+)
+</pre>
+
+<p>and can be loaded in to an R session by calling
+<code><a href='data_dir.html'>get_config("concept-dict")</a></code>. The default dictionary can be extended by
+adding a file <code>concept-dict.json</code> to the path specified by the environment
+variable <code>RICU_CONFIG_PATH</code>. New concepts can be added to this file and
+existing concepts can be extended (by adding new data sources).
+Alternatively, <code>load_dictionary()</code> can be called on non-default
+dictionaries using the <code>file</code> argument.</p>
+<p>In order to specify a concept as JSON object, for example the numeric
+concept for glucose, is given by</p><pre>{
+  "glu": {
+    "unit": "mg/dL",
+    "min": 0,
+    "max": 1000,
+    "description": "glucose",
+    "category": "chemistry",
+    "sources": {
+      "mimic_demo": [
+        {
+          "ids": [50809, 50931],
+          "table": "labevents",
+          "sub_var": "itemid"
+        }
+      ]
+    }
+  }
+}
+</pre>
+
+<p>Using such a specification, constructors for <code><a href='new_cncpt.html'>cncpt</a></code> and
+<code><a href='new_itm.html'>itm</a></code> objects are called either using default arguments or as
+specified by the JSON object, with the above corresponding to a call like</p><pre><span class='fu'><a href='new_cncpt.html'>concept</a></span>(
+  name = <span class='st'>"glu"</span>,
+  items = <span class='fu'><a href='new_itm.html'>item</a></span>(
+    src = <span class='st'>"mimic_demo"</span>, table = <span class='st'>"labevents"</span>, sub_var = <span class='st'>"itemid"</span>,
+    ids = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))
+  ),
+  description = <span class='st'>"glucose"</span>, category = <span class='st'>"chemistry"</span>,
+  unit = <span class='st'>"mg/dL"</span>, min = <span class='fl'>0</span>, max = <span class='fl'>1000</span>
+)
+</pre>
+
+<p>The arguments <code>src</code> and <code>concepts</code> can be used to only load a subset of a
+dictionary by specifying a character vector of data sources and/or concept
+names.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>load_dictionary</span>())
+</div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='message'>The following tables are missing from directory ~/.local/share/ricu/hirid:</span></div><div class='output co'>#&gt; <span class='message'>● `general`</span></div><div class='output co'>#&gt; <span class='message'>● `observations`</span></div><div class='output co'>#&gt; <span class='message'>● `ordinal`</span></div><div class='output co'>#&gt; <span class='message'>● `pharma`</span></div><div class='output co'>#&gt; <span class='message'>● `variables`</span></div><div class='output co'>#&gt; <span class='error'>Error: </span></div><div class='input'><span class='fu'>load_dictionary</span>(<span class='st'>"mimic_demo"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"glu"</span>, <span class='st'>"lact"</span>))
+</div><div class='output co'>#&gt; &lt;concept[2]&gt;
+#&gt;                    glu                   lact 
+#&gt; glucose &lt;num_cncpt[1]&gt; lactate &lt;num_cncpt[1]&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

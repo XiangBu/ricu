@@ -168,13 +168,14 @@ assessment tool used to track a patient's well-being in an ICU.</p>
   interval = <span class='kw'>NULL</span>
 )
 
+<span class='fu'>sofa_sed</span>(<span class='kw'>trach</span>, <span class='kw'>rass</span>, interval = <span class='kw'>NULL</span>)
+
 <span class='fu'>sofa_gcs</span>(
   <span class='kw'>egcs</span>,
   <span class='kw'>mgcs</span>,
   <span class='kw'>vgcs</span>,
   <span class='kw'>tgcs</span>,
-  <span class='kw'>trach</span>,
-  <span class='kw'>rass</span>,
+  <span class='kw'>sed</span>,
   win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>6L</span>),
   set_sed_max = <span class='fl'>TRUE</span>,
   set_na_max = <span class='fl'>TRUE</span>,
@@ -260,7 +261,11 @@ values with 21</p></td>
 time</p></td>
     </tr>
     <tr>
-      <th>egcs, mgcs, vgcs, tgcs, trach, rass</th>
+      <th>trach, rass</th>
+      <td><p>Data input used for sed evaluation</p></td>
+    </tr>
+    <tr>
+      <th>egcs, mgcs, vgcs, tgcs, sed</th>
       <td><p>Data input used for gcs evaluation</p></td>
     </tr>
     <tr>

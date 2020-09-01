@@ -276,12 +276,12 @@ character vector identifying patient ID columns (<a href='id_vars.html'>id_vars<
 a string, tracking the column holding time-stamps
 (<a href='id_vars.html'>index_var</a>) and a scalar <code>difftime</code> object determining
 the time-series step size <a href='id_vars.html'>interval</a>. Again, all further
-columns are treated as <a href='id_vars.html'>data_vars</a>.
-Owing to the nested structure of required meta data, <code>ts_tbl</code> inherits from
-ìd_tbl<code>. Furthermore, both classes inherit from </code>data.table<code>. As such, </code>data.table<code>[reference semantics][data.table::reference] are available for some operations, indicated by presence of a</code>by_ref<code>argument. At default, value,</code>by_ref<code>is disabled as this is inline with base R behavior at the cost of potentially incurring unnecessary data copies. Some care has to be taken when passing</code>by_ref = TRUE` and enabling by reference operations as
-this can have side effects (see examples).</p></li>
+columns are treated as <a href='id_vars.html'>data_vars</a>.</p></li>
 </ul>
 
+<p>Owing to the nested structure of required meta data, <code>ts_tbl</code> inherits from
+ìd_tbl<code>. Furthermore, both classes inherit from </code>data.table<code>. As such, </code>data.table<code>[reference semantics][data.table::reference] are available for some operations, indicated by presence of a</code>by_ref<code>argument. At default, value,</code>by_ref<code>is disabled as this is inline with base R behavior at the cost of potentially incurring unnecessary data copies. Some care has to be taken when passing</code>by_ref = TRUE` and enabling by reference operations as
+this can have side effects (see examples).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
