@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tabular ICU data — id_tbl • ICU data with R</title>
+<title>Tabular ICU data classes — id_tbl • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Tabular ICU data — id_tbl" />
+<meta property="og:title" content="Tabular ICU data classes — id_tbl" />
 <meta property="og:description" content="In order to simplify handling or tabular ICU data, ricu provides two
 S3 classes, id_tbl and ts_tbl. The two classes essentially
 consist of a data.table object, alongside some meta data and S3 dispatch
@@ -129,7 +129,7 @@ information can be identified." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tabular ICU data</h1>
+    <h1>Tabular ICU data classes</h1>
     
     <div class="hidden name"><code>id_tbl.Rd</code></div>
     </div>
@@ -150,75 +150,12 @@ information can be identified.</p>
 
 <span class='fu'>as_id_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
 
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>as_id_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>as_id_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for data.table</span>
-<span class='fu'>as_id_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>as_id_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
 <span class='fu'>ts_tbl</span>(<span class='kw'>...</span>, id_vars = <span class='fl'>1L</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>)
 
 <span class='fu'>is_ts_tbl</span>(<span class='kw'>x</span>)
 
 <span class='fu'>as_ts_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
 
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>as_ts_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>as_ts_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for data.table</span>
-<span class='fu'>as_ts_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>as_ts_tbl</span>(<span class='kw'>x</span>, id_vars = <span class='kw'>NULL</span>, index_var = <span class='kw'>NULL</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>FALSE</span>)
-
-<span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for data.frame</span>
-<span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
-
-<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
-
-<span class='co'># S3 method for `NULL`</span>
-<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
-
-<span class='fu'>as_ptype</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>as_ptype</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>as_ptype</span>(<span class='kw'>x</span>)
-
-<span class='fu'>validate_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>validate_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>validate_tbl</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for data.table</span>
 <span class='fu'>validate_tbl</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -250,39 +187,79 @@ reference</p></td>
       <td><p>Time series interval length specified as scalar-valued
 <code>difftime</code> object</p></td>
     </tr>
-    <tr>
-      <th>template</th>
-      <td><p>Object after which to model the object in question</p></td>
-    </tr>
-    <tr>
-      <th>stop_on_fail</th>
-      <td><p>Logical flag indicating whether to consider failed
-object validation as error</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The two classes are designed for two often encoutered data scenatios:</p><ul>
+    <p>The two classes are designed for two often encountered data scenarios:</p><ul>
 <li><p><code>id_tbl</code> objects can be used to represent static (with repspect to
 relevant time scales) patient data such as patient age and such an object
 is simply a <code>data.table</code> combined with a non-zero length character vector
 valued attribute marking the columns tracking patient ID information
-(<a href='id_vars.html'>id_vars</a>). All further columns are considered as
-<a href='id_vars.html'>data_vars</a>.</p></li>
+(<code><a href='write_psv.html'>id_vars</a></code>). All further columns are considered as
+<a href='write_psv.html'>data_vars</a>.</p></li>
 <li><p><code>ts_tbl</code> objects are used for grouped time series data. A <code>data.table</code>
 object again is augmented by attributes, including a non-zero length
-character vector identifying patient ID columns (<a href='id_vars.html'>id_vars</a>),
+character vector identifying patient ID columns (<a href='write_psv.html'>id_vars</a>),
 a string, tracking the column holding time-stamps
-(<a href='id_vars.html'>index_var</a>) and a scalar <code>difftime</code> object determining
-the time-series step size <a href='id_vars.html'>interval</a>. Again, all further
-columns are treated as <a href='id_vars.html'>data_vars</a>.</p></li>
+(<a href='write_psv.html'>index_var</a>) and a scalar <code>difftime</code> object determining
+the time-series step size <a href='write_psv.html'>interval</a>. Again, all further
+columns are treated as <a href='write_psv.html'>data_vars</a>.</p></li>
 </ul>
 
 <p>Owing to the nested structure of required meta data, <code>ts_tbl</code> inherits from
-ìd_tbl<code>. Furthermore, both classes inherit from </code>data.table<code>. As such, </code>data.table<code>[reference semantics][data.table::reference] are available for some operations, indicated by presence of a</code>by_ref<code>argument. At default, value,</code>by_ref<code>is disabled as this is inline with base R behavior at the cost of potentially incurring unnecessary data copies. Some care has to be taken when passing</code>by_ref = TRUE` and enabling by reference operations as
-this can have side effects (see examples).</p>
+<code>id_tbl</code>. Furthermore, both classes inherit from <code>data.table</code>. As such,
+<code>data.table</code> reference semantics are available for
+some operations, indicated by presence of a <code>by_ref</code> argument. At default,
+value, <code>by_ref</code> is set to <code>FALSE</code> as this is in line with base R behavior
+at the cost of potentially incurring unnecessary data copies. Some care has
+to be taken when passing <code>by_ref = TRUE</code> and enabling by reference
+operations as this can have side effects (see examples).</p>
+<p>For instantiating <code>ts_tbl</code> objects, both <code>index_var</code> and <code>interval</code> can be
+automatically determined if not specified. For the index column, the only
+requirement is that a single <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code> column is
+present, while for the time step, the minimal difference between two
+consecutive observations is chosen (and all differences are therefore
+required to be multiples of the minimum difference).</p>
+<p>Coercion between <code>id_tbl</code> and <code>ts_tbl</code> by default keeps intersecting
+attributes fixed and new attributes are by default inferred as for class
+instantiation. Each class comes with a class-specific implementation of the
+S3 generic function <code>validate_tbl()</code> which returns <code>TRUE</code> if the ibject is
+considered valid or a string outlining the type of validation failure that
+was encountered. Validity requires</p><ol>
+<li><p>inheriting from <code>data.table</code> and unique column names</p></li>
+<li><p>for <code>id_tbl</code> that all columns specified by the non-zero length character
+vector holding onto the <code>id_vars</code> specification are available</p></li>
+<li><p>for <code>ts_tbl</code> that the string-valued <code>index_var</code> column is available and
+does not intersect with <code>id_vars</code> and that the index column obeys the
+specified interval.</p></li>
+</ol>
 
+<p>Finally, inheritance can be checked by calling <code>is_id_tbl()</code> and
+<code>is_ts_tbl()</code>. Note that due to <code>ts_tbl</code> inheriting from <code>id_tbl</code>,
+<code>is_id_tbl()</code> returns <code>TRUE</code> for both <code>id_tbl</code> and <code>ts_tbl</code> objects, while
+<code>is_ts_tbl()</code> only returns <code>TRUE</code> for <code>ts_tbl</code> objects.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+<span class='fu'>is_id_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_ts_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>as_ts_tbl</span>(<span class='kw'>dat</span>, <span class='st'>"a"</span>)
+</div><div class='output co'>#&gt; <span class='message'>In order to automatically determine the index column, exactly one `difftime`</span>
+#&gt; <span class='message'>column is required.</span></div><div class='input'><span class='fu'>is_id_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_ts_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'>as_id_tbl</span>(<span class='kw'>tbl</span>)
+<span class='fu'>is_ts_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_ts_tbl</span>(<span class='kw'>tmp</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'>as_id_tbl</span>(<span class='kw'>tbl</span>, by_ref = <span class='fl'>TRUE</span>)
+<span class='fu'>is_ts_tbl</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>is_ts_tbl</span>(<span class='kw'>tmp</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

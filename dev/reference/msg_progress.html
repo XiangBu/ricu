@@ -154,7 +154,7 @@ be used when signaling messages in callback functions.</p>
     <pre class="examples"><div class='input'><span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>)
 </div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='kw'>capt_fun</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) {
-  <span class='kw'>rlang</span>::<span class='fu'><a href='https://rlang.r-lib.org/reference/abort.html'>inform</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"captured:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>conditionMessage</a></span>(<span class='kw'>x</span>)))
+  <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"captured: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>conditionMessage</a></span>(<span class='kw'>x</span>))
 }
 
 <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(<span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>), msg_progress = <span class='kw'>capt_fun</span>)

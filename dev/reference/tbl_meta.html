@@ -41,7 +41,15 @@
 
 <meta property="og:title" content="Read and write utilities — write_psv" />
 <meta property="og:description" content="Support for reading from and writing to .psv files as used for the
-Physionet Sepsis Challenge." />
+Physionet Sepsis Challenge.
+The two data classes id_tbl and ts_tbl, used by ricu to represent ICU
+patient data, consist of a data.table alongside some meta data. This
+includes marking columns that have special meaning and for data
+representing measurements ordered in time, the step size. The following
+utility functions can be used to extract columns and column names with
+special meaning, as well as query a ts_tbl object regarding its time
+series related meta data.
+Utilities for retrieving/modifying temporal metadata from ts_tbl objects." />
 
 
 <meta name="robots" content="noindex">
@@ -132,18 +140,52 @@ Physionet Sepsis Challenge." />
     <div class="ref-description">
     <p>Support for reading from and writing to <code>.psv</code> files as used for the
 Physionet Sepsis Challenge.</p>
+<p>The two data classes <code>id_tbl</code> and <code>ts_tbl</code>, used by <code>ricu</code> to represent ICU
+patient data, consist of a <code>data.table</code> alongside some meta data. This
+includes marking columns that have special meaning and for data
+representing measurements ordered in time, the step size. The following
+utility functions can be used to extract columns and column names with
+special meaning, as well as query a <code>ts_tbl</code> object regarding its time
+series related meta data.</p>
+<p>Utilities for retrieving/modifying temporal metadata from <code>ts_tbl</code> objects.</p>
     </div>
 
     <pre class="usage"><span class='fu'>write_psv</span>(<span class='kw'>x</span>, <span class='kw'>dir</span>, na_rows = <span class='kw'>NULL</span>)
 
-<span class='fu'>read_psv</span>(<span class='kw'>dir</span>, col_spec = <span class='kw'>NULL</span>, id_var = <span class='st'>"stay_id"</span>)</pre>
+<span class='fu'>read_psv</span>(<span class='kw'>dir</span>, col_spec = <span class='kw'>NULL</span>, id_var = <span class='st'>"stay_id"</span>)
+
+<span class='fu'>id_vars</span>(<span class='kw'>x</span>)
+
+<span class='fu'>id_var</span>(<span class='kw'>x</span>)
+
+<span class='fu'>id_col</span>(<span class='kw'>x</span>)
+
+<span class='fu'>index_var</span>(<span class='kw'>x</span>)
+
+<span class='fu'>index_col</span>(<span class='kw'>x</span>)
+
+<span class='fu'>meta_vars</span>(<span class='kw'>x</span>)
+
+<span class='fu'>data_vars</span>(<span class='kw'>x</span>)
+
+<span class='fu'>data_var</span>(<span class='kw'>x</span>)
+
+<span class='fu'>data_col</span>(<span class='kw'>x</span>)
+
+<span class='fu'>interval</span>(<span class='kw'>x</span>)
+
+<span class='fu'>time_unit</span>(<span class='kw'>x</span>)
+
+<span class='fu'>time_step</span>(<span class='kw'>x</span>)
+
+<span class='fu'>time_vars</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object to write to files</p></td>
+      <td><p>Object to query/operate on</p></td>
     </tr>
     <tr>
       <th>dir</th>
@@ -165,6 +207,48 @@ if <code>NULL</code>, data is written as-is</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following functions can be used to query an object for columns or
+column names that represent a distinct aspect of the data:</p><ul>
+<li><p><code>id_vars()</code>: ID variables are one or more column names with the
+interaction of corresponding columns identifying a grouping of the data.
+Most commonly this is some sort of patient identifier.</p></li>
+<li><p><code>id_var()</code>: This function either fails or returns a string and can
+therefore be used in case only a single column provides grouping
+information.</p></li>
+<li><p><code>id_col()</code>: Again, in case only a single column provides grouping
+information, this column can be extracted using this function.</p></li>
+<li><p><code>index_var()</code>: Suitable for use as index variable is a column that encodes
+a temporal ordering of observations as <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code>
+vector. Only a single column can be marked as index variable and this
+function queries a <code>ts_tbl</code> object for its name.</p></li>
+<li><p><code>index_col()</code>: similarly to <code>id_col()</code>, this function extracts the column
+with the given designation. As a <code>ts_tbl</code> object is required to have
+exactly one column marked as index, this function always returns for
+<code>ts_tbl</code> objects (and fails for <code>id_tbl</code> objects).</p></li>
+<li><p><code>meta_vars()</code>: For <code>ts_tbl</code> objects, meta variables represent the union
+of ID and index variables, while for <code>id_tbl</code> objects meta variables
+consist pf ID variables.</p></li>
+<li><p><code>data_vars()</code>: Data variables on the other hand are all columns that are
+not meta variables.</p></li>
+<li><p><code>data_var()</code>: Similarly to <code>id_var()</code>, this function either returns the
+name of a single data variable or fails.</p></li>
+<li><p><code>data_col()</code>: Building on <code>data_var()</code>, in situations where only a single
+data variable is present, it is returned or if multiple data column
+exists, an error is thrown.</p></li>
+<li><p><code>time_vars()</code>: Time variables are all columns in an object inheriting
+from <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> that are of type
+<code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code>. Therefore in a <code>ts_tbl</code> object the index
+column is one of (potentially) several time variables.</p></li>
+<li><p><code>interval()</code>: The time series interval length is represented a scalar
+valued <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code> object.</p></li>
+<li><p><code>time_unit()</code>: The time unit of the time series interval, represented by
+a string such as "hours" or "mins" (see <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code>).</p></li>
+<li><p><code>time_step()</code>: The time series step size represented by a nuemric value
+in the unit as returned by <code>time_unit()</code>.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Reyna, M., Josef, C., Jeter, R., Shashikumar, S., Moody, B., Westover, M.
@@ -173,6 +257,33 @@ Sepsis from Clinical Data -- the PhysioNet Computing in Cardiology
 Challenge 2019 (version 1.0.0). PhysioNet.
 https://doi.org/10.13026/v64v-d857.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>id_tbl</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>),
+              id_vars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))
+
+<span class='fu'>id_vars</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] "a" "b"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(<span class='fu'>id_col</span>(<span class='kw'>tbl</span>), error = <span class='fu'>function</span>(<span class='kw'>...</span>) <span class='st'>"no luck"</span>)
+</div><div class='output co'>#&gt; [1] "no luck"</div><div class='input'><span class='fu'>data_vars</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] "c"</div><div class='input'><span class='fu'>data_col</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt;  [1] -0.47270248  0.70875306 -1.52895871  0.23742535 -1.31281425  0.74702859
+#&gt;  [7] -1.56251843  0.07105336 -0.63953477 -0.84519574</div><div class='input'>
+<span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>as_id_tbl</a></span>(<span class='kw'>tbl</span>, id_vars = <span class='st'>"a"</span>)
+<span class='fu'>id_vars</span>(<span class='kw'>tmp</span>)
+</div><div class='output co'>#&gt; [1] "a"</div><div class='input'><span class='fu'>id_col</span>(<span class='kw'>tmp</span>)
+</div><div class='output co'>#&gt;  [1] 1 1 1 1 1 2 2 2 2 2</div><div class='input'>
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>ts_tbl</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>)), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+</div><div class='output co'>#&gt; <span class='message'>In order to automatically determine the index column, exactly one `difftime`</span>
+#&gt; <span class='message'>column is required.</span></div><div class='input'><span class='fu'>index_var</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] "b"</div><div class='input'><span class='fu'>index_col</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; Time differences in hours
+#&gt;  [1] 1 2 3 4 5 1 2 3 4 5</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>index_var</span>(<span class='kw'>tbl</span>), <span class='fu'>time_vars</span>(<span class='kw'>tbl</span>))
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>interval</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; Time difference of 1 hours</div><div class='input'><span class='fu'>time_unit</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] "hours"</div><div class='input'><span class='fu'>time_step</span>(<span class='kw'>tbl</span>)
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

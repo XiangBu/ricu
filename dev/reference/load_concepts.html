@@ -343,9 +343,9 @@ wide-format table, as this requires data to be unique per observation (i.e.
 by either id or combination of id and index). Several value types are
 acceptable as <code>aggregate</code> argument, the most important being <code>FALSE</code>, which
 disables aggregation, NULL, which auto-determines a suitable aggregation
-function or a string which is ultimately passed to <code><a href='id_vars.html'>dt_gforce()</a></code> where it
+function or a string which is ultimately passed to <code><a href='unclass_tbl.html'>dt_gforce()</a></code> where it
 identifies a function such as <code><a href='https://rdrr.io/r/base/sum.html'>sum()</a></code>, <code><a href='https://rdrr.io/r/base/mean.html'>mean()</a></code>, <code><a href='https://rdrr.io/r/base/Extremes.html'>min()</a></code> or <code><a href='https://rdrr.io/r/base/Extremes.html'>max()</a></code>. More
-information on aggregation is available as <code><a href='id_vars.html'>make_unique()</a></code>. If the object
+information on aggregation is available as <code><a href='unclass_tbl.html'>make_unique()</a></code>. If the object
 passed as <code>aggregate</code> is scalar, it is applied to all requested concepts in
 the same way. In order to customize aggregation per concept, a named object
 (with names corresponding to concepts) of the same length as the number of
@@ -431,7 +431,7 @@ series interval), this function actually carries out the loading of
 individual data items, using the specified ID system, rounding times to
 the correct interval and subsetting on patient IDs. As return value, on
 object of class as specified by the <code>target</code> entry is expected and all
-<code><a href='id_vars.html'>data_vars()</a></code> should be named consistently, as data corresponding to
+<code><a href='write_psv.html'>data_vars()</a></code> should be named consistently, as data corresponding to
 multiple <code>itm</code> objects concatenated in row-wise fashion as in
 <code><a href='https://rdrr.io/r/base/cbind.html'>base::rbind()</a></code>.</p></li>
 </ul>
