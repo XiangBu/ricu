@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read and write utilities — write_psv • ICU data with R</title>
+<title>ICU class meta data utilities — id_vars • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Read and write utilities — write_psv" />
-<meta property="og:description" content="Support for reading from and writing to .psv files as used for the
-Physionet Sepsis Challenge.
-The two data classes id_tbl and ts_tbl, used by ricu to represent ICU
+<meta property="og:title" content="ICU class meta data utilities — id_vars" />
+<meta property="og:description" content="The two data classes id_tbl and ts_tbl, used by ricu to represent ICU
 patient data, consist of a data.table alongside some meta data. This
 includes marking columns that have special meaning and for data
 representing measurements ordered in time, the step size. The following
@@ -132,15 +130,13 @@ Utilities for retrieving/modifying temporal metadata from ts_tbl objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read and write utilities</h1>
+    <h1>ICU class meta data utilities</h1>
     
     <div class="hidden name"><code>tbl_meta.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Support for reading from and writing to <code>.psv</code> files as used for the
-Physionet Sepsis Challenge.</p>
-<p>The two data classes <code>id_tbl</code> and <code>ts_tbl</code>, used by <code>ricu</code> to represent ICU
+    <p>The two data classes <code>id_tbl</code> and <code>ts_tbl</code>, used by <code>ricu</code> to represent ICU
 patient data, consist of a <code>data.table</code> alongside some meta data. This
 includes marking columns that have special meaning and for data
 representing measurements ordered in time, the step size. The following
@@ -150,11 +146,7 @@ series related meta data.</p>
 <p>Utilities for retrieving/modifying temporal metadata from <code>ts_tbl</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_psv</span>(<span class='kw'>x</span>, <span class='kw'>dir</span>, na_rows = <span class='kw'>NULL</span>)
-
-<span class='fu'>read_psv</span>(<span class='kw'>dir</span>, col_spec = <span class='kw'>NULL</span>, id_var = <span class='st'>"stay_id"</span>)
-
-<span class='fu'>id_vars</span>(<span class='kw'>x</span>)
+    <pre class="usage"><span class='fu'>id_vars</span>(<span class='kw'>x</span>)
 
 <span class='fu'>id_var</span>(<span class='kw'>x</span>)
 
@@ -186,24 +178,6 @@ series related meta data.</p>
     <tr>
       <th>x</th>
       <td><p>Object to query/operate on</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p>Directory to write the (many) files to or read from</p></td>
-    </tr>
-    <tr>
-      <th>na_rows</th>
-      <td><p>If <code>TRUE</code> missing time steps are filled with <code>NaN</code> values,
-if <code>FALSE</code>, rows where all data columns entries are missing are removed and
-if <code>NULL</code>, data is written as-is</p></td>
-    </tr>
-    <tr>
-      <th>col_spec</th>
-      <td><p>A column specification as created by <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>id_var</th>
-      <td><p>Name of the id column (IDs are generated from file names)</p></td>
     </tr>
     </table>
 
@@ -249,13 +223,6 @@ a string such as "hours" or "mins" (see <code><a href='https://rdrr.io/r/base/di
 in the unit as returned by <code>time_unit()</code>.</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Reyna, M., Josef, C., Jeter, R., Shashikumar, S., Moody, B., Westover, M.
-B., Sharma, A., Nemati, S., &amp; Clifford, G. (2019). Early Prediction of
-Sepsis from Clinical Data -- the PhysioNet Computing in Cardiology
-Challenge 2019 (version 1.0.0). PhysioNet.
-https://doi.org/10.13026/v64v-d857.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>id_tbl</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>),

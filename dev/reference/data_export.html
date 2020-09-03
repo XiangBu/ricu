@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Switch between id types — change_id • ICU data with R</title>
+<title>Read and write utilities — write_psv • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Switch between id types — change_id" />
-<meta property="og:description" content="In ICU settings, multiple ID types may be in use which present an ordering
-or nested structure, for example patient id, hospital stay id and ICU stay
-id. This function allows for converting from one ID to another." />
+<meta property="og:title" content="Read and write utilities — write_psv" />
+<meta property="og:description" content="Support for reading from and writing to .psv files as used for the
+Physionet Sepsis Challenge." />
 
 
 <meta name="robots" content="noindex">
@@ -125,60 +124,54 @@ id. This function allows for converting from one ID to another." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Switch between id types</h1>
+    <h1>Read and write utilities</h1>
     
-    <div class="hidden name"><code>change_id.Rd</code></div>
+    <div class="hidden name"><code>data_export.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In ICU settings, multiple ID types may be in use which present an ordering
-or nested structure, for example patient id, hospital stay id and ICU stay
-id. This function allows for converting from one ID to another.</p>
+    <p>Support for reading from and writing to <code>.psv</code> files as used for the
+Physionet Sepsis Challenge.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>change_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>write_psv</span>(<span class='kw'>x</span>, <span class='kw'>dir</span>, na_rows = <span class='kw'>NULL</span>)
 
-<span class='fu'>upgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='fu'>downgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>upgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>upgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for ts_tbl</span>
-<span class='fu'>downgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'>downgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)</pre>
+<span class='fu'>read_psv</span>(<span class='kw'>dir</span>, col_spec = <span class='kw'>NULL</span>, id_var = <span class='st'>"stay_id"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>icu_tbl</code> object for which to make the id change</p></td>
+      <td><p>Object to write to files</p></td>
     </tr>
     <tr>
-      <th>target_id</th>
-      <td><p>The destination id name</p></td>
+      <th>dir</th>
+      <td><p>Directory to write the (many) files to or read from</p></td>
     </tr>
     <tr>
-      <th>src</th>
-      <td><p>Passed to <code><a href='new_id_cfg.html'>as_id_cfg()</a></code> and <code><a href='data.html'>as_src_env()</a></code></p></td>
+      <th>na_rows</th>
+      <td><p>If <code>TRUE</code> missing time steps are filled with <code>NaN</code> values,
+if <code>FALSE</code>, rows where all data columns entries are missing are removed and
+if <code>NULL</code>, data is written as-is</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Passed to <code>upgrade_id()</code>/<code>downgrade_id()</code></p></td>
+      <th>col_spec</th>
+      <td><p>A column specification as created by <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code></p></td>
     </tr>
     <tr>
-      <th>cols</th>
-      <td><p>Column names that require time-adjustment</p></td>
+      <th>id_var</th>
+      <td><p>Name of the id column (IDs are generated from file names)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Reyna, M., Josef, C., Jeter, R., Shashikumar, S., Moody, B., Westover, M.
+B., Sharma, A., Nemati, S., &amp; Clifford, G. (2019). Early Prediction of
+Sepsis from Clinical Data -- the PhysioNet Computing in Cardiology
+Challenge 2019 (version 1.0.0). PhysioNet.
+https://doi.org/10.13026/v64v-d857.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

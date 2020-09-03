@@ -196,15 +196,15 @@ reference</p></td>
 relevant time scales) patient data such as patient age and such an object
 is simply a <code>data.table</code> combined with a non-zero length character vector
 valued attribute marking the columns tracking patient ID information
-(<code><a href='write_psv.html'>id_vars</a></code>). All further columns are considered as
-<a href='write_psv.html'>data_vars</a>.</p></li>
+(<code><a href='id_vars.html'>id_vars</a></code>). All further columns are considered as
+<a href='id_vars.html'>data_vars</a>.</p></li>
 <li><p><code>ts_tbl</code> objects are used for grouped time series data. A <code>data.table</code>
 object again is augmented by attributes, including a non-zero length
-character vector identifying patient ID columns (<a href='write_psv.html'>id_vars</a>),
+character vector identifying patient ID columns (<a href='id_vars.html'>id_vars</a>),
 a string, tracking the column holding time-stamps
-(<a href='write_psv.html'>index_var</a>) and a scalar <code>difftime</code> object determining
-the time-series step size <a href='write_psv.html'>interval</a>. Again, all further
-columns are treated as <a href='write_psv.html'>data_vars</a>.</p></li>
+(<a href='id_vars.html'>index_var</a>) and a scalar <code>difftime</code> object determining
+the time-series step size <a href='id_vars.html'>interval</a>. Again, all further
+columns are treated as <a href='id_vars.html'>data_vars</a>.</p></li>
 </ul>
 
 <p>Owing to the nested structure of required meta data, <code>ts_tbl</code> inherits from

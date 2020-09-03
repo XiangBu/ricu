@@ -142,19 +142,19 @@
 
 <span class='fu'>rm_cols</span>(<span class='kw'>x</span>, <span class='kw'>cols</span>, skip_absent = <span class='fl'>FALSE</span>, by_ref = <span class='fl'>FALSE</span>)
 
-<span class='fu'>change_interval</span>(<span class='kw'>x</span>, <span class='kw'>new_interval</span>, cols = <span class='fu'><a href='write_psv.html'>time_vars</a></span>(<span class='kw'>x</span>), by_ref = <span class='fl'>FALSE</span>)
+<span class='fu'>change_interval</span>(<span class='kw'>x</span>, <span class='kw'>new_interval</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), by_ref = <span class='fl'>FALSE</span>)
 
 <span class='fu'>rbind_lst</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
-<span class='fu'>rm_na</span>(<span class='kw'>x</span>, cols = <span class='fu'><a href='write_psv.html'>data_vars</a></span>(<span class='kw'>x</span>), mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"all"</span>, <span class='st'>"any"</span>))
+<span class='fu'>rm_na</span>(<span class='kw'>x</span>, cols = <span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>), mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"all"</span>, <span class='st'>"any"</span>))
 
-<span class='fu'>unmerge</span>(<span class='kw'>x</span>, col_groups = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='write_psv.html'>data_vars</a></span>(<span class='kw'>x</span>)), by = <span class='fu'><a href='write_psv.html'>meta_vars</a></span>(<span class='kw'>x</span>), na_rm = <span class='fl'>TRUE</span>)
+<span class='fu'>unmerge</span>(<span class='kw'>x</span>, col_groups = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>)), by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), na_rm = <span class='fl'>TRUE</span>)
 
 <span class='fu'>dt_gforce</span>(
   <span class='kw'>x</span>,
   fun = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"median"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>, <span class='st'>"prod"</span>, <span class='st'>"var"</span>, <span class='st'>"sd"</span>, <span class='st'>"first"</span>, <span class='st'>"last"</span>),
-  by = <span class='fu'><a href='write_psv.html'>meta_vars</a></span>(<span class='kw'>x</span>),
-  vars = <span class='fu'><a href='write_psv.html'>data_vars</a></span>(<span class='kw'>x</span>),
+  by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>),
+  vars = <span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>),
   na_rm = <span class='op'>!</span><span class='kw'>fun</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"first"</span>, <span class='st'>"last"</span>)
 )
 
@@ -166,8 +166,8 @@
 <span class='fu'>make_unique</span>(
   <span class='kw'>x</span>,
   expr = <span class='kw'>NULL</span>,
-  by = <span class='fu'><a href='write_psv.html'>meta_vars</a></span>(<span class='kw'>x</span>),
-  vars = <span class='fu'><a href='write_psv.html'>data_vars</a></span>(<span class='kw'>x</span>),
+  by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>),
+  vars = <span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>),
   env = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>
 )</pre>
