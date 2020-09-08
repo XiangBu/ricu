@@ -141,10 +141,6 @@ assessment tool used to track a patient's well-being in an ICU.</p>
   interval = <span class='kw'>NULL</span>
 )
 
-<span class='fu'>supp_o2</span>(<span class='kw'>vent</span>, <span class='kw'>fio2</span>, interval = <span class='kw'>NULL</span>)
-
-<span class='fu'>avpu</span>(<span class='kw'>gcs</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>TRUE</span>)
-
 <span class='fu'>news_score</span>(
   <span class='kw'>...</span>,
   win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
@@ -181,16 +177,6 @@ individual components alongside the aggregated score</p></td>
       <td><p>Time series interval (only used for checking consistency
 of input data)</p></td>
     </tr>
-    <tr>
-      <th>vent, fio2, gcs</th>
-      <td><p>Data as returned by <code><a href='load_concepts.html'>load_concepts()</a></code> used for score
-calculation</p></td>
-    </tr>
-    <tr>
-      <th>by_ref</th>
-      <td><p>Logical flag indicating whether to change the input by
-reference</p></td>
-    </tr>
     </table>
 
 
@@ -209,7 +195,7 @@ reference</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

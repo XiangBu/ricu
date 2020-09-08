@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load configuration for a data source — load_src_cfg • ICU data with R</title>
+<title>ICU class data reshaping — .cbind.id_tbl • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Load configuration for a data source — load_src_cfg" />
-<meta property="og:description" content="For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a src_cfg object (see
-new_src_cfg())." />
+<meta property="og:title" content="ICU class data reshaping — .cbind.id_tbl" />
+<meta property="og:description" content="Utilities for reshaping id_tbl and ts_tbl objects." />
 
 
 <meta name="robots" content="noindex">
@@ -125,34 +123,68 @@ new_src_cfg())." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load configuration for a data source</h1>
+    <h1>ICU class data reshaping</h1>
     
-    <div class="hidden name"><code>load_src_cfg.Rd</code></div>
+    <div class="hidden name"><code>tbl_reshape.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a <code>src_cfg</code> object (see
-<code><a href='new_src_cfg.html'>new_src_cfg()</a></code>).</p>
+    <p>Utilities for reshaping <code>id_tbl</code> and <code>ts_tbl</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>.cbind.id_tbl</span>(
+  <span class='kw'>...</span>,
+  keep.rownames = <span class='fl'>FALSE</span>,
+  check.names = <span class='fl'>FALSE</span>,
+  key = <span class='kw'>NULL</span>,
+  stringsAsFactors = <span class='fl'>FALSE</span>
+)
+
+<span class='fu'>.rbind.id_tbl</span>(<span class='kw'>...</span>, use.names = <span class='fl'>TRUE</span>, fill = <span class='fl'>FALSE</span>, idcol = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>, by.x = <span class='kw'>NULL</span>, by.y = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='fu'>rbind_lst</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='fu'>unmerge</span>(<span class='kw'>x</span>, col_groups = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>)), by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), na_rm = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>src</th>
-      <td><p>(Optional) name(s) of data sources used for subsetting</p></td>
+      <th>...</th>
+      <td><p>Objects to combine</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
+      <th>keep.rownames, check.names, key, stringsAsFactors</th>
+      <td><p>Forwarded to
+<a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
+      <th>use.names, fill, idcol</th>
+      <td><p>Forwarded to <a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>data.table::rbindlist</a></p></td>
+    </tr>
+    <tr>
+      <th>x, y</th>
+      <td><p>Objects to combine</p></td>
+    </tr>
+    <tr>
+      <th>by, by.x, by.y</th>
+      <td><p>Column names used for combining data</p></td>
+    </tr>
+    <tr>
+      <th>col_groups</th>
+      <td><p>A list of character vectors defining the grouping of
+non-by columns</p></td>
+    </tr>
+    <tr>
+      <th>na_rm</th>
+      <td><p>Logical flag indicating whether to remove rows that have all
+missing entries in the respective <code>col_groups</code> group</p></td>
     </tr>
     </table>
 

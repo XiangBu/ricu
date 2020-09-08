@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ICU class data utilities — unclass_tbl • ICU data with R</title>
+<title>ICU class data utilities — rename_cols • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,21 @@
 
 
 
-<meta property="og:title" content="ICU class data utilities — unclass_tbl" />
-<meta property="og:description" content="Utilities for working with id_tbl and ts_tbl objects." />
+<meta property="og:title" content="ICU class data utilities — rename_cols" />
+<meta property="og:description" content="Several utility functions for working with id_tbl and ts_tbl objects
+are available, including functions for changing column names, removing
+columns, as well as aggregating or removing rows. An important thing to
+note is that as id_tbl (and consequently ts_tbl) inherits from
+data.table, there are several functions provided by the data.table
+package that are capable of modifying id_tbl in a way that results in an
+object with inconsistent state. An example for this is
+data.table::setnames(): if an ID column or the index column name is
+modified without updating the attribute marking the column as such, this
+leads to an invalid object. As data.table::setnames() is not an S3
+generic function, the only way to control its behavior with respect to
+id_tbl objects is masking the function. As such an approach has its own
+down-sides, a separate function, rename_cols() is provided, which is able
+to handle column renaming correctly." />
 
 
 <meta name="robots" content="noindex">
@@ -129,26 +142,41 @@
     </div>
 
     <div class="ref-description">
-    <p>Utilities for working with <code>id_tbl</code> and <code>ts_tbl</code> objects.</p>
+    <p>Several utility functions for working with <code>id_tbl</code> and <code>ts_tbl</code> objects
+are available, including functions for changing column names, removing
+columns, as well as aggregating or removing rows. An important thing to
+note is that as <code>id_tbl</code> (and consequently <code>ts_tbl</code>) inherits from
+<code>data.table</code>, there are several functions provided by the <code>data.table</code>
+package that are capable of modifying <code>id_tbl</code> in a way that results in an
+object with inconsistent state. An example for this is
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>data.table::setnames()</a></code>: if an ID column or the index column name is
+modified without updating the attribute marking the column as such, this
+leads to an invalid object. As <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>data.table::setnames()</a></code> is not an S3
+generic function, the only way to control its behavior with respect to
+<code>id_tbl</code> objects is masking the function. As such an approach has its own
+down-sides, a separate function, <code>rename_cols()</code> is provided, which is able
+to handle column renaming correctly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
-
-<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
-
-<span class='fu'>as_ptype</span>(<span class='kw'>x</span>)
-
-<span class='fu'>rename_cols</span>(<span class='kw'>x</span>, <span class='kw'>new</span>, old = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>), skip_absent = <span class='fl'>FALSE</span>, by_ref = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>rename_cols</span>(<span class='kw'>x</span>, <span class='kw'>new</span>, old = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>), skip_absent = <span class='fl'>FALSE</span>, by_ref = <span class='fl'>FALSE</span>)
 
 <span class='fu'>rm_cols</span>(<span class='kw'>x</span>, <span class='kw'>cols</span>, skip_absent = <span class='fl'>FALSE</span>, by_ref = <span class='fl'>FALSE</span>)
 
 <span class='fu'>change_interval</span>(<span class='kw'>x</span>, <span class='kw'>new_interval</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), by_ref = <span class='fl'>FALSE</span>)
 
-<span class='fu'>rbind_lst</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
 <span class='fu'>rm_na</span>(<span class='kw'>x</span>, cols = <span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>), mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"all"</span>, <span class='st'>"any"</span>))
 
-<span class='fu'>unmerge</span>(<span class='kw'>x</span>, col_groups = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>)), by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), na_rm = <span class='fl'>TRUE</span>)
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(
+  <span class='kw'>x</span>,
+  decreasing = <span class='fl'>FALSE</span>,
+  by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>),
+  reorder_cols = <span class='fl'>TRUE</span>,
+  by_ref = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
+)
+
+<span class='fu'>is_sorted</span>(<span class='kw'>x</span>)
 
 <span class='fu'>dt_gforce</span>(
   <span class='kw'>x</span>,
@@ -158,12 +186,19 @@
   na_rm = <span class='op'>!</span><span class='kw'>fun</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"first"</span>, <span class='st'>"last"</span>)
 )
 
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/duplicated.html'>duplicated</a></span>(<span class='kw'>x</span>, incomparables = <span class='fl'>FALSE</span>, by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/duplicated.html'>anyDuplicated</a></span>(<span class='kw'>x</span>, incomparables = <span class='fl'>FALSE</span>, by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='kw'>x</span>, incomparables = <span class='fl'>FALSE</span>, by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
 <span class='fu'>is_unique</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>is_unique</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='fu'>make_unique</span>(
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/aggregate.html'>aggregate</a></span>(
   <span class='kw'>x</span>,
   expr = <span class='kw'>NULL</span>,
   by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>),
@@ -177,16 +212,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object to modify/query</p></td>
-    </tr>
-    <tr>
-      <th>template</th>
-      <td><p>Object after which to model the object in question</p></td>
-    </tr>
-    <tr>
-      <th>stop_on_fail</th>
-      <td><p>Logical flag indicating whether to consider failed
-object validation as error</p></td>
+      <td><p>Object to query</p></td>
     </tr>
     <tr>
       <th>new, old</th>
@@ -212,28 +238,28 @@ reference</p></td>
 <code>difftime</code> object</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Ignored</p></td>
-    </tr>
-    <tr>
       <th>mode</th>
       <td><p>Switch between <code>all</code> where all entries of a row have to be
 missing (for the selected columns) or <code>any</code>, where a single missing entry
 suffices</p></td>
     </tr>
     <tr>
-      <th>col_groups</th>
-      <td><p>A list of character vectors defining the grouping of
-non-by columns</p></td>
+      <th>decreasing</th>
+      <td><p>Logical flag indicating the sort order</p></td>
     </tr>
     <tr>
       <th>by</th>
-      <td><p>Columns that will be present in every one of the resulting tables</p></td>
+      <td><p>Character vector indicating which combinations of columns from
+<code>x</code> to use for uniqueness checks</p></td>
     </tr>
     <tr>
-      <th>na_rm</th>
-      <td><p>Logical flag indicating whether to remove rows that have all
-missing entries in the respective <code>col_groups</code> group</p></td>
+      <th>reorder_cols</th>
+      <td><p>Logical flag indicating whether to move the <code>by</code>
+columns to the front.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Ignored</p></td>
     </tr>
     <tr>
       <th>fun</th>
@@ -244,6 +270,14 @@ missing entries in the respective <code>col_groups</code> group</p></td>
       <td><p>Column names to apply the function to</p></td>
     </tr>
     <tr>
+      <th>na_rm</th>
+      <td><p>Logical flag indicating how to treat <code>NA</code> values</p></td>
+    </tr>
+    <tr>
+      <th>incomparables</th>
+      <td><p>Not used. Here for S3 method consistency</p></td>
+    </tr>
+    <tr>
       <th>expr</th>
       <td><p>Expression to apply over groups</p></td>
     </tr>
@@ -252,6 +286,38 @@ missing entries in the respective <code>col_groups</code> group</p></td>
       <td><p>Environment to look up names in <code>expr</code></p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Apart from a function for renaming columns while respecting attributes
+marking columns a index or ID columns, several other utility functions are
+provided to make handling of <code>id_tbl</code> and <code>ts_tbl</code> objects more convenient.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Sorting</h3>
+
+
+<p>An <code>id_tbl</code> or <code>ts_tbl</code> object is considered sorted when rows are in
+ascending order according to column as specified by <code><a href='id_vars.html'>meta_vars()</a></code>. This
+means that for an <code>id_tbl</code> object rows have to be ordered by <code><a href='id_vars.html'>id_vars()</a></code>
+and for a <code>ts_tbl</code> object rows have to be ordered first by <code><a href='id_vars.html'>id_vars()</a></code>,
+followed by the <code><a href='id_vars.html'>index_var()</a></code>. Calling the S3 generic function
+<code><a href='https://rdrr.io/r/base/sort.html'>base::sort()</a></code> on an object that inherits form <code>id_tbl</code> using default
+arguments yields an object that is considered sorted. For convenience
+(mostly in printing), the column by which the table was sorted are moved to
+the front (this can be disabled by passing <code>FALSE</code> as <code>reorder_cols</code>
+argument). Internally, sorting is handled by either setting a
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>data.table::key()</a></code> in case <code>decreasing = FALSE</code> or be calling
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/setorder.html'>data.table::setorder()</a></code> in case <code>decreasing = TRUE</code>.</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Uniqueness</h3>
+
+
+<p>On object inheriting form <code>ts_tbl</code> is considered unique if it is unique in
+terms of the columns as specified by <code><a href='id_vars.html'>meta_vars()</a></code>.</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Aggregating</h3>
+
+
+<p>In order to turn a non-unique <code>id_tbl</code> or <code>ts_tbl</code> object into a unique
+one, the S3 generic function <code><a href='https://rdrr.io/r/stats/aggregate.html'>stats::aggregate()</a></code> is available.</p>
 
 
   </div>
@@ -269,7 +335,7 @@ missing entries in the respective <code>col_groups</code> group</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

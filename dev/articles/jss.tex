@@ -196,16 +196,7 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
 cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-For automatically determining an aggregation function, either all of or none of
-vars `lact` are expected to be of numeric type
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -214,12 +205,12 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-No overlap between configured id var options and available columns for table
-`labevents` in mimic_demo
+cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+No overlap between configured id var options and available columns for table
+`labevents` in mimic_demo
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -240,10 +231,6 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
 cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
@@ -258,19 +245,7 @@ not all units are in [%]: NA (18.26%)
 \begin{CodeOutput}
 cannot mix interval lengths when row-binding
 cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-multiple units detected: . (0.04%), cmH2O (48.08%), L/min (11.22%), mL
-(10.09%), ml/B (11.38%), sec (2.79%), NA (16.4%)
-\end{CodeOutput}
-
-\begin{CodeOutput}
 cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-multiple units detected: None (0.93%), NA (99.07%)
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -283,15 +258,11 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
 cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 3 (0.19%) of rows due to out of range entries
+removed 3 (0.19%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -300,7 +271,16 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+cannot mix interval lengths when row-binding
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 22 (0.14%) of rows due to `NA` values
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 13 (0.08%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -308,7 +288,11 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 771 (33.52%) of rows due to `NA` values
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 1 (0.07%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -316,7 +300,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 35 (0.22%) of rows due to out of range entries
+removed 2 (50%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -324,17 +308,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 1 (0.26%) of rows due to out of range entries
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
-cannot mix interval lengths when row-binding
-cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 371 (36.16%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -342,11 +316,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 2 (0.05%) of rows due to out of range entries
-\end{CodeOutput}
-
-\begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 9 (27.27%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -354,11 +324,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 5 (0.13%) of rows due to out of range entries
-\end{CodeOutput}
-
-\begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 2 (0.05%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -366,11 +332,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 7 (0.18%) of rows due to out of range entries
-\end{CodeOutput}
-
-\begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 5 (0.13%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -378,15 +340,39 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 2 (0.1%) of rows due to out of range entries
-\end{CodeOutput}
-
-\begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+removed 7 (0.18%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
 cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 2 (0.1%) of rows due to `NA` values
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -410,11 +396,6 @@ x does not contain column `icustay_id`
 \end{CodeOutput}
 
 \begin{CodeOutput}
-cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-x does not contain column `charttime`
 x does not contain column `charttime`
 \end{CodeOutput}
 
@@ -432,7 +413,15 @@ No overlap between configured id var options and available columns for table
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 1 (0.06%) of rows due to `NA` values
+\end{CodeOutput}
+
+\begin{CodeOutput}
+removed 1 (0.06%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -440,19 +429,11 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 2 (0.12%) of rows due to out of range entries
+removed 20 (0.22%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
-index is not compatible with an interval of 1 mins
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-removed 21 (0.23%) of rows due to out of range entries
+removed 1 (0.01%) of rows due to out of range entries
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -462,24 +443,10 @@ not all units are in [mL]: NA (0.08%)
 \begin{CodeOutput}
 x does not contain column `charttime`
 x does not contain column `charttime`
-x does not contain column `charttime`
 \end{CodeOutput}
 
 \begin{CodeOutput}
 x does not contain column `icustay_id`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-x does not contain column `charttime`
-x does not contain column `charttime`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-x does not contain column `icustay_id`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -491,7 +458,11 @@ x does not contain column `icustay_id`
 \end{CodeOutput}
 
 \begin{CodeOutput}
-cannot mix interval lengths when row-binding
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -507,27 +478,7 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-x does not contain column `charttime`
-\end{CodeOutput}
-
-\begin{CodeOutput}
 x does not contain column `icustay_id`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
-\end{CodeOutput}
-
-\begin{CodeOutput}
-x does not contain column `charttime`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-x does not contain column `icustay_id`
-\end{CodeOutput}
-
-\begin{CodeOutput}
-cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -543,6 +494,90 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+cannot mix interval lengths when row-binding
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
 x does not contain column `charttime`
 \end{CodeOutput}
 
@@ -556,6 +591,31 @@ cannot mix interval lengths when row-binding
 
 \begin{CodeOutput}
 x does not contain column `charttime`
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `icustay_id`
+\end{CodeOutput}
+
+\begin{CodeOutput}
+x does not contain column `charttime`
 \end{CodeOutput}
 
 \begin{CodeOutput}
@@ -567,17 +627,10 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-x does not contain column `charttime`
-x does not contain column `charttime`
-x does not contain column `charttime`
-\end{CodeOutput}
-
-\begin{CodeOutput}
 x does not contain column `icustay_id`
 \end{CodeOutput}
 
 \begin{CodeOutput}
-x does not contain column `charttime`
 x does not contain column `charttime`
 \end{CodeOutput}
 
@@ -609,7 +662,7 @@ We visualize the results of the model
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpyWOdLF/file3b6929e3346/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
+\begin{center}\includegraphics{/tmp/Rtmpi5pner/file3dda3ab3e09a/dev/articles/jss_files/figure-latex/cox_plot-1} \end{center}
 
 \end{CodeChunk}
 
@@ -655,16 +708,11 @@ cannot mix interval lengths when row-binding
 \end{CodeOutput}
 
 \begin{CodeOutput}
-removed 1037 (32.17%) of rows due to out of range entries
+removed 1037 (32.17%) of rows due to `NA` values
 \end{CodeOutput}
 
 \begin{CodeOutput}
 multiple units detected: Uhr (66.16%), units/hr (33.84%)
-\end{CodeOutput}
-
-\begin{CodeOutput}
-For automatically determining an aggregation function, either all of or none of
-vars `ins` are expected to be of numeric type
 \end{CodeOutput}
 
 \begin{CodeInput}
@@ -701,7 +749,7 @@ a histogram:
 \begin{CodeChunk}
 
 
-\begin{center}\includegraphics{/tmp/RtmpyWOdLF/file3b6929e3346/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
+\begin{center}\includegraphics{/tmp/Rtmpi5pner/file3dda3ab3e09a/dev/articles/jss_files/figure-latex/diabetes_visualize-1} \end{center}
 
 \end{CodeChunk}
 

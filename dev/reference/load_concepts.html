@@ -181,6 +181,9 @@ in wide format (i.e. returning concepts as columns).</p>
 <span class='co'># S3 method for fct_cncpt</span>
 <span class='fu'>load_concepts</span>(<span class='kw'>x</span>, aggregate = <span class='kw'>NULL</span>, <span class='kw'>...</span>, progress = <span class='kw'>NULL</span>)
 
+<span class='co'># S3 method for lgl_cncpt</span>
+<span class='fu'>load_concepts</span>(<span class='kw'>x</span>, aggregate = <span class='kw'>NULL</span>, <span class='kw'>...</span>, progress = <span class='kw'>NULL</span>)
+
 <span class='co'># S3 method for rec_cncpt</span>
 <span class='fu'>load_concepts</span>(
   <span class='kw'>x</span>,
@@ -343,13 +346,13 @@ wide-format table, as this requires data to be unique per observation (i.e.
 by either id or combination of id and index). Several value types are
 acceptable as <code>aggregate</code> argument, the most important being <code>FALSE</code>, which
 disables aggregation, NULL, which auto-determines a suitable aggregation
-function or a string which is ultimately passed to <code><a href='unclass_tbl.html'>dt_gforce()</a></code> where it
+function or a string which is ultimately passed to <code><a href='rename_cols.html'>dt_gforce()</a></code> where it
 identifies a function such as <code><a href='https://rdrr.io/r/base/sum.html'>sum()</a></code>, <code><a href='https://rdrr.io/r/base/mean.html'>mean()</a></code>, <code><a href='https://rdrr.io/r/base/Extremes.html'>min()</a></code> or <code><a href='https://rdrr.io/r/base/Extremes.html'>max()</a></code>. More
-information on aggregation is available as <code><a href='unclass_tbl.html'>make_unique()</a></code>. If the object
-passed as <code>aggregate</code> is scalar, it is applied to all requested concepts in
-the same way. In order to customize aggregation per concept, a named object
-(with names corresponding to concepts) of the same length as the number of
-requested concepts may be passed.</p>
+information on aggregation is available as <a href='rename_cols.html'>aggregate()</a>.
+If the object passed as <code>aggregate</code> is scalar, it is applied to all
+requested concepts in the same way. In order to customize aggregation per
+concept, a named object (with names corresponding to concepts) of the same
+length as the number of requested concepts may be passed.</p>
 <p>Under the hood, a <code>concept</code> object comprises of several <code>cncpt</code> objects
 with varying sub-types (for example <code>num_cncpt</code>, representing continuous
 numeric data or <code>fct_cncpt</code> representing categorical data). This
@@ -442,8 +445,7 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 </div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
 #&gt; <span class='message'>choose one of mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
 #&gt; <span class='message'>`FALSE` for at least one concept) when data merging is enabled.</span></div><div class='output co'>#&gt; <span class='message'>── Loading 1 concept ───────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>index is not compatible with an interval of 1 mins</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 2 (0.1%) of rows due to out of range entries</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>For automatically determining an aggregation function, either all of or none of</span>
-#&gt; <span class='message'>vars `glu` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='input'>
+#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 1 (0.05%) of rows due to `NA` values</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>removed 1 (0.05%) of rows due to out of range entries</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='input'>
 <span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_cncpt.html'>concept</a></span>(<span class='st'>"gluc"</span>,
   <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)))
 )
@@ -452,16 +454,14 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 </div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
 #&gt; <span class='message'>choose one of mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
 #&gt; <span class='message'>`FALSE` for at least one concept) when data merging is enabled.</span></div><div class='output co'>#&gt; <span class='message'>── Loading 1 concept ───────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>index is not compatible with an interval of 1 mins</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 1 (0.05%) of rows due to out of range entries</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>For automatically determining an aggregation function, either all of or none of</span>
-#&gt; <span class='message'>vars `gluc` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>cannot mix interval lengths when row-binding</span></div><div class='output co'>#&gt; <span class='message'>removed 1 (0.05%) of rows due to `NA` values</span></div><div class='output co'>#&gt; <span class='message'>●</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='kw'>dat</span>)
 </div><div class='output co'>#&gt; [1] "ts_tbl"     "id_tbl"     "data.table" "data.frame"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='fu'>load_concepts</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sex"</span>, <span class='st'>"age"</span>), <span class='st'>"mimic_demo"</span>))
 </div><div class='output co'>#&gt; <span class='message'>Only concept data from a single data source can be loaded a the time. Please</span>
 #&gt; <span class='message'>choose one of mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>Data aggregation cannot be disabled (i.e. passing an `aggregate` value of</span>
 #&gt; <span class='message'>`FALSE` for at least one concept) when data merging is enabled.</span></div><div class='output co'>#&gt; <span class='message'>── Loading 2 concepts ──────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
 #&gt; <span class='message'>`patients` in mimic_demo</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`patients` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>For automatically determining an aggregation function, either all of or none of</span>
-#&gt; <span class='message'>vars `age` are expected to be of numeric type</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; [1] "id_tbl"     "data.table" "data.frame"</div><div class='input'>
+#&gt; <span class='message'>`patients` in mimic_demo</span></div><div class='output co'>#&gt; <span class='message'>────────────────────────────────────────────────────────────────────────────────</span></div><div class='output co'>#&gt; [1] "id_tbl"     "data.table" "data.frame"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -478,7 +478,7 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

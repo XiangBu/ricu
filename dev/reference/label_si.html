@@ -135,12 +135,10 @@ and body-fluid sampling.</p>
     </div>
 
     <pre class="usage"><span class='fu'>susp_inf</span>(
-  <span class='kw'>abx</span>,
-  <span class='kw'>samp</span>,
+  <span class='kw'>...</span>,
   abx_count_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>),
   abx_min_count = <span class='fl'>1L</span>,
   positive_cultures = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>,
   interval = <span class='kw'>NULL</span>
 )
 
@@ -155,9 +153,8 @@ and body-fluid sampling.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>abx, samp</th>
-      <td><p>Data input used for determining suspicion of infection
-(<code>ts_tbl</code> objects, as produced by <code><a href='load_concepts.html'>load_concepts()</a></code>)</p></td>
+      <th>...</th>
+      <td><p>Data and further arguments are passed to <code>si_calc()</code></p></td>
     </tr>
     <tr>
       <th>abx_count_win</th>
@@ -172,10 +169,6 @@ criterion</p></td>
       <th>positive_cultures</th>
       <td><p>Logical flag indicating whether to require
 cultures to be positive</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Passed to <code>si_calc()</code></p></td>
     </tr>
     <tr>
       <th>interval</th>
@@ -259,7 +252,7 @@ doi:10.1001/jama.2016.0288</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sepsis 3 label — sepsis_3 • ICU data with R</title>
+<title>Sepsis 3 label — sep3 • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Sepsis 3 label — sepsis_3" />
+<meta property="og:title" content="Sepsis 3 label — sep3" />
 <meta property="og:description" content="The sepsis 3 label consists of a suspected infection combined with an acute
 increase in SOFA score." />
 
@@ -134,9 +134,8 @@ increase in SOFA score." />
 increase in SOFA score.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sepsis_3</span>(
-  <span class='kw'>sofa</span>,
-  <span class='kw'>susp_inf</span>,
+    <pre class="usage"><span class='fu'>sep3</span>(
+  <span class='kw'>...</span>,
   si_window = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"first"</span>, <span class='st'>"last"</span>, <span class='st'>"any"</span>),
   delta_fun = <span class='kw'>delta_cummin</span>,
   sofa_thresh = <span class='fl'>2L</span>,
@@ -155,13 +154,8 @@ increase in SOFA score.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sofa</th>
-      <td><p><code>ts_tbl</code> with a column <code>sofa</code></p></td>
-    </tr>
-    <tr>
-      <th>susp_inf</th>
-      <td><p><code>ts_tbl</code> with columns <code>si_lwr</code> and <code>si_upr</code> defining windows for
-which a suspected infection is valid</p></td>
+      <th>...</th>
+      <td><p>Data objects</p></td>
     </tr>
     <tr>
       <th>si_window</th>
@@ -235,7 +229,7 @@ Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

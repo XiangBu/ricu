@@ -221,10 +221,18 @@ requirement is that a single <code><a href='https://rdrr.io/r/base/difftime.html
 present, while for the time step, the minimal difference between two
 consecutive observations is chosen (and all differences are therefore
 required to be multiples of the minimum difference).</p>
+<p>Upon instantiation, the data might be rearranged: columns are reordered
+such that ID columns are moved to the front, followed by the index column
+and a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>data.table::key()</a></code> is set on meta columns, causing rows to be sorted
+accordingly. Moving meta columns to the front is done for reasons of
+convenience for printing, while setting a key on meta columns is done to
+improve efficiency of subsequent transformations such as merging or grouped
+operations. Furthermore, <code>NA</code> values in either ID or index columns are not
+allowed and therefore corresponding rows are silently removed.</p>
 <p>Coercion between <code>id_tbl</code> and <code>ts_tbl</code> by default keeps intersecting
 attributes fixed and new attributes are by default inferred as for class
 instantiation. Each class comes with a class-specific implementation of the
-S3 generic function <code>validate_tbl()</code> which returns <code>TRUE</code> if the ibject is
+S3 generic function <code>validate_tbl()</code> which returns <code>TRUE</code> if the object is
 considered valid or a string outlining the type of validation failure that
 was encountered. Validity requires</p><ol>
 <li><p>inheriting from <code>data.table</code> and unique column names</p></li>
@@ -239,6 +247,35 @@ specified interval.</p></li>
 <code>is_ts_tbl()</code>. Note that due to <code>ts_tbl</code> inheriting from <code>id_tbl</code>,
 <code>is_id_tbl()</code> returns <code>TRUE</code> for both <code>id_tbl</code> and <code>ts_tbl</code> objects, while
 <code>is_ts_tbl()</code> only returns <code>TRUE</code> for <code>ts_tbl</code> objects.</p>
+    <h2 class="hasAnchor" id="relationship-to-data-table"><a class="anchor" href="#relationship-to-data-table"></a>Relationship to <code>data.table</code></h2>
+
+    
+
+<p>Both <code>id_tbl</code> and <code>ts_tbl</code> inherit from <code>data.table</code> and as such, functions
+intended for use with <code>data.table</code> objects can be applied to <code>id_tbl</code> and
+<code>ts_tbl</code> as well. But there are some caveats: Many functions introduced by
+<code>data.table</code> are not S3 generic and therefore they would have to be masked
+in order to retain control over how they operate on objects inheriting form
+<code>data.table</code>. Take for example the function <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>data.table::setnames()</a></code>, which
+changes column names by reference. Using this function, the name of an
+index column of an <code>id_tbl</code> object can me changed without updating the
+attribute marking the column as such and thusly leaving the object in an
+inconsistent state. Instead of masking the function <code>setnames()</code>, an
+alternative is provided as <code><a href='rename_cols.html'>rename_cols()</a></code>. In places where it is possible
+to seamlessly insert the appropriate function (such as
+<code><a href='https://rdrr.io/r/base/names.html'>base::names&lt;-()</a></code> or <code><a href='https://rdrr.io/r/base/colnames.html'>base::colnames&lt;-()</a></code>) and the responsibility for not
+using <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>data.table::setnames()</a></code> in a way that breaks the <code>id_tbl</code> object is
+left to the user.</p>
+<p>Owing to <code>data.table</code> heritage, one of the functions that is often called
+on <code>id_tbl</code> and <code>ts_tbl</code> objects is base S3 generic [base::<code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code>()]. As this
+function is capable of modifying the object in a way that makes it
+incompatible with attached meta data, an attempt is made at preserving as
+much as possible and if all fails, a <code>data.table</code> object is returned
+instead of an object inheriting form <code>id_tbl</code>. If for example the index
+column is removed (or modified in a way that makes it incompatible with the
+interval specification) from a <code>ts_tbl</code>, an <code>id_tbl</code> is returned. If
+however the ID column is removed the only sensible thing to return is a
+<code>data.table</code> (see examples).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
@@ -259,7 +296,74 @@ specified interval.</p></li>
 <span class='fu'>is_ts_tbl</span>(<span class='kw'>tbl</span>)
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>is_ts_tbl</span>(<span class='kw'>tmp</span>)
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-</div></pre>
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>tbl</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"b"</span>)
+<span class='kw'>tbl</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 10 ✖ 2</span><span>
+#&gt; </span><span style='color: #555555;'># Id var:      `c`</span><span>
+#&gt;        c         b
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1  0.893   
+#&gt; </span><span style='color: #555555;'>2</span><span>      2 -</span><span style='color: #BB0000;'>0.778</span><span>   
+#&gt; </span><span style='color: #555555;'>3</span><span>      3  0.437   
+#&gt; </span><span style='color: #555555;'>4</span><span>      4  0.413   
+#&gt; </span><span style='color: #555555;'>5</span><span>      5  0.976   
+#&gt; </span><span style='color: #555555;'>6</span><span>      6  1.15    
+#&gt; </span><span style='color: #555555;'>7</span><span>      7  1.22    
+#&gt; </span><span style='color: #555555;'>8</span><span>      8  0.000</span><span style='text-decoration: underline;'>480</span><span>
+#&gt; </span><span style='color: #555555;'>9</span><span>      9  0.755   
+#&gt; </span><span style='color: #555555;'>10</span><span>    10  0.342   </div><div class='input'>
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+<span class='fu'>validate_tbl</span>(<span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>setnames</a></span>(<span class='kw'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"b"</span>)))
+</div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt; [1] ""
+#&gt; attr(,"assert_class")
+#&gt; [1] "has_cols_assert"</div><div class='input'>
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+<span class='fu'>validate_tbl</span>(<span class='fu'><a href='rename_cols.html'>rename_cols</a></span>(<span class='kw'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"b"</span>)))
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>ts_tbl</span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>)), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+</div><div class='output co'>#&gt; <span class='message'>In order to automatically determine the index column, exactly one `difftime`</span>
+#&gt; <span class='message'>column is required.</span></div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"c"</span>), with = <span class='fl'>FALSE</span>]
+</div><div class='output co'>#&gt; <span class='message'>x does not contain column `b`</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># An `id_tbl`: 10 ✖ 2</span><span>
+#&gt; </span><span style='color: #555555;'># Id var:      `a`</span><span>
+#&gt;        a       c
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1 -</span><span style='color: #BB0000;'>0.548</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span>      1  1.11  
+#&gt; </span><span style='color: #555555;'>3</span><span>      1 -</span><span style='color: #BB0000;'>2.61</span><span>  
+#&gt; </span><span style='color: #555555;'>4</span><span>      1 -</span><span style='color: #BB0000;'>0.156</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      1  0.434 
+#&gt; </span><span style='color: #555555;'>6</span><span>      2 -</span><span style='color: #BB0000;'>0.382</span><span> 
+#&gt; </span><span style='color: #555555;'>7</span><span>      2  0.424 
+#&gt; </span><span style='color: #555555;'>8</span><span>      2  1.06  
+#&gt; </span><span style='color: #555555;'>9</span><span>      2  1.05  
+#&gt; </span><span style='color: #555555;'>10</span><span>     2 -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span></div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"b"</span>, <span class='st'>"c"</span>), with = <span class='fl'>FALSE</span>]
+</div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt;           b           c
+#&gt;  1: 1 hours -0.54825726
+#&gt;  2: 2 hours  1.11053489
+#&gt;  3: 3 hours -2.61233433
+#&gt;  4: 4 hours -0.15569378
+#&gt;  5: 5 hours  0.43388979
+#&gt;  6: 1 hours -0.38195111
+#&gt;  7: 2 hours  0.42418757
+#&gt;  8: 3 hours  1.06310200
+#&gt;  9: 4 hours  1.04871262
+#&gt; 10: 5 hours -0.03810289</div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span>, b = <span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='kw'>b</span>), <span class='kw'>c</span>)]
+</div><div class='output co'>#&gt; <span class='message'>x is not a `difftime` object</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># An `id_tbl`: 10 ✖ 3</span><span>
+#&gt; </span><span style='color: #555555;'># Id var:      `a`</span><span>
+#&gt;        a     b       c
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1     1 -</span><span style='color: #BB0000;'>0.548</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span>      1     2  1.11  
+#&gt; </span><span style='color: #555555;'>3</span><span>      1     3 -</span><span style='color: #BB0000;'>2.61</span><span>  
+#&gt; </span><span style='color: #555555;'>4</span><span>      1     4 -</span><span style='color: #BB0000;'>0.156</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      1     5  0.434 
+#&gt; </span><span style='color: #555555;'>6</span><span>      2     1 -</span><span style='color: #BB0000;'>0.382</span><span> 
+#&gt; </span><span style='color: #555555;'>7</span><span>      2     2  0.424 
+#&gt; </span><span style='color: #555555;'>8</span><span>      2     3  1.06  
+#&gt; </span><span style='color: #555555;'>9</span><span>      2     4  1.05  
+#&gt; </span><span style='color: #555555;'>10</span><span>     2     5 -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -275,7 +379,7 @@ specified interval.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

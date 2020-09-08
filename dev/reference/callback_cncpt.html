@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load configuration for a data source — load_src_cfg • ICU data with R</title>
+<title>Concept callback functions — pafi • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,11 @@
 
 
 
-<meta property="og:title" content="Load configuration for a data source — load_src_cfg" />
-<meta property="og:description" content="For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a src_cfg object (see
-new_src_cfg())." />
+<meta property="og:title" content="Concept callback functions — pafi" />
+<meta property="og:description" content="Owing to increased complexity and more diverse applications, recursive
+concepts (class rec_cncpt) may specify callback functions
+to be called on corresponding data objects and perform post-processing
+steps." />
 
 
 <meta name="robots" content="noindex">
@@ -125,34 +126,97 @@ new_src_cfg())." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load configuration for a data source</h1>
+    <h1>Concept callback functions</h1>
     
-    <div class="hidden name"><code>load_src_cfg.Rd</code></div>
+    <div class="hidden name"><code>callback_cncpt.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a <code>src_cfg</code> object (see
-<code><a href='new_src_cfg.html'>new_src_cfg()</a></code>).</p>
+    <p>Owing to increased complexity and more diverse applications, recursive
+concepts (class <code><a href='new_cncpt.html'>rec_cncpt</a></code>) may specify callback functions
+to be called on corresponding data objects and perform post-processing
+steps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>pafi</span>(
+  <span class='kw'>...</span>,
+  match_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>2L</span>),
+  mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"match_vals"</span>, <span class='st'>"extreme_vals"</span>, <span class='st'>"fill_gaps"</span>),
+  fix_na_fio2 = <span class='fl'>TRUE</span>,
+  interval = <span class='kw'>NULL</span>
+)
+
+<span class='fu'>vent</span>(<span class='kw'>...</span>, match_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>6L</span>), min_length = <span class='fu'><a href='secs.html'>mins</a></span>(<span class='fl'>10L</span>), interval = <span class='kw'>NULL</span>)
+
+<span class='fu'>sed</span>(<span class='kw'>...</span>, interval = <span class='kw'>NULL</span>)
+
+<span class='fu'>gcs</span>(
+  <span class='kw'>...</span>,
+  valid_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>6L</span>),
+  set_sed_max = <span class='fl'>TRUE</span>,
+  set_na_max = <span class='fl'>TRUE</span>,
+  interval = <span class='kw'>NULL</span>
+)
+
+<span class='fu'>urine24</span>(<span class='kw'>...</span>, min_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>12L</span>), interval = <span class='kw'>NULL</span>)
+
+<span class='fu'>supp_o2</span>(<span class='kw'>...</span>, interval = <span class='kw'>NULL</span>)
+
+<span class='fu'>avpu</span>(<span class='kw'>...</span>, interval = <span class='kw'>NULL</span>, by_ref = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>src</th>
-      <td><p>(Optional) name(s) of data sources used for subsetting</p></td>
+      <th>...</th>
+      <td><p>Data input used for concept calculation</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
+      <th>match_win</th>
+      <td><p>Default ventilation window if no stop time can be
+matched to a start time</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
+      <th>mode</th>
+      <td><p>Method for matching PaO₂ and FiO₂ values</p></td>
+    </tr>
+    <tr>
+      <th>fix_na_fio2</th>
+      <td><p>Logical flag indicating whether to impute missing FiO₂
+values with 21</p></td>
+    </tr>
+    <tr>
+      <th>interval</th>
+      <td><p>Expected time series step size (determined from data if
+<code>NULL</code>)</p></td>
+    </tr>
+    <tr>
+      <th>min_length</th>
+      <td><p>Minimal time span between a ventilation start and end
+time</p></td>
+    </tr>
+    <tr>
+      <th>valid_win</th>
+      <td><p>Maximal time window for which a GCS value is valid
+if no newer measurement is available</p></td>
+    </tr>
+    <tr>
+      <th>set_sed_max</th>
+      <td><p>Logical flag for considering sedation</p></td>
+    </tr>
+    <tr>
+      <th>set_na_max</th>
+      <td><p>Logical flag controlling imputation of missing GCS values
+with the respective maximum values</p></td>
+    </tr>
+    <tr>
+      <th>min_win</th>
+      <td><p>Minimal time span required for calculation of urine/24h</p></td>
+    </tr>
+    <tr>
+      <th>by_ref</th>
+      <td><p>Logical flag indicating whether to change the input by
+reference</p></td>
     </tr>
     </table>
 

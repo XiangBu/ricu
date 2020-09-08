@@ -134,55 +134,7 @@ assessment tool used to track a patient's well-being in an ICU." />
 assessment tool used to track a patient's well-being in an ICU.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sofa_score</span>(
-  <span class='kw'>pafi</span>,
-  <span class='kw'>vent</span>,
-  <span class='kw'>plt</span>,
-  <span class='kw'>bili</span>,
-  <span class='kw'>map</span>,
-  <span class='kw'>norepi</span>,
-  <span class='kw'>epi</span>,
-  <span class='kw'>dopa</span>,
-  <span class='kw'>dobu</span>,
-  <span class='kw'>gcs</span>,
-  <span class='kw'>crea</span>,
-  <span class='kw'>urine24</span>,
-  <span class='kw'>...</span>,
-  interval = <span class='kw'>NULL</span>
-)
-
-<span class='fu'>sofa_pafi</span>(
-  <span class='kw'>po2</span>,
-  <span class='kw'>fio2</span>,
-  win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>2L</span>),
-  mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"match_vals"</span>, <span class='st'>"extreme_vals"</span>, <span class='st'>"fill_gaps"</span>),
-  fix_na_fio2 = <span class='fl'>TRUE</span>,
-  interval = <span class='kw'>NULL</span>
-)
-
-<span class='fu'>sofa_vent</span>(
-  <span class='kw'>vent_start</span>,
-  <span class='kw'>vent_end</span>,
-  win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>6L</span>),
-  min_length = <span class='fu'><a href='secs.html'>mins</a></span>(<span class='fl'>10L</span>),
-  interval = <span class='kw'>NULL</span>
-)
-
-<span class='fu'>sofa_sed</span>(<span class='kw'>trach</span>, <span class='kw'>rass</span>, interval = <span class='kw'>NULL</span>)
-
-<span class='fu'>sofa_gcs</span>(
-  <span class='kw'>egcs</span>,
-  <span class='kw'>mgcs</span>,
-  <span class='kw'>vgcs</span>,
-  <span class='kw'>tgcs</span>,
-  <span class='kw'>sed</span>,
-  win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>6L</span>),
-  set_sed_max = <span class='fl'>TRUE</span>,
-  set_na_max = <span class='fl'>TRUE</span>,
-  interval = <span class='kw'>NULL</span>
-)
-
-<span class='fu'>sofa_urine</span>(<span class='kw'>urine</span>, min_win = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>12L</span>), interval = <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>sofa_score</span>(<span class='kw'>...</span>, interval = <span class='kw'>NULL</span>)
 
 <span class='fu'>sofa_window</span>(
   <span class='kw'>tbl</span>,
@@ -212,78 +164,21 @@ assessment tool used to track a patient's well-being in an ICU.</p>
   na_val_renal = <span class='kw'>na_val</span>,
   impute_fun = <span class='kw'>NULL</span>,
   keep_components = <span class='fl'>FALSE</span>,
-  by_ref = <span class='fl'>FALSE</span>
+  by_ref = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pafi, vent, plt, bili, map, norepi, epi, dopa, dobu, gcs, crea, urine24</th>
-      <td><p>Data
-input used for sofa score evaluation (<code>ts_tbl</code> objects, as produced by
-<code><a href='load_concepts.html'>load_concepts()</a></code>)</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Passed to <code>sofa_window()</code> or <code>sofa_compute()</code></p></td>
+      <td><p>Data and further arguments passed to <code>sofa_window()</code> or
+<code>sofa_compute()</code></p></td>
     </tr>
     <tr>
       <th>interval</th>
       <td><p>Time series interval (only used for checking consistency
 of input data, <code>NULL</code> will use the interval of the first data object)</p></td>
-    </tr>
-    <tr>
-      <th>po2, fio2</th>
-      <td><p>Data input used for PaO₂/FiO₂ evaluation</p></td>
-    </tr>
-    <tr>
-      <th>win_length</th>
-      <td><p>Maximal time window for which a GCS value is valid
-if no newer measurement is available</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>Method for matching PaO₂ and FiO₂ values</p></td>
-    </tr>
-    <tr>
-      <th>fix_na_fio2</th>
-      <td><p>Logical flag indicating whether to impute missing FiO₂
-values with 21</p></td>
-    </tr>
-    <tr>
-      <th>vent_start, vent_end</th>
-      <td><p>Data input used for vent evaluation</p></td>
-    </tr>
-    <tr>
-      <th>min_length</th>
-      <td><p>Minimal time span between a ventilation start and end
-time</p></td>
-    </tr>
-    <tr>
-      <th>trach, rass</th>
-      <td><p>Data input used for sed evaluation</p></td>
-    </tr>
-    <tr>
-      <th>egcs, mgcs, vgcs, tgcs, sed</th>
-      <td><p>Data input used for gcs evaluation</p></td>
-    </tr>
-    <tr>
-      <th>set_sed_max</th>
-      <td><p>Logical flag for considering sedation</p></td>
-    </tr>
-    <tr>
-      <th>set_na_max</th>
-      <td><p>Logical flag controlling imputation of missing GCS values
-with the respective maximum values</p></td>
-    </tr>
-    <tr>
-      <th>urine</th>
-      <td><p>Data input used for urine/24h evaluation</p></td>
-    </tr>
-    <tr>
-      <th>min_win</th>
-      <td><p>Minimal time span required for calculation of urine/24h</p></td>
     </tr>
     <tr>
       <th>tbl</th>
@@ -379,7 +274,7 @@ Care Med 22, 707–710 (1996). https://doi.org/10.1007/BF01709751</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load configuration for a data source — load_src_cfg • ICU data with R</title>
+<title>Internal utilities for ICU data objects — unclass_tbl • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,17 @@
 
 
 
-<meta property="og:title" content="Load configuration for a data source — load_src_cfg" />
-<meta property="og:description" content="For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a src_cfg object (see
-new_src_cfg())." />
+<meta property="og:title" content="Internal utilities for ICU data objects — unclass_tbl" />
+<meta property="og:description" content="In order to remove all id_tbl/ts_tbl-related attributes, as well as
+extra class-labels, the exported but marked internal function
+unclass_tbl() can be used. This function provides what one might expect
+from an id_tbl/ts_tbl-specific implementation of the S3 generic
+function data.table::as.data.table(). The inverse functionality if
+provided by reclass_tbl() which attempts to add attributes as seen in
+template to the object passed as x. The logical flag stop_on_fail
+controls how to proceed if the attributes of template are incompatible
+with the object x. Finally, in order to generate a template, as_ptype()
+creates an empty object with the appropriate attributes." />
 
 
 <meta name="robots" content="noindex">
@@ -125,34 +132,45 @@ new_src_cfg())." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load configuration for a data source</h1>
+    <h1>Internal utilities for ICU data objects</h1>
     
-    <div class="hidden name"><code>load_src_cfg.Rd</code></div>
+    <div class="hidden name"><code>tbl_internal.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For a data source to become available to ricu, a JSON base configuration
-file is required which is parsed into a <code>src_cfg</code> object (see
-<code><a href='new_src_cfg.html'>new_src_cfg()</a></code>).</p>
+    <p>In order to remove all <code>id_tbl</code>/<code>ts_tbl</code>-related attributes, as well as
+extra class-labels, the exported but marked internal function
+<code>unclass_tbl()</code> can be used. This function provides what one might expect
+from an <code>id_tbl</code>/<code>ts_tbl</code>-specific implementation of the S3 generic
+function <code><a href='https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html'>data.table::as.data.table()</a></code>. The inverse functionality if
+provided by <code>reclass_tbl()</code> which attempts to add attributes as seen in
+<code>template</code> to the object passed as <code>x</code>. The logical flag <code>stop_on_fail</code>
+controls how to proceed if the attributes of <code>template</code> are incompatible
+with the object <code>x</code>. Finally, in order to generate a template, <code>as_ptype()</code>
+creates an empty object with the appropriate attributes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>unclass_tbl</span>(<span class='kw'>x</span>)
+
+<span class='fu'>reclass_tbl</span>(<span class='kw'>x</span>, <span class='kw'>template</span>, stop_on_fail = <span class='fl'>TRUE</span>)
+
+<span class='fu'>as_ptype</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>src</th>
-      <td><p>(Optional) name(s) of data sources used for subsetting</p></td>
+      <th>x</th>
+      <td><p>Object to modify/query</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
+      <th>template</th>
+      <td><p>Object after which to model the object in question</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
+      <th>stop_on_fail</th>
+      <td><p>Logical flag indicating whether to consider failed
+object validation as error</p></td>
     </tr>
     </table>
 

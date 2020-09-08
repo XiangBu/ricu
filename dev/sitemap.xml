@@ -7,7 +7,10 @@
     <loc>https://septic-tank.github.io/ricu/reference/attach_src.html</loc>
   </url>
   <url>
-    <loc>https://septic-tank.github.io/ricu/reference/callback_utils.html</loc>
+    <loc>https://septic-tank.github.io/ricu/reference/callback_cncpt.html</loc>
+  </url>
+  <url>
+    <loc>https://septic-tank.github.io/ricu/reference/callback_itm.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/cfg_utils.html</loc>
@@ -91,7 +94,13 @@
     <loc>https://septic-tank.github.io/ricu/reference/tbl_cfg.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/tbl_internal.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/tbl_meta.html</loc>
+  </url>
+  <url>
+    <loc>https://septic-tank.github.io/ricu/reference/tbl_reshape.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/tbl_utils.html</loc>
