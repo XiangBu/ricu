@@ -301,18 +301,18 @@ however the ID column is removed the only sensible thing to return is a
 <span class='kw'>tbl</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 10 ✖ 2</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:      `c`</span><span>
-#&gt;        c         b
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      1  0.893   
-#&gt; </span><span style='color: #555555;'>2</span><span>      2 -</span><span style='color: #BB0000;'>0.778</span><span>   
-#&gt; </span><span style='color: #555555;'>3</span><span>      3  0.437   
-#&gt; </span><span style='color: #555555;'>4</span><span>      4  0.413   
-#&gt; </span><span style='color: #555555;'>5</span><span>      5  0.976   
-#&gt; </span><span style='color: #555555;'>6</span><span>      6  1.15    
-#&gt; </span><span style='color: #555555;'>7</span><span>      7  1.22    
-#&gt; </span><span style='color: #555555;'>8</span><span>      8  0.000</span><span style='text-decoration: underline;'>480</span><span>
-#&gt; </span><span style='color: #555555;'>9</span><span>      9  0.755   
-#&gt; </span><span style='color: #555555;'>10</span><span>    10  0.342   </div><div class='input'>
+#&gt;        c       b
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1  0.770 
+#&gt; </span><span style='color: #555555;'>2</span><span>      2  0.563 
+#&gt; </span><span style='color: #555555;'>3</span><span>      3 -</span><span style='color: #BB0000;'>0.374</span><span> 
+#&gt; </span><span style='color: #555555;'>4</span><span>      4 -</span><span style='color: #BB0000;'>0.601</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      5 -</span><span style='color: #BB0000;'>0.424</span><span> 
+#&gt; </span><span style='color: #555555;'>6</span><span>      6 -</span><span style='color: #BB0000;'>0.872</span><span> 
+#&gt; </span><span style='color: #555555;'>7</span><span>      7  0.107 
+#&gt; </span><span style='color: #555555;'>8</span><span>      8 -</span><span style='color: #BB0000;'>0.587</span><span> 
+#&gt; </span><span style='color: #555555;'>9</span><span>      9 -</span><span style='color: #BB0000;'>0.328</span><span> 
+#&gt; </span><span style='color: #555555;'>10</span><span>    10 -</span><span style='color: #BB0000;'>0.085</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span></div><div class='input'>
 <span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>id_tbl</span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, b = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
 <span class='fu'>validate_tbl</span>(<span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setattr.html'>setnames</a></span>(<span class='kw'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"c"</span>, <span class='st'>"b"</span>)))
 </div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt; [1] ""
@@ -326,43 +326,43 @@ however the ID column is removed the only sensible thing to return is a
 #&gt; <span class='message'>column is required.</span></div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"c"</span>), with = <span class='fl'>FALSE</span>]
 </div><div class='output co'>#&gt; <span class='message'>x does not contain column `b`</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># An `id_tbl`: 10 ✖ 2</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:      `a`</span><span>
-#&gt;        a       c
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      1 -</span><span style='color: #BB0000;'>0.548</span><span> 
-#&gt; </span><span style='color: #555555;'>2</span><span>      1  1.11  
-#&gt; </span><span style='color: #555555;'>3</span><span>      1 -</span><span style='color: #BB0000;'>2.61</span><span>  
-#&gt; </span><span style='color: #555555;'>4</span><span>      1 -</span><span style='color: #BB0000;'>0.156</span><span> 
-#&gt; </span><span style='color: #555555;'>5</span><span>      1  0.434 
-#&gt; </span><span style='color: #555555;'>6</span><span>      2 -</span><span style='color: #BB0000;'>0.382</span><span> 
-#&gt; </span><span style='color: #555555;'>7</span><span>      2  0.424 
-#&gt; </span><span style='color: #555555;'>8</span><span>      2  1.06  
-#&gt; </span><span style='color: #555555;'>9</span><span>      2  1.05  
-#&gt; </span><span style='color: #555555;'>10</span><span>     2 -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span></div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"b"</span>, <span class='st'>"c"</span>), with = <span class='fl'>FALSE</span>]
-</div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt;           b           c
-#&gt;  1: 1 hours -0.54825726
-#&gt;  2: 2 hours  1.11053489
-#&gt;  3: 3 hours -2.61233433
-#&gt;  4: 4 hours -0.15569378
-#&gt;  5: 5 hours  0.43388979
-#&gt;  6: 1 hours -0.38195111
-#&gt;  7: 2 hours  0.42418757
-#&gt;  8: 3 hours  1.06310200
-#&gt;  9: 4 hours  1.04871262
-#&gt; 10: 5 hours -0.03810289</div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span>, b = <span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='kw'>b</span>), <span class='kw'>c</span>)]
+#&gt;        a      c
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1 -</span><span style='color: #BB0000;'>0.665</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>      1  1.11 
+#&gt; </span><span style='color: #555555;'>3</span><span>      1 -</span><span style='color: #BB0000;'>0.246</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>      1 -</span><span style='color: #BB0000;'>1.18</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      1 -</span><span style='color: #BB0000;'>0.976</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span>      2  1.07 
+#&gt; </span><span style='color: #555555;'>7</span><span>      2  0.132
+#&gt; </span><span style='color: #555555;'>8</span><span>      2  0.489
+#&gt; </span><span style='color: #555555;'>9</span><span>      2 -</span><span style='color: #BB0000;'>1.70</span><span> 
+#&gt; </span><span style='color: #555555;'>10</span><span>     2 -</span><span style='color: #BB0000;'>1.47</span><span> </div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"b"</span>, <span class='st'>"c"</span>), with = <span class='fl'>FALSE</span>]
+</div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt; <span class='message'>x does not contain column `a`</span></div><div class='output co'>#&gt;           b          c
+#&gt;  1: 1 hours -0.6650882
+#&gt;  2: 2 hours  1.1139524
+#&gt;  3: 3 hours -0.2458964
+#&gt;  4: 4 hours -1.1775633
+#&gt;  5: 5 hours -0.9758506
+#&gt;  6: 1 hours  1.0650573
+#&gt;  7: 2 hours  0.1316706
+#&gt;  8: 3 hours  0.4886288
+#&gt;  9: 4 hours -1.6994506
+#&gt; 10: 5 hours -1.4707363</div><div class='input'><span class='kw'>tbl</span>[, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>a</span>, b = <span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='kw'>b</span>), <span class='kw'>c</span>)]
 </div><div class='output co'>#&gt; <span class='message'>x is not a `difftime` object</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># An `id_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:      `a`</span><span>
-#&gt;        a     b       c
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      1     1 -</span><span style='color: #BB0000;'>0.548</span><span> 
-#&gt; </span><span style='color: #555555;'>2</span><span>      1     2  1.11  
-#&gt; </span><span style='color: #555555;'>3</span><span>      1     3 -</span><span style='color: #BB0000;'>2.61</span><span>  
-#&gt; </span><span style='color: #555555;'>4</span><span>      1     4 -</span><span style='color: #BB0000;'>0.156</span><span> 
-#&gt; </span><span style='color: #555555;'>5</span><span>      1     5  0.434 
-#&gt; </span><span style='color: #555555;'>6</span><span>      2     1 -</span><span style='color: #BB0000;'>0.382</span><span> 
-#&gt; </span><span style='color: #555555;'>7</span><span>      2     2  0.424 
-#&gt; </span><span style='color: #555555;'>8</span><span>      2     3  1.06  
-#&gt; </span><span style='color: #555555;'>9</span><span>      2     4  1.05  
-#&gt; </span><span style='color: #555555;'>10</span><span>     2     5 -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span></div><div class='input'>
+#&gt;        a     b      c
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1     1 -</span><span style='color: #BB0000;'>0.665</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>      1     2  1.11 
+#&gt; </span><span style='color: #555555;'>3</span><span>      1     3 -</span><span style='color: #BB0000;'>0.246</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>      1     4 -</span><span style='color: #BB0000;'>1.18</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      1     5 -</span><span style='color: #BB0000;'>0.976</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span>      2     1  1.07 
+#&gt; </span><span style='color: #555555;'>7</span><span>      2     2  0.132
+#&gt; </span><span style='color: #555555;'>8</span><span>      2     3  0.489
+#&gt; </span><span style='color: #555555;'>9</span><span>      2     4 -</span><span style='color: #BB0000;'>1.70</span><span> 
+#&gt; </span><span style='color: #555555;'>10</span><span>     2     5 -</span><span style='color: #BB0000;'>1.47</span><span> </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

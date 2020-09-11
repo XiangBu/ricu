@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal utilities for item/concept objects — prepare_query • ICU data with R</title>
+<title>Data — data • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,13 @@
 
 
 
-<meta property="og:title" content="Internal utilities for item/concept objects — prepare_query" />
-<meta property="og:description" content="Internal utilities for item/concept objects" />
+<meta property="og:title" content="Data — data" />
+<meta property="og:description" content="The Laboratory for Computational Physiology  (LCP) at MIT hosts several large-scale
+databases of hospital intensive care units (ICUs), two of which can be
+either downloaded in full or as demo subsets using utilities provided by
+ricu, while a third data set is available only in full. While demo data
+sets are publicly available, full download requires credentialed access
+which can be gained by applying for up an account with PhysioNet ." />
 
 
 <meta name="robots" content="noindex">
@@ -123,59 +128,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal utilities for <code>item</code>/<code>concept</code> objects</h1>
+    <h1>Data</h1>
     
-    <div class="hidden name"><code>item_utils.Rd</code></div>
+    <div class="hidden name"><code>data_src.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal utilities for <code>item</code>/<code>concept</code> objects</p>
+    <p>The <a href='https://lcp.mit.edu/index.html'>Laboratory for Computational Physiology </a> (LCP) at MIT hosts several large-scale
+databases of hospital intensive care units (ICUs), two of which can be
+either downloaded in full or as demo subsets using utilities provided by
+<code>ricu</code>, while a third data set is available only in full. While demo data
+sets are publicly available, full download requires credentialed access
+which can be gained by applying for up an account with <a href='https://physionet.org'>PhysioNet </a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prepare_query</span>(<span class='kw'>x</span>)
+    <pre class="usage"><span class='kw'>data</span></pre>
 
-<span class='fu'>try_add_vars</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
-<span class='fu'>get_itm_var</span>(<span class='kw'>x</span>, var = <span class='kw'>NULL</span>)
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-<span class='fu'>set_callback</span>(<span class='kw'>x</span>, <span class='kw'>fun</span>)
+    <p>An object of class <code>environment</code> of length 5.</p>
+    <h2 class="hasAnchor" id="mimic-iii"><a class="anchor" href="#mimic-iii"></a>MIMIC-III</h2>
 
-<span class='fu'>do_callback</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    
 
-<span class='fu'>do_itm_load</span>(<span class='kw'>x</span>, id_type = <span class='st'>"icustay"</span>, interval = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>1L</span>))
+<p>The Medical Information Mart for Intensive Care
+(<a href='https://physionet.org/content/mimiciii/'>MIMIC</a>) database holds
+detailed clinical data from roughly 60,000 patient stays in Beth Israel
+Deaconess Medical Center (BIDMC) intensive care units between 2001 and 2012.
+The database includes information such as demographics, vital sign
+measurements made at the bedside (~1 data point per hour), laboratory test
+results, procedures, medications, caregiver notes, imaging reports, and
+mortality (both in and out of hospital). For further information, please
+refer to the <a href='https://mimic.physionet.org/about/mimic'>MIMIC-III documentation </a>.</p>
+<p>The corresponding
+<a href='https://physionet.org/content/mimiciii-demo'>demo dataset</a>
+contains the full data of a randomly selected subset of 100 patients from
+the patient cohort with conformed in-hospital mortality. The only notable
+data omission is the <code>noteevents</code> table, which unstructured text reports on
+patients.</p>
+<p>More recently, Philips Healthcare and LCP began assembling the eICU
+Collaborative Research Database as a multi-center resource for ICU data.
+Combining data of several critical care units throughout the continental
+United States from the years 2014 and 2015, this database contains
+deidentified health data associated with over 200,000 admissions, including
+vital sign measurements, care plan documentation, severity of illness
+measures, diagnosis information, and treatment information. For further
+information, please refer to the <a href='https://eicu-crd.mit.edu/about/eicu'>eICU documentation </a>.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-<span class='fu'>n_tick</span>(<span class='kw'>x</span>)
-
-<span class='fu'>set_target</span>(<span class='kw'>x</span>, <span class='kw'>target</span>)
-
-<span class='fu'>get_target</span>(<span class='kw'>x</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>Object defining the row-subsetting</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Variable name</p></td>
-    </tr>
-    <tr>
-      <th>fun</th>
-      <td><p>Callback function (passed as string)</p></td>
-    </tr>
-    <tr>
-      <th>id_type</th>
-      <td><p>String specifying the patient id type to return</p></td>
-    </tr>
-    <tr>
-      <th>interval</th>
-      <td><p>The time interval used to discretize time stamps with,
-specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> object</p></td>
-    </tr>
-    </table>
-
+    <p>MIMIC-III, a freely accessible critical care database. Johnson AEW, Pollard
+TJ, Shen L, Lehman L, Feng M, Ghassemi M, Moody B, Szolovits P, Celi LA,
+and Mark RG. Scientific Data (2016). DOI: 10.1038/sdata.2016.35.</p>
+<p>The eICU Collaborative Research Database, a freely available multi-center
+database for critical care research. Pollard TJ, Johnson AEW, Raffa JD,
+Celi LA, Mark RG and Badawi O. Scientific Data (2018). DOI:
+http://dx.doi.org/10.1038/sdata.2018.178.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

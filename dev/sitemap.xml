@@ -13,13 +13,7 @@
     <loc>https://septic-tank.github.io/ricu/reference/callback_itm.html</loc>
   </url>
   <url>
-    <loc>https://septic-tank.github.io/ricu/reference/cfg_utils.html</loc>
-  </url>
-  <url>
     <loc>https://septic-tank.github.io/ricu/reference/change_id.html</loc>
-  </url>
-  <url>
-    <loc>https://septic-tank.github.io/ricu/reference/col_cfg.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/concept_dictionary.html</loc>
@@ -34,6 +28,9 @@
     <loc>https://septic-tank.github.io/ricu/reference/data_items.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/data_src.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/data_utils.html</loc>
   </url>
   <url>
@@ -44,9 +41,6 @@
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/file_utils.html</loc>
-  </url>
-  <url>
-    <loc>https://septic-tank.github.io/ricu/reference/id_cfg.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/id_tbl.html</loc>
@@ -89,9 +83,6 @@
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/stay_windows.html</loc>
-  </url>
-  <url>
-    <loc>https://septic-tank.github.io/ricu/reference/tbl_cfg.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/tbl_internal.html</loc>

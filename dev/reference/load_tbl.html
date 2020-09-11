@@ -40,7 +40,12 @@
 
 
 <meta property="og:title" content="Load data as id_tbl or ts_tbl objects — load_id" />
-<meta property="og:description" content="Load data as id_tbl or ts_tbl objects" />
+<meta property="og:description" content="Building on functionality provided by load_src() and load_difftime(),
+load_id() and load_ts() load data from disk as id_tbl and ts_tbl
+objects respectively. Over load_difftime() both load_id() and
+load_ts() provide a way to specify meta_vars() (as id_var and
+index_var arguments), as well as an interval size (as interval
+argument) for time series data." />
 
 
 <meta name="robots" content="noindex">
@@ -129,7 +134,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Load data as <code>id_tbl</code> or <code>ts_tbl</code> objects</p>
+    <p>Building on functionality provided by <code><a href='load_src.html'>load_src()</a></code> and <code><a href='load_src.html'>load_difftime()</a></code>,
+<code>load_id()</code> and <code>load_ts()</code> load data from disk as <code>id_tbl</code> and <code>ts_tbl</code>
+objects respectively. Over <code><a href='load_src.html'>load_difftime()</a></code> both <code>load_id()</code> and
+<code>load_ts()</code> provide a way to specify <code><a href='id_vars.html'>meta_vars()</a></code> (as <code>id_var</code> and
+<code>index_var</code> arguments), as well as an interval size (as <code>interval</code>
+argument) for time series data.</p>
     </div>
 
     <pre class="usage"><span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -147,6 +157,12 @@
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for itm</span>
+<span class='fu'>load_id</span>(<span class='kw'>x</span>, cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>), id_var = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
+<span class='co'># S3 method for fun_itm</span>
+<span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>load_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -167,6 +183,18 @@
 
 <span class='co'># S3 method for character</span>
 <span class='fu'>load_ts</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for itm</span>
+<span class='fu'>load_ts</span>(
+  <span class='kw'>x</span>,
+  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
+  id_var = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
+  index_var = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>index_var</a></span>(<span class='kw'>x</span>),
+  <span class='kw'>...</span>
+)
+
+<span class='co'># S3 method for fun_itm</span>
+<span class='fu'>load_ts</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>load_ts</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
@@ -206,7 +234,7 @@ timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.h
     </tr>
     <tr>
       <th>src</th>
-      <td><p>Passed to <code><a href='data.html'>as_src_tbl()</a></code> in order to determine the data source</p></td>
+      <td><p>Passed to <code><a href='new_src_tbl.html'>as_src_tbl()</a></code> in order to determine the data source</p></td>
     </tr>
     <tr>
       <th>index_var</th>
@@ -214,7 +242,60 @@ timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.h
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>While for <code><a href='load_src.html'>load_difftime()</a></code> the ID variable can be suggested, the function
+only returns a best effort at fulfilling this request. In some cases, where
+the data does not allow for the desired ID type, data is returned using the
+ID system (among all available ones for the given table) with highest
+cardinality. Both <code>load_id()</code> and <code>load_ts()</code> are guaranteed to return an
+object with <code><a href='id_vars.html'>id_vars()</a></code> set as requested by the <code>id_var</code> argument.
+Internally, the change of ID system is performed by <code><a href='change_id.html'>change_id()</a></code>.</p>
+<p>Additionally, while times returned by <code><a href='load_src.html'>load_difftime()</a></code> are in 1 minute
+resolution, the time series step size can be specified by the <code>interval</code>
+argument when calling <code>load_id()</code> or <code>load_ts()</code>. This rounding and
+potential change of time unit is performed by <code><a href='rename_cols.html'>change_interval()</a></code> on all
+columns specified by the <code>time_vars</code> argument. All time stamps are relative
+to the origin provided by the ID system. This means that for an <code>id_var</code>
+corresponding to hospital IDs, times are relative to hospital admission.</p>
+<p>When <code>load_id()</code> (or <code>load_ts()</code>) is called on <code><a href='new_itm.html'>itm</a></code> objects
+instead of <code><a href='new_src_tbl.html'>src_tbl</a></code> (or objects that can be coerced to
+<code>src_tbl</code>), The row-subsetting is performed according the the specification
+as provided by the <code>itm</code> object. Furhtermore, at default settings, columns
+are returned as required by the <code>itm</code> object and <code>id_var</code> (as well as
+<code>index_var</code>) are set accordingly if specified by the <code>itm</code> or set to
+default values for the given <code>src_tbl</code> object if not explicitly specified.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>load_id</span>(<span class='st'>"admissions"</span>, <span class='st'>"mimic_demo"</span>, cols = <span class='st'>"admission_type"</span>)
+</div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
+#&gt; <span class='message'>`admissions` in mimic_demo</span></div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 136 ✖ 2</span><span>
+#&gt; </span><span style='color: #555555;'># Id var:      `icustay_id`</span><span>
+#&gt;     icustay_id admission_type
+#&gt;          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
+#&gt; </span><span style='color: #555555;'>1</span><span>       </span><span style='text-decoration: underline;'>201</span><span>006 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>2</span><span>       </span><span style='text-decoration: underline;'>204</span><span>881 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>3</span><span>       </span><span style='text-decoration: underline;'>210</span><span>164 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>4</span><span>       </span><span style='text-decoration: underline;'>210</span><span>474 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>5</span><span>       </span><span style='text-decoration: underline;'>217</span><span>992 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>…</span><span>      
+#&gt; </span><span style='color: #555555;'>132</span><span>     </span><span style='text-decoration: underline;'>236</span><span>120 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>133</span><span>     </span><span style='text-decoration: underline;'>256</span><span>338 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>134</span><span>     </span><span style='text-decoration: underline;'>285</span><span>750 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>135</span><span>     </span><span style='text-decoration: underline;'>285</span><span>789 EMERGENCY     
+#&gt; </span><span style='color: #555555;'>136</span><span>     </span><span style='text-decoration: underline;'>286</span><span>020 ELECTIVE      
+#&gt; </span><span style='color: #555555;'># … with 126 more rows</span><span></div><div class='input'>
+<span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>load_ts</span>(<span class='kw'>mimic_demo</span><span class='op'>$</span><span class='kw'>labevents</span>, <span class='kw'>itemid</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>),
+               cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"itemid"</span>, <span class='st'>"valuenum"</span>))
+</div><div class='output co'>#&gt; <span class='message'>Cannot update read-only data source `mimic_demo`</span></div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
+#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='input'>
+<span class='kw'>glu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_itm.html'>new_itm</a></span>(src = <span class='st'>"mimic_demo"</span>, table = <span class='st'>"labevents"</span>,
+               sub_var = <span class='st'>"itemid"</span>, ids = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))
+
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>load_ts</span>(<span class='kw'>glu</span>), <span class='kw'>dat</span>)
+</div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
+#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -165,7 +165,7 @@
         <td>
           <p><code><a href="data_concepts.html">new_cncpt()</a></code> <code><a href="data_concepts.html">is_cncpt()</a></code> <code><a href="data_concepts.html">init_cncpt()</a></code> <code><a href="data_concepts.html">new_concept()</a></code> <code><a href="data_concepts.html">concept()</a></code> <code><a href="data_concepts.html">is_concept()</a></code> <code><a href="data_concepts.html">as_concept()</a></code> </p>
         </td>
-        <td><p>Data items</p></td>
+        <td><p>Data Concepts</p></td>
       </tr><tr>
         
         <td>
@@ -300,7 +300,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-data-source-setup" class="hasAnchor"><a href="#section-data-source-setup" class="anchor"></a>Data source setup</h2>
-          <p class="section-desc"><p>For a data source to be usable via <code>ricu</code>, a JSON-based configuration is required and some preprocessing is carried out by <code>ricu</code> as an initial setup step by <code><a href="../reference/import_src.html">import_src()</a></code> and for data sets hosted on <a href="https://physionet.org">Physionet</a>, a downloader is available as <code><a href="../reference/download_src.html">download_src()</a></code>. As a final step, making data available to <code>ricu</code>, <code><a href="../reference/data.html">attach_src()</a></code> is automatically called for configured data sources at package loading.</p></p>
+          <p class="section-desc"><p>For a data source to be usable via <code>ricu</code>, a JSON-based configuration is required and some preprocessing is carried out by <code>ricu</code> as an initial setup step by <code><a href="../reference/import_src.html">import_src()</a></code> and for data sets hosted on <a href="https://physionet.org">Physionet</a>, a downloader is available as <code><a href="../reference/download_src.html">download_src()</a></code>. As a final step, making data available to <code>ricu</code>, <code><a href="../reference/new_src_tbl.html">attach_src()</a></code> is automatically called for configured data sources at package loading.</p></p>
         </th>
       </tr>
       
@@ -309,6 +309,12 @@
       
       
       <tr>
+        
+        <td>
+          <p><code><a href="load_src_cfg.html">load_src_cfg()</a></code> </p>
+        </td>
+        <td><p>Load configuration for a data source</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="download.html">download_src()</a></code> </p>
@@ -323,15 +329,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="attach_src.html">data</a></code> <code><a href="attach_src.html">as_src_tbl()</a></code> <code><a href="attach_src.html">new_src_env()</a></code> <code><a href="attach_src.html">as_src_env()</a></code> <code><a href="attach_src.html">attach_src()</a></code> <code><a href="attach_src.html">setup_src_env()</a></code> </p>
+          <p><code><a href="attach_src.html">new_src_tbl()</a></code> <code><a href="attach_src.html">as_src_tbl()</a></code> <code><a href="attach_src.html">new_src_env()</a></code> <code><a href="attach_src.html">as_src_env()</a></code> <code><a href="attach_src.html">attach_src()</a></code> <code><a href="attach_src.html">setup_src_env()</a></code> </p>
         </td>
         <td><p>Data attach utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load_src_cfg.html">load_src_cfg()</a></code> </p>
-        </td>
-        <td><p>Load configuration for a data source</p></td>
       </tr><tr>
         
         <td>
@@ -341,9 +341,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="cfg_utils.html">src_name()</a></code> <code><a href="cfg_utils.html">tbl_name()</a></code> </p>
+          <p><code><a href="data_src.html">data</a></code> </p>
         </td>
-        <td><p>Get default columns</p></td>
+        <td><p>Data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="src_cfg.html">new_src_cfg()</a></code> <code><a href="src_cfg.html">new_id_cfg()</a></code> <code><a href="src_cfg.html">new_col_cfg()</a></code> <code><a href="src_cfg.html">new_tbl_cfg()</a></code> <code><a href="src_cfg.html">is_src_cfg()</a></code> <code><a href="src_cfg.html">is_id_cfg()</a></code> <code><a href="src_cfg.html">is_col_cfg()</a></code> <code><a href="src_cfg.html">is_tbl_cfg()</a></code> <code><a href="src_cfg.html">as_src_cfg()</a></code> <code><a href="src_cfg.html">as_id_cfg()</a></code> <code><a href="src_cfg.html">as_col_cfg()</a></code> <code><a href="src_cfg.html">as_tbl_cfg()</a></code> <code><a href="src_cfg.html">src_url()</a></code> <code><a href="src_cfg.html">id_var_opts()</a></code> <code><a href="src_cfg.html">src_name()</a></code> <code><a href="src_cfg.html">tbl_name()</a></code> </p>
+        </td>
+        <td><p>Internal utilities for working with data source configurations</p></td>
       </tr>
     </tbody><tbody>
       <tr>

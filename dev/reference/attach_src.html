@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data attach utilities — data • ICU data with R</title>
+<title>Data attach utilities — new_src_tbl • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Data attach utilities — data" />
+<meta property="og:title" content="Data attach utilities — new_src_tbl" />
 <meta property="og:description" content="Attaching a data source sets up an environment containing prt::new_prt()
 files using base::delayedAssign()." />
 
@@ -134,7 +134,7 @@ files using base::delayedAssign()." />
 files using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::delayedAssign()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>data</span>
+    <pre class="usage"><span class='fu'>new_src_tbl</span>(<span class='kw'>files</span>, <span class='kw'>col_cfg</span>, <span class='kw'>tbl_cfg</span>, <span class='kw'>prefix</span>, <span class='kw'>src_env</span>)
 
 <span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
@@ -169,7 +169,7 @@ files using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::dela
 <span class='fu'>attach_src</span>(<span class='kw'>x</span>, assign_env = <span class='kw'>.GlobalEnv</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>attach_src</span>(<span class='kw'>x</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>, assign_env = <span class='kw'>.GlobalEnv</span>, <span class='kw'>...</span>)
+<span class='fu'>attach_src</span>(<span class='kw'>x</span>, name = <span class='st'>"data-sources"</span>, dir = <span class='kw'>NULL</span>, assign_env = <span class='kw'>.GlobalEnv</span>, <span class='kw'>...</span>)
 
 <span class='fu'>setup_src_env</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, dir = <span class='kw'>NULL</span>)
 
@@ -179,6 +179,28 @@ files using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::dela
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>files</th>
+      <td><p>File names of <code>fst</code> files that will be used to create a <code>prt</code>
+object (see also <code><a href='https://rdrr.io/pkg/prt/man/new_prt.html'>prt::new_prt()</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>col_cfg</th>
+      <td><p>Coerced to <code>col_cfg</code> by calling <code><a href='new_src_cfg.html'>as_col_cfg()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>tbl_cfg</th>
+      <td><p>Coerced to <code>tbl_cfg</code> by calling <code><a href='new_src_cfg.html'>as_tbl_cfg()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>Character vector valued data source name(s) (used as class
+prefix)</p></td>
+    </tr>
+    <tr>
+      <th>src_env</th>
+      <td><p>The data source environment (as <code>src_env</code> object)</p></td>
+    </tr>
     <tr>
       <th>x</th>
       <td><p>Data source to attach</p></td>
@@ -209,15 +231,8 @@ files using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::dela
       <td><p>String valued name of a config file which will be looked up in
 the default config directors</p></td>
     </tr>
-    <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>environment</code> of length 5.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data source configuration — new_src_cfg • ICU data with R</title>
+<title>Internal utilities for working with data source configurations — new_src_cfg • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,27 @@
 
 
 
-<meta property="og:title" content="Data source configuration — new_src_cfg" />
-<meta property="og:description" content="In order to use a data source with ricu, a configuration object has to be
-created." />
+<meta property="og:title" content="Internal utilities for working with data source configurations — new_src_cfg" />
+<meta property="og:description" content="Data source configuration objects store information on data sources used
+throughout ricu. This includes URLs for data set downloading, Column
+specifications used for data set importing, default values per table for
+important columns such as index columns when loading data and how different
+patient identifiers used throughout a dataset relate to another. Per
+dataset, a src_cfg object is created from a JSON file (see
+load_src_cfg()), consisnting of several helper-classes compartmentalizing
+the pieces of information outlined above. Alongside constructors for the
+various classes, several utiltites, such as inheritance checks, coercion
+functions, as well as functions to extract pieces of information from these
+objects are provided.
+
+id_col: column will be used for as id for icu_tbl objects
+index_col: column represents a timestamp variable and will be use as
+such for ts_tbl objects
+val_col: column contains the measured variable of interest
+unit_col: column specifies the unit of measurement in the corresponding
+val_col
+
+" />
 
 
 <meta name="robots" content="noindex">
@@ -124,28 +142,93 @@ created." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Data source configuration</h1>
+    <h1>Internal utilities for working with data source configurations</h1>
     
     <div class="hidden name"><code>src_cfg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In order to use a data source with <code>ricu</code>, a configuration object has to be
-created.</p>
+    <p>Data source configuration objects store information on data sources used
+throughout <code>ricu</code>. This includes URLs for data set downloading, Column
+specifications used for data set importing, default values per table for
+important columns such as index columns when loading data and how different
+patient identifiers used throughout a dataset relate to another. Per
+dataset, a <code>src_cfg</code> object is created from a JSON file (see
+<code><a href='load_src_cfg.html'>load_src_cfg()</a></code>), consisnting of several helper-classes compartmentalizing
+the pieces of information outlined above. Alongside constructors for the
+various classes, several utiltites, such as inheritance checks, coercion
+functions, as well as functions to extract pieces of information from these
+objects are provided.</p>
+<ul>
+<li><p><code>id_col</code>: column will be used for as id for <code>icu_tbl</code> objects</p></li>
+<li><p><code>index_col</code>: column represents a timestamp variable and will be use as
+such for <code>ts_tbl</code> objects</p></li>
+<li><p><code>val_col</code>: column contains the measured variable of interest</p></li>
+<li><p><code>unit_col</code>: column specifies the unit of measurement in the corresponding
+<code>val_col</code></p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>new_src_cfg</span>(
+    <pre class="usage"><span class='fu'>new_src_cfg</span>(<span class='kw'>name</span>, <span class='kw'>id_cfg</span>, <span class='kw'>col_cfg</span>, tbl_cfg = <span class='kw'>NULL</span>, <span class='kw'>...</span>, class_prefix = <span class='kw'>name</span>)
+
+<span class='fu'>new_id_cfg</span>(
   <span class='kw'>name</span>,
-  <span class='kw'>id_cfg</span>,
-  <span class='kw'>col_cfg</span>,
-  tbl_cfg = <span class='kw'>NULL</span>,
-  url = <span class='kw'>NULL</span>,
-  class_prefix = <span class='kw'>NULL</span>
+  <span class='kw'>src</span>,
+  <span class='kw'>id</span>,
+  <span class='kw'>pos</span>,
+  start = <span class='fl'>NA_character_</span>,
+  end = <span class='fl'>NA_character_</span>,
+  table = <span class='fl'>NA_character_</span>,
+  class_prefix = <span class='kw'>src</span>
+)
+
+<span class='fu'>new_col_cfg</span>(
+  <span class='kw'>table</span>,
+  <span class='kw'>src</span>,
+  id_var = <span class='kw'>NULL</span>,
+  index_var = <span class='kw'>NULL</span>,
+  val_var = <span class='kw'>NULL</span>,
+  unit_var = <span class='kw'>NULL</span>,
+  time_vars = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>,
+  class_prefix = <span class='kw'>src</span>
+)
+
+<span class='fu'>new_tbl_cfg</span>(
+  <span class='kw'>table</span>,
+  <span class='kw'>src</span>,
+  files = <span class='kw'>NULL</span>,
+  cols = <span class='kw'>NULL</span>,
+  num_rows = <span class='kw'>NULL</span>,
+  partitioning = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>,
+  class_prefix = <span class='kw'>src</span>
 )
 
 <span class='fu'>is_src_cfg</span>(<span class='kw'>x</span>)
 
-<span class='fu'>src_url</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>is_id_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>is_col_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>is_tbl_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>as_src_cfg</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='fu'>as_id_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>as_col_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>as_tbl_cfg</span>(<span class='kw'>x</span>)
+
+<span class='fu'>src_url</span>(<span class='kw'>x</span>)
+
+<span class='fu'>id_var_opts</span>(<span class='kw'>x</span>)
+
+<span class='fu'>src_name</span>(<span class='kw'>x</span>)
+
+<span class='fu'>tbl_name</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,24 +239,99 @@ created.</p>
     </tr>
     <tr>
       <th>id_cfg</th>
-      <td><p>List passed to <code><a href='new_id_cfg.html'>new_id_cfg()</a></code></p></td>
+      <td><p>An <code>id_cfg</code> object for the given data source</p></td>
     </tr>
     <tr>
-      <th>url</th>
-      <td><p>String valued url used for data downloading (see
-<code><a href='download_src.html'>download_src()</a></code>)</p></td>
+      <th>col_cfg</th>
+      <td><p>A list of <code>col_cfg</code> objects representing column defaults for
+all tables of the</p></td>
+    </tr>
+    <tr>
+      <th>tbl_cfg</th>
+      <td><p>A list of <code>tbl_cfg</code> containing information on how tables are
+organized (may be <code>NULL</code>)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further objects to add (such as an URL specification)</p></td>
+    </tr>
+    <tr>
+      <th>class_prefix</th>
+      <td><p>A character vector of class prefixes that are added to
+the instantiated classes</p></td>
+    </tr>
+    <tr>
+      <th>src</th>
+      <td><p>Data source name</p></td>
+    </tr>
+    <tr>
+      <th>id, start, end</th>
+      <td><p>Name(s) of ID column(s), as well as respective start
+and end timestamps</p></td>
+    </tr>
+    <tr>
+      <th>pos</th>
+      <td><p>Integer valued position, ordering IDs by their cardinality</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Table name</p></td>
+    </tr>
+    <tr>
+      <th>id_var, index_var, val_var, unit_var, time_vars</th>
+      <td><p>Names of columns with
+respective meanings</p></td>
+    </tr>
+    <tr>
+      <th>cols</th>
+      <td><p>List containing a list per column each holding string valued
+entries <code>name</code> (column name as used by <code>ricu</code>), <code>col</code> (column name as used
+in the raw data) and <code>spec</code> (name of <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> column specification).
+Further entries will be passed as argument to the respective <code>readr</code> column
+specification</p></td>
+    </tr>
+    <tr>
+      <th>num_rows</th>
+      <td><p>A count indicating the expected number of rows</p></td>
+    </tr>
+    <tr>
+      <th>partitioning</th>
+      <td><p>A table partitioning is defined by a column name and a
+vector of numeric values that are passed as <code>vec</code> argument to
+<code><a href='https://rdrr.io/r/base/findInterval.html'>base::findInterval()</a></code></p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>Object to test/coerce</p></td>
-    </tr>
-    <tr>
-      <th>tables</th>
-      <td><p>List passed to <code><a href='new_col_cfg.html'>as_col_cfg()</a></code> and potentially to
-<code><a href='new_tbl_cfg.html'>as_tbl_cfg()</a></code></p></td>
+      <td><p>Object to coerce/query</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following classes are used to represent data source configuration
+objects:</p><ul>
+<li><p><code>src_cfg</code>: wraps objects <code>id_cfg</code>, <code>col_cfg</code> and optionally <code>tbl_cfg</code></p></li>
+<li><p><code>id_cfg</code>: contains information in ID systems and is created from <code>id_cfg</code>
+entries in config files</p></li>
+<li><p><code>col_cfg</code>: contains column default settings represented by <code>defaults</code>
+entries in table configuration blocks</p></li>
+<li><p><code>tbl_cfg</code>: used when importing data and therefore encompasses information
+in <code>files</code>, <code>num_rows</code> and <code>cols</code> entries of table configuration blocks</p></li>
+</ul>
+
+<p>Alongside constructors (<code>new_*()</code>), inheritance checking functions
+(<code>is_*()</code>), as well as coercion functions (<code>as_*(</code>), relevant utility
+functions include:</p><ul>
+<li><p><code>src_url()</code>: retrieve the URL of a data source</p></li>
+<li><p><code>id_var_opts()</code>: column name(s) corresponding to ID systems</p></li>
+<li><p><code>src_name()</code>: name of the data source</p></li>
+<li><p><code>tbl_name()</code>: name of a table</p></li>
+</ul>
+
+<p>Coercion between objects under some circumstances can yield list-of object
+return types. For example when coercing <code>src_cfg</code> to <code>tbl_cfg</code>, this will
+result in a list of <code>tbl_cfg</code> objects, as multiple tables typically
+correspond to a data source.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

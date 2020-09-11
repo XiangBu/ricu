@@ -136,7 +136,7 @@ or nested structure, for example patient id, hospital stay id and ICU stay
 id. This function allows for converting from one ID to another.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>change_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>change_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, <span class='kw'>...</span>, keep_old_id = <span class='fl'>TRUE</span>)
 
 <span class='fu'>upgrade_id</span>(<span class='kw'>x</span>, <span class='kw'>target_id</span>, <span class='kw'>src</span>, cols = <span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
 
@@ -167,11 +167,16 @@ id. This function allows for converting from one ID to another.</p>
     </tr>
     <tr>
       <th>src</th>
-      <td><p>Passed to <code><a href='new_id_cfg.html'>as_id_cfg()</a></code> and <code><a href='data.html'>as_src_env()</a></code></p></td>
+      <td><p>Passed to <code><a href='new_src_cfg.html'>as_id_cfg()</a></code> and <code><a href='new_src_tbl.html'>as_src_env()</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Passed to <code>upgrade_id()</code>/<code>downgrade_id()</code></p></td>
+    </tr>
+    <tr>
+      <th>keep_old_id</th>
+      <td><p>Logical flag indicating whether to keep the previous ID
+column</p></td>
     </tr>
     <tr>
       <th>cols</th>

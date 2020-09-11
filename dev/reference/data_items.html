@@ -142,7 +142,7 @@ from code or by parsing a JSON formatted concept dictionary using
 <code><a href='load_dictionary.html'>load_dictionary()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, class = <span class='st'>"sel_itm"</span>)
+    <pre class="usage"><span class='fu'>new_itm</span>(<span class='kw'>src</span>, <span class='kw'>...</span>, target = <span class='fl'>NA_character_</span>, class = <span class='st'>"sel_itm"</span>)
 
 <span class='fu'>is_itm</span>(<span class='kw'>x</span>)
 
@@ -185,6 +185,11 @@ from code or by parsing a JSON formatted concept dictionary using
       <th>...</th>
       <td><p>Further specification of the <code>itm</code> object (passed to
 <code>init_itm()</code>)</p></td>
+    </tr>
+    <tr>
+      <th>target</th>
+      <td><p>Item target class (e.g. "id_tbl"), <code>NA</code> indicates no specific
+class requirement</p></td>
     </tr>
     <tr>
       <th>class</th>
@@ -286,7 +291,7 @@ Several additional S3 generic functions exist for manipulation of
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>item</span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>)),
-             unit_var = <span class='fl'>TRUE</span>, index_var = <span class='fl'>TRUE</span>)
+             unit_var = <span class='fl'>TRUE</span>, target = <span class='st'>"ts_tbl"</span>)
 
 <span class='fu'>is_item</span>(<span class='kw'>gluc</span>)
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>

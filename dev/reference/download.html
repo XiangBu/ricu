@@ -40,12 +40,14 @@
 
 
 <meta property="og:title" content="Data download utilities — download_src" />
-<meta property="og:description" content="The Laboratory for Computational Physiology  (LCP) at MIT hosts several large-scale
-databases of hospital intensive care units (ICUs), two of which can be
-either downloaded in full or as demo subsets using utilities provided by
-ricu, while a third data set is available only in full. While demo data
-sets are publicly available, full download requires credentialed access
-which can be gained by applying for up an account with PhysioNet ." />
+<meta property="og:description" content="Making a dataset available to ricu consists of 3 steps: downloading
+(download_src()), importing (import_src()) and attaching
+(attach_src()). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in .csv format), importing consists of some preprocessing to make the
+data available more efficiently (by converting it to .fst
+format) and attaching sets up the data for use by the package." />
 
 
 <meta name="robots" content="noindex">
@@ -134,12 +136,14 @@ which can be gained by applying for up an account with PhysioNet ." />
     </div>
 
     <div class="ref-description">
-    <p>The <a href='https://lcp.mit.edu/index.html'>Laboratory for Computational Physiology </a> (LCP) at MIT hosts several large-scale
-databases of hospital intensive care units (ICUs), two of which can be
-either downloaded in full or as demo subsets using utilities provided by
-<code>ricu</code>, while a third data set is available only in full. While demo data
-sets are publicly available, full download requires credentialed access
-which can be gained by applying for up an account with <a href='https://physionet.org'>PhysioNet </a>.</p>
+    <p>Making a dataset available to <code>ricu</code> consists of 3 steps: downloading
+(<code>download_src()</code>), importing (<code><a href='import_src.html'>import_src()</a></code>) and attaching
+(<code><a href='new_src_tbl.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in <code>.csv</code> format), importing consists of some preprocessing to make the
+data available more efficiently (by converting it to <code><a href='http://www.fstpackage.org/reference/fst.html'>.fst</a></code>
+format) and attaching sets up the data for use by the package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>download_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
@@ -153,10 +157,7 @@ which can be gained by applying for up an account with <a href='https://physione
   user = <span class='kw'>NULL</span>,
   pass = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>
-)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>download_src</span>(<span class='kw'>x</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,58 +189,46 @@ which can be gained by applying for up an account with <a href='https://physione
 variables <code>RICU_PHYSIONET_USER</code>/<code>RICU_PHYSIONET_PASS</code> are not set, user
 input is required</p></td>
     </tr>
-    <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="mimic-iii"><a class="anchor" href="#mimic-iii"></a>MIMIC-III</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-<p>The Medical Information Mart for Intensive Care
-(<a href='https://physionet.org/content/mimiciii/'>MIMIC</a>) database holds
-detailed clinical data from roughly 60,000 patient stays in Beth Israel
-Deaconess Medical Center (BIDMC) intensive care units between 2001 and 2012.
-The database includes information such as demographics, vital sign
-measurements made at the bedside (~1 data point per hour), laboratory test
-results, procedures, medications, caregiver notes, imaging reports, and
-mortality (both in and out of hospital). For further information, please
-refer to the <a href='https://mimic.physionet.org/about/mimic'>MIMIC-III documentation </a>.</p>
-<p>The corresponding
-<a href='https://physionet.org/content/mimiciii-demo'>demo dataset</a>
-contains the full data of a randomly selected subset of 100 patients from
-the patient cohort with conformed in-hospital mortality. The only notable
-data omission is the <code>noteevents</code> table, which unstructured text reports on
-patients.</p>
-<p>More recently, Philips Healthcare and LCP began assembling the eICU
-Collaborative Research Database as a multi-center resource for ICU data.
-Combining data of several critical care units throughout the continental
-United States from the years 2014 and 2015, this database contains
-deidentified health data associated with over 200,000 admissions, including
-vital sign measurements, care plan documentation, severity of illness
-measures, diagnosis information, and treatment information. For further
-information, please refer to the <a href='https://eicu-crd.mit.edu/about/eicu'>eICU documentation </a>.</p>
+    <p>Downloads by <code>ricu</code> are focused data hosted by
+<a href='https://physionet.org'>PhysioNet</a> and tools are currently available for
+downloading the datasets
+<a href='https://physionet.org/content/mimiciii/1.4/'>MIMIC-III</a>,
+<a href='https://physionet.org/content/eicu-crd/2.0/'>eICU</a> and
+<a href='https://physionet.org/content/hirid/1.0/'>HiRID</a> (see <a href='data.html'>data</a>). While
+credentials are required for downloading any of the three datasets, demo
+dataset for both MIMIC-III and eICU are available without having to log in.
+Even though access to full dataset is credentialed, the datasets are in
+fact publicly available. For setting up an account, please refer to <a href='https://physionet.org/register/'>the registration form</a>.</p>
 <p>Physionet credentials can either be entered in an interactive session,
 passed as function arguments <code>user</code>/<code>pass</code> or as environment
-variables <code>RICU_PHYSIONET_USER</code>/<code>RICU_PHYSIONET_PASS</code>. If the openssl
-package is available, SHA256 hashes of downloaded files are verified using
-<code><a href='https://rdrr.io/pkg/openssl/man/hash.html'>openssl::sha256()</a></code>.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+variables <code>RICU_PHYSIONET_USER</code>/<code>RICU_PHYSIONET_PASS</code>. For setting
+environment variables on session startup, refer to <code><a href='https://rdrr.io/r/base/Startup.html'>base::.First.sys()</a></code> and
+for setting environment varaibles in general, refer to <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>base::Sys.setenv()</a></code>
+If the openssl package is available, SHA256 hashes of downloaded files are
+verified using <code><a href='https://rdrr.io/pkg/openssl/man/hash.html'>openssl::sha256()</a></code>.</p>
+<p>Demo datasets
+<a href='https://physionet.org/content/mimiciii-demo/1.4/'>MIMIC-III demo</a> and
+<a href='https://physionet.org/content/eicu-crd-demo/2.0/'>eiCU demo</a> can either be
+installed as R packages directly by running</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mimic.demo"</span>, <span class='st'>"eicu.demo"</span>),
+  repos = <span class='st'>"https://septic-tank.github.io/physionet-demo"</span>
+)
+</pre>
 
-    <p>MIMIC-III, a freely accessible critical care database. Johnson AEW, Pollard
-TJ, Shen L, Lehman L, Feng M, Ghassemi M, Moody B, Szolovits P, Celi LA,
-and Mark RG. Scientific Data (2016). DOI: 10.1038/sdata.2016.35.</p>
-<p>The eICU Collaborative Research Database, a freely available multi-center
-database for critical care research. Pollard TJ, Johnson AEW, Raffa JD,
-Celi LA, Mark RG and Badawi O. Scientific Data (2018). DOI:
-http://dx.doi.org/10.1038/sdata.2018.178.</p>
+<p>or downloaded and imported using <code>download_src()</code> and <code><a href='import_src.html'>import_src()</a></code>.
+Furthermore, <code>ricu</code> specifies <code>mimic.demo</code> and <code>eicu.demo</code> as <code>Suggests</code>
+dependencies therefore, passing <code>dependencies = TURE</code> when calling
+<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages()</a></code> for installing <code>ricu</code>, this will automatically install
+the demo datasets as well.</p>
+<p>While the included data downloaders are intended for data hosted by
+PhysioNet, <code>download_src()</code> is an S3 generic function that can be extended
+to new classes. Method dispatch is intended to occur on objects that
+inherit from or can be coerced to <code>src_cfg</code>. For more information on data
+source configuration, refer to <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {

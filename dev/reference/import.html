@@ -40,10 +40,14 @@
 
 
 <meta property="og:title" content="Data import utilities — import_src" />
-<meta property="og:description" content="In order to speed up data access operations, ricu does not directly use
-the PhysioNet provided CSV files, but converts all data to fst::fst()
-format, which allows for random row and column access. Large tables are
-split into chunks in order to keep memory requirements under control." />
+<meta property="og:description" content="Making a dataset available to ricu consists of 3 steps: downloading
+(download_src()), importing (import_src()) and attaching
+(attach_src()). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in .csv format), importing consists of some preprocessing to make the
+data available more efficiently and attaching sets up the data for use by
+the package." />
 
 
 <meta name="robots" content="noindex">
@@ -132,19 +136,20 @@ split into chunks in order to keep memory requirements under control." />
     </div>
 
     <div class="ref-description">
-    <p>In order to speed up data access operations, <code>ricu</code> does not directly use
-the PhysioNet provided CSV files, but converts all data to <code><a href='http://www.fstpackage.org/reference/fst.html'>fst::fst()</a></code>
-format, which allows for random row and column access. Large tables are
-split into chunks in order to keep memory requirements under control.</p>
+    <p>Making a dataset available to <code>ricu</code> consists of 3 steps: downloading
+(<code><a href='download_src.html'>download_src()</a></code>), importing (<code>import_src()</code>) and attaching
+(<code><a href='new_src_tbl.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in <code>.csv</code> format), importing consists of some preprocessing to make the
+data available more efficiently and attaching sets up the data for use by
+the package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>import_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for src_cfg</span>
 <span class='fu'>import_src</span>(<span class='kw'>x</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>), force = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>import_src</span>(<span class='kw'>x</span>, name = <span class='st'>"data-sources"</span>, file = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
 
 <span class='fu'>import_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
@@ -174,15 +179,6 @@ split into chunks in order to keep memory requirements under control.</p>
 tables</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>Full file name to load</p></td>
-    </tr>
-    <tr>
       <th>progress</th>
       <td><p>Either <code>NULL</code> or a progress bar as created by
 <code><a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress::progress_bar()</a></code></p></td>
@@ -191,52 +187,32 @@ the default config directors</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A nested list supplied as <code>config</code> argument controls how the CSV data is
-parsed and ingested. A the top level, elements <code>name</code> (string), <code>base_url</code>
-(string), <code>version</code> (string) and <code>tables</code> (list) are expected. For every
-file to be read in, an entry in <code>tables</code> with the name of the corresponding
-file is assumed, requiring a list named <code>col_spec</code> and optionally a list
-named <code>partitioning</code>.</p>
-<p>Every <code>col_spec</code> node again is expected to be a named list with names
-corresponding to column names in the CSV and list valued entries. Finally,
-a list node defining a single column is a named list with a required,
-string-valued <code>type</code> entry which is interpreted as <code>readr</code> column
-specification function (see <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code>). Further list entries will be
-passed as arguments to the column specification function. A column defined
-as</p><pre><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(type = <span class='st'>"col_datetime"</span>, format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)
-</pre>
-
-<p>will therefore result in a <code>readr</code> column specification like</p><pre><span class='fu'>col_datetime</span>(format = <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)
-</pre>
-
-<p>Entries controlling the partitioning of tables, specified as <code>partitioning</code>
-list nodes are expected to be named lists of length 1, where the name
-corresponds to the column used for partitioning and partitions are defined
-as integer vector which is passed to <code><a href='https://rdrr.io/r/base/findInterval.html'>base::findInterval()</a></code>. This implies
-that partitions can only be created on integer valued columns.</p>
-<p>Putting all this together, the expected structure of <code>config</code> is as</p><pre><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  name = <span class='st'>"some_name"</span>,
-  base_url = <span class='st'>"some_url"</span>,
-  version = <span class='st'>"major.minor"</span>,
-  tables = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    file_name_table_1 = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-      col_spec = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-        colname_1 = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(type = <span class='st'>"col_*"</span>),
-        colname_2 = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(type = <span class='st'>"col_*"</span>),
-        <span class='kw'>...</span>
-      )
-    ),
-    file_name_table_2 = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-      col_spec = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>...</span>),
-      partitioning = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(colname_i = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0L</span>, ))
-    ),
-    <span class='kw'>...</span>
-  )
-)
-</pre>
-
-<p>Configurations for the MIMIC-III and eICU databases are available in
-<code>extdata/config</code> as JSON files and can be read in using <code><a href='data_dir.html'>get_config()</a></code>.</p>
+    <p>In order to speed up data access operations, <code>ricu</code> does not directly use
+the PhysioNet provided CSV files, but converts all data to <code><a href='http://www.fstpackage.org/reference/fst.html'>fst::fst()</a></code>
+format, which allows for random row and column access. Large tables are
+split into chunks in order to keep memory requirements reasonably low.</p>
+<p>The one-time step per dataset of data import is fairly resource intensive:
+depending on CPU and available storage system, it will take on the order of
+an hour to run to completion and depending on the dataset, somewhere
+between 50 GB and 75 GB of temporary disk space are required as tables are
+uncompressed, in case of partitioned data, rows are reordered and the data
+again is saved to a storage efficient format.</p>
+<p>The S3 generic function <code>import_src()</code> performs import of an entire data
+source, internally calling the S3 generic function <code>import_tbl()</code> in order
+to perform import of individual tables. Method dispatch is intended to
+occur on objects inheriting from <code>src_cfg</code> and <code>tbl_cfg</code> respectively. Such
+objects can be generated from JSON based configuration files which contain
+information such as table names,  column types or row numbers, in order to
+provide safety in parsing of <code>.csv</code> files. For more information on data
+source configuration, refer to <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>.</p>
+<p>Current import capabilities include re-saving a <code>.csv</code> file to <code>.fst</code> at
+once (used for smaller sized tables), reading a large <code>.csv</code> file using the
+<code><a href='https://readr.tidyverse.org/reference/read_delim_chunked.html'>readr::read_csv_chunked()</a></code> API, while partitioning chunks and reassembling
+sub-partitions (used for splitting a large file into partitions), as well
+as re-partitioning an already partitioned table according to a new
+partitioning scheme. Care has been taken to keep the maximal memory
+requirements for this reasonably low, such that data import is feasible on
+laptop class hardware.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
