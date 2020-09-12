@@ -138,7 +138,7 @@ the package." />
     <div class="ref-description">
     <p>Making a dataset available to <code>ricu</code> consists of 3 steps: downloading
 (<code><a href='download_src.html'>download_src()</a></code>), importing (<code>import_src()</code>) and attaching
-(<code><a href='new_src_tbl.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
+(<code><a href='attach_src.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
 attaching of the dataset is repeated every time the package is loaded.
 Briefly, downloading loads the raw dataset from the internet (most likely
 in <code>.csv</code> format), importing consists of some preprocessing to make the
@@ -149,12 +149,12 @@ the package.</p>
     <pre class="usage"><span class='fu'>import_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for src_cfg</span>
-<span class='fu'>import_src</span>(<span class='kw'>x</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>), force = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)
+<span class='fu'>import_src</span>(<span class='kw'>x</span>, data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>), force = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)
 
 <span class='fu'>import_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for tbl_cfg</span>
-<span class='fu'>import_tbl</span>(<span class='kw'>x</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>), progress = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>import_tbl</span>(<span class='kw'>x</span>, data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>), progress = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,7 +169,7 @@ the package.</p>
 <a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv</a>/<a href='https://readr.tidyverse.org/reference/read_delim_chunked.html'>readr::read_csv_chunked</a>)/generic consistency</p></td>
     </tr>
     <tr>
-      <th>dir</th>
+      <th>data_dir</th>
       <td><p>The directory where the data was downloaded to (see
 <code><a href='download_src.html'>download_src()</a></code>).</p></td>
     </tr>
@@ -246,7 +246,7 @@ laptop class hardware.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

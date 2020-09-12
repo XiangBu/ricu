@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Difftime utilities — secs" />
-<meta property="og:description" content="Utility functions for working with base::difftime() objects." />
+<meta property="og:description" content="As base::difftime() vectors are used throughout ricu, a set of wrapper
+functions are exported for convenience of instantiation base::difftime()
+vectors with given time units." />
 
 
 <meta name="robots" content="noindex">
@@ -129,7 +131,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Utility functions for working with <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> objects.</p>
+    <p>As <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> vectors are used throughout <code>ricu</code>, a set of wrapper
+functions are exported for convenience of instantiation <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code>
+vectors with given time units.</p>
     </div>
 
     <pre class="usage"><span class='fu'>secs</span>(<span class='kw'>x</span>)
@@ -147,11 +151,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object to test/coerce</p></td>
+      <td><p>Numeric vector to coerce to <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code></p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>hours</span>(<span class='fl'>1L</span>)
+</div><div class='output co'>#&gt; Time difference of 1 hours</div><div class='input'><span class='fu'>mins</span>(<span class='fl'>NA_real_</span>)
+</div><div class='output co'>#&gt; Time difference of NA mins</div><div class='input'><span class='fu'>secs</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
+</div><div class='output co'>#&gt; Time differences in secs
+#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>hours</span>(<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span>(<span class='fl'>0L</span>))
+</div><div class='output co'>#&gt; Time difference of  hours</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -167,7 +179,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

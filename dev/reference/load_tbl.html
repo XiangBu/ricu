@@ -234,7 +234,7 @@ timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.h
     </tr>
     <tr>
       <th>src</th>
-      <td><p>Passed to <code><a href='new_src_tbl.html'>as_src_tbl()</a></code> in order to determine the data source</p></td>
+      <td><p>Passed to <code><a href='attach_src.html'>as_src_tbl()</a></code> in order to determine the data source</p></td>
     </tr>
     <tr>
       <th>index_var</th>
@@ -259,7 +259,7 @@ columns specified by the <code>time_vars</code> argument. All time stamps are re
 to the origin provided by the ID system. This means that for an <code>id_var</code>
 corresponding to hospital IDs, times are relative to hospital admission.</p>
 <p>When <code>load_id()</code> (or <code>load_ts()</code>) is called on <code><a href='new_itm.html'>itm</a></code> objects
-instead of <code><a href='new_src_tbl.html'>src_tbl</a></code> (or objects that can be coerced to
+instead of <code><a href='attach_src.html'>src_tbl</a></code> (or objects that can be coerced to
 <code>src_tbl</code>), The row-subsetting is performed according the the specification
 as provided by the <code>itm</code> object. Furhtermore, at default settings, columns
 are returned as required by the <code>itm</code> object and <code>id_var</code> (as well as
@@ -311,7 +311,7 @@ default values for the given <code>src_tbl</code> object if not explicitly speci
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

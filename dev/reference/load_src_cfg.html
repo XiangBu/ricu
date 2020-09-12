@@ -148,7 +148,7 @@ dataset which includes file names and column names alongside their data
 types.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, dir = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, cfg_dirs = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,7 @@ types.</p>
 the default config directors</p></td>
     </tr>
     <tr>
-      <th>dir</th>
+      <th>cfg_dirs</th>
       <td><p>Additional directory/ies to look for configuration files</p></td>
     </tr>
     </table>
@@ -171,7 +171,7 @@ the default config directors</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Configuration files are looked for as files <code>name</code> with added suffix
-<code>.json</code> starting with the directory (or directories) supplied as <code>dir</code>
+<code>.json</code> starting with the directory (or directories) supplied as <code>cfg_dirs</code>
 argument, followed by the directory specified by the environment variable
 <code>RICU_CONFIG_PATH</code>, and finally in <code>extdata/config</code> of the package install
 directory. If files with matching names are found in multiple places they
@@ -307,8 +307,8 @@ format</p>
 
 <p>The <code>class_prefix</code> entry in a data source configuration is used create sub-
 classes to <code>src_cfg</code>, <code>id_cfg</code>, <code>col_cfg</code> and <code>tbl_cfg</code> classes and passed
-on to constructors of <code>src_env</code> (<code><a href='new_src_tbl.html'>new_src_env()</a></code>) and <code>src_tbl</code>
-<code><a href='new_src_tbl.html'>new_src_tbl()</a></code> objects. As an example, for the above <code>class_prefix</code> value
+on to constructors of <code>src_env</code> (<code><a href='attach_src.html'>new_src_env()</a></code>) and <code>src_tbl</code>
+<code><a href='attach_src.html'>new_src_tbl()</a></code> objects. As an example, for the above <code>class_prefix</code> value
 of <code><a href='https://rdrr.io/r/base/c.html'>c("mimic_demo", "mimic")</a></code>, the corresponding <code>src_cfg</code> will be assigned
 classes <code><a href='https://rdrr.io/r/base/c.html'>c("mimic_demo_cfg", "mimic_cfg", "src_cfg")</a></code> and consequently the
 <code>src_tbl</code> objects will inherit from <code>"mimic_demo_tbl"</code>, <code>"mimic_tbl"</code> and
@@ -360,7 +360,7 @@ class.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

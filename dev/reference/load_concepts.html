@@ -159,7 +159,7 @@ in wide format (i.e. returning concepts as columns).</p>
   concepts = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>,
   dict_name = <span class='st'>"concept-dict"</span>,
-  dict_file = <span class='kw'>NULL</span>
+  dict_dirs = <span class='kw'>NULL</span>
 )
 
 <span class='co'># S3 method for concept</span>
@@ -236,7 +236,7 @@ means no subsetting</p></td>
 <code><a href='load_dictionary.html'>load_dictionary()</a></code> is called</p></td>
     </tr>
     <tr>
-      <th>dict_name, dict_file</th>
+      <th>dict_name, dict_dirs</th>
       <td><p>In case not concepts are passed as <code>concepts</code>,
 these are forwarded to <code><a href='load_dictionary.html'>load_dictionary()</a></code> as <code>name</code> and <code>file</code> arguments</p></td>
     </tr>
@@ -302,7 +302,7 @@ generic functions.</p>
 subset a <code>concept</code> object or an entire <a href='load_dictionary.html'>concept dictionary</a>, or a <code>concept</code> object. When passing a
 character vector as first argument, the most important further arguments at
 that level control from where the dictionary is taken (<code>dict_name</code> or
-<code>dict_file</code>). At <code>concept</code> level, the most important additional arguments
+<code>dict_dirs</code>). At <code>concept</code> level, the most important additional arguments
 control the result structure: data merging can be disabled using
 <code>merge_data</code> and data aggregation is governed by the <code>aggregate</code> argument.</p>
 <p>Data aggregation is important for merging several concepts into a
@@ -442,7 +442,7 @@ multiple <code>itm</code> objects concatenated in row-wise fashion as in
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

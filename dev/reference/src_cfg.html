@@ -50,16 +50,7 @@ load_src_cfg()), consisnting of several helper-classes compartmentalizing
 the pieces of information outlined above. Alongside constructors for the
 various classes, several utiltites, such as inheritance checks, coercion
 functions, as well as functions to extract pieces of information from these
-objects are provided.
-
-id_col: column will be used for as id for icu_tbl objects
-index_col: column represents a timestamp variable and will be use as
-such for ts_tbl objects
-val_col: column contains the measured variable of interest
-unit_col: column specifies the unit of measurement in the corresponding
-val_col
-
-" />
+objects are provided." />
 
 
 <meta name="robots" content="noindex">
@@ -159,15 +150,6 @@ the pieces of information outlined above. Alongside constructors for the
 various classes, several utiltites, such as inheritance checks, coercion
 functions, as well as functions to extract pieces of information from these
 objects are provided.</p>
-<ul>
-<li><p><code>id_col</code>: column will be used for as id for <code>icu_tbl</code> objects</p></li>
-<li><p><code>index_col</code>: column represents a timestamp variable and will be use as
-such for <code>ts_tbl</code> objects</p></li>
-<li><p><code>val_col</code>: column contains the measured variable of interest</p></li>
-<li><p><code>unit_col</code>: column specifies the unit of measurement in the corresponding
-<code>val_col</code></p></li>
-</ul>
-
     </div>
 
     <pre class="usage"><span class='fu'>new_src_cfg</span>(<span class='kw'>name</span>, <span class='kw'>id_cfg</span>, <span class='kw'>col_cfg</span>, tbl_cfg = <span class='kw'>NULL</span>, <span class='kw'>...</span>, class_prefix = <span class='kw'>name</span>)
@@ -214,7 +196,7 @@ such for <code>ts_tbl</code> objects</p></li>
 
 <span class='fu'>is_tbl_cfg</span>(<span class='kw'>x</span>)
 
-<span class='fu'>as_src_cfg</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>as_src_cfg</span>(<span class='kw'>x</span>)
 
 <span class='fu'>as_id_cfg</span>(<span class='kw'>x</span>)
 
@@ -319,6 +301,17 @@ entries in table configuration blocks</p></li>
 in <code>files</code>, <code>num_rows</code> and <code>cols</code> entries of table configuration blocks</p></li>
 </ul>
 
+<p>Represented by a <code>col_cfg</code>, a table can have some of its columns marked as
+default columns for the following concepts and further column meanings can
+be specified via <code>...</code>:</p><ul>
+<li><p><code>id_col</code>: column will be used for as id for <code>icu_tbl</code> objects</p></li>
+<li><p><code>index_col</code>: column represents a timestamp variable and will be use as
+such for <code>ts_tbl</code> objects</p></li>
+<li><p><code>val_col</code>: column contains the measured variable of interest</p></li>
+<li><p><code>unit_col</code>: column specifies the unit of measurement in the corresponding
+<code>val_col</code></p></li>
+</ul>
+
 <p>Alongside constructors (<code>new_*()</code>), inheritance checking functions
 (<code>is_*()</code>), as well as coercion functions (<code>as_*(</code>), relevant utility
 functions include:</p><ul>
@@ -348,7 +341,7 @@ correspond to a data source.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

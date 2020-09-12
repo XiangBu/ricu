@@ -136,7 +136,15 @@ individual sessions.</p>
 
     <pre class="usage"><span class='fu'>data_dir</span>(subdir = <span class='kw'>NULL</span>, create = <span class='fl'>TRUE</span>)
 
-<span class='fu'>get_config</span>(<span class='kw'>name</span>, dir = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+<span class='fu'>src_data_dir</span>(<span class='kw'>src</span>)
+
+<span class='fu'>auto_load_src_names</span>()
+
+<span class='fu'>src_data_avail</span>(src = <span class='fu'>auto_load_src_names</span>())
+
+<span class='fu'>config_paths</span>()
+
+<span class='fu'>get_config</span>(<span class='kw'>name</span>, cfg_dirs = <span class='fu'>config_paths</span>(), combine_fun = <span class='kw'>c</span>, <span class='kw'>...</span>)
 
 <span class='fu'>set_config</span>(<span class='kw'>x</span>, <span class='kw'>name</span>, dir = <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"inst"</span>, <span class='st'>"extdata"</span>, <span class='st'>"config"</span>), <span class='kw'>...</span>)</pre>
 
@@ -154,12 +162,21 @@ exist below the data directory.</p></td>
 directory</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>File name of the configuration file (without file ending)</p></td>
+      <th>src</th>
+      <td><p>Character vector of data source names</p></td>
     </tr>
     <tr>
-      <th>dir</th>
-      <td><p>(Optional) directory name where to look for the specified file</p></td>
+      <th>name</th>
+      <td><p>File name of the configuration file (<code>.json</code> will be appended)</p></td>
+    </tr>
+    <tr>
+      <th>cfg_dirs</th>
+      <td><p>Character vector of directories searched for config files</p></td>
+    </tr>
+    <tr>
+      <th>combine_fun</th>
+      <td><p>If multiple files are found, a function for combining
+returned lists</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -168,6 +185,10 @@ directory</p></td>
     <tr>
       <th>x</th>
       <td><p>Object to be written</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>Directory to write the file to (created if non-existent)</p></td>
     </tr>
     </table>
 
@@ -193,6 +214,36 @@ to make it apply to all R sessions. For example, it could be set within:</p><ul>
 </ul>
 
 <p>Any directory specified as environment variable will recursively be created.</p>
+<p>Data source directories typically are sub-directories to <code>data_dir()</code> named
+the same as the respective dataset. For demo datasets corresponding to
+<code>mimic</code> and <code>eicu</code>, file location however deviates from this scheme. The
+function <code>src_data_dir()</code> is used to determine the expected data location
+of a given dataset.</p>
+<p>Configuration files used both for data source configuration, as well as for
+dictionary definitions potentially involve multiple files that are read and
+merged. For that reason, <code>get_config()</code> will iterate over directories
+passed as <code>cfg_dirs</code> and look for the specified file (with suffix <code>.json</code>
+appended and might be missing in some of the queried directories). All
+found files are read by <code><a href='https://rdrr.io/pkg/jsonlite/man/read_json.html'>jsonlite::read_json()</a></code> and the resulting lists are
+combined by reduction with the binary function passed as <code>combine_fun</code>.</p>
+<p>With default arguments, <code>get_config()</code> will simply concatenate lists
+corresponding to files found in the default config locations as returned by
+<code>config_paths()</code>: first the directory specified by the environment variable
+<code>RICU_CONFIG_PATH</code> (if set), followed by the directory at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"config"</span>, package = <span class='st'>"ricu"</span>)
+</pre>
+
+<p>Further arguments are passed to <code><a href='https://rdrr.io/pkg/jsonlite/man/read_json.html'>jsonlite::read_json()</a></code>, which is called
+with slightly modified defaults: <code>simplifyVector = TRUE</code>,
+<code>simplifyDataFrame = FALSE</code> and <code>simplifyMatrix = FALSE</code>.</p>
+<p>The utility function <code>set_config()</code> writes the list passed as <code>x</code> to file
+<code>dir/name.json</code>, using <code><a href='https://rdrr.io/pkg/jsonlite/man/read_json.html'>jsonlite::write_json()</a></code> also with slightly modified
+defaults (which can be overridden by passing arguments as <code>...</code>): <code>null = "null"</code>, <code>auto_unbox = TRUE</code> and <code>pretty = TRUE</code>.</p>
+<p>Whenever the package namespace is attached, a summary of dataset
+availability is printed using the utility functions <code>auto_load_src_names()</code>
+and <code>src_data_avail()</code>. While the former simply returns a character vector
+of data sources that are configures for automatically being set up on
+package loading, the latter returns a summary of the number of available
+tables per dataset.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span>(RICU_DATA_PATH = <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())
@@ -203,6 +254,7 @@ to make it apply to all R sessions. For example, it could be set within:</p><ul>
 <span class='fu'><a href='https://rdrr.io/r/base/files2.html'>dir.exists</a></span>(<span class='kw'>some_subdir</span>)
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='kw'>cfg</span> <span class='op'>&lt;-</span> <span class='fu'>get_config</span>(<span class='st'>"concept-dict"</span>)
+
 <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(
   <span class='kw'>cfg</span>,
   <span class='fu'>get_config</span>(<span class='st'>"concept-dict"</span>,
@@ -225,7 +277,7 @@ to make it apply to all R sessions. For example, it could be set within:</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

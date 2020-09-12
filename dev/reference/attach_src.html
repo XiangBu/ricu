@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data attach utilities — new_src_tbl • ICU data with R</title>
+<title>Data attach utilities — attach_src • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,15 @@
 
 
 
-<meta property="og:title" content="Data attach utilities — new_src_tbl" />
-<meta property="og:description" content="Attaching a data source sets up an environment containing prt::new_prt()
-files using base::delayedAssign()." />
+<meta property="og:title" content="Data attach utilities — attach_src" />
+<meta property="og:description" content="Making a dataset available to ricu consists of 3 steps: downloading
+(download_src()), importing (import_src()) and attaching
+(attach_src()). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in .csv format), importing consists of some preprocessing to make the
+data available more efficiently and attaching sets up the data for use by
+the package." />
 
 
 <meta name="robots" content="noindex">
@@ -130,55 +136,61 @@ files using base::delayedAssign()." />
     </div>
 
     <div class="ref-description">
-    <p>Attaching a data source sets up an environment containing <code><a href='https://rdrr.io/pkg/prt/man/new_prt.html'>prt::new_prt()</a></code>
-files using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::delayedAssign()</a></code>.</p>
+    <p>Making a dataset available to <code>ricu</code> consists of 3 steps: downloading
+(<code><a href='download_src.html'>download_src()</a></code>), importing (<code><a href='import_src.html'>import_src()</a></code>) and attaching
+(<code>attach_src()</code>). While downloading and importing are one-time procedures,
+attaching of the dataset is repeated every time the package is loaded.
+Briefly, downloading loads the raw dataset from the internet (most likely
+in <code>.csv</code> format), importing consists of some preprocessing to make the
+data available more efficiently and attaching sets up the data for use by
+the package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_src_tbl</span>(<span class='kw'>files</span>, <span class='kw'>col_cfg</span>, <span class='kw'>tbl_cfg</span>, <span class='kw'>prefix</span>, <span class='kw'>src_env</span>)
+    <pre class="usage"><span class='fu'>attach_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
-<span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_tbl</span>
-<span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_env</span>
-<span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>tbl</span>, <span class='kw'>...</span>)
+<span class='co'># S3 method for src_cfg</span>
+<span class='fu'>attach_src</span>(<span class='kw'>x</span>, assign_env = <span class='kw'>.GlobalEnv</span>, data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, <span class='kw'>...</span>)
+<span class='fu'>attach_src</span>(<span class='kw'>x</span>, assign_env = <span class='kw'>.GlobalEnv</span>, data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
+<span class='fu'>setup_src_env</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for src_cfg</span>
+<span class='fu'>setup_src_env</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+
+<span class='fu'>new_src_tbl</span>(<span class='kw'>files</span>, <span class='kw'>col_cfg</span>, <span class='kw'>tbl_cfg</span>, <span class='kw'>prefix</span>, <span class='kw'>src_env</span>)
+
+<span class='fu'>as_src_tbl</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='fu'>new_src_env</span>(<span class='kw'>x</span>, env = <span class='fu'><a href='https://rdrr.io/r/base/environment.html'>new.env</a></span>(parent = <span class='fu'>data_env</span>()))
 
-<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for src_env</span>
-<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)
-
-<span class='co'># S3 method for src_tbl</span>
-<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)
-
-<span class='fu'>attach_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for src_cfg</span>
-<span class='fu'>attach_src</span>(<span class='kw'>x</span>, assign_env = <span class='kw'>.GlobalEnv</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>attach_src</span>(<span class='kw'>x</span>, name = <span class='st'>"data-sources"</span>, dir = <span class='kw'>NULL</span>, assign_env = <span class='kw'>.GlobalEnv</span>, <span class='kw'>...</span>)
-
-<span class='fu'>setup_src_env</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, dir = <span class='kw'>NULL</span>)
-
-<span class='co'># S3 method for src_cfg</span>
-<span class='fu'>setup_src_env</span>(<span class='kw'>x</span>, <span class='kw'>env</span>, dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>))</pre>
+<span class='fu'>as_src_env</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Data source to attach</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Forwarded to further calls to <code>attach_src()</code></p></td>
+    </tr>
+    <tr>
+      <th>assign_env</th>
+      <td><p>Environment in which the data source will become available</p></td>
+    </tr>
+    <tr>
+      <th>data_dir</th>
+      <td><p>Directory used to look for <code><a href='http://www.fstpackage.org/reference/fst.html'>fst::fst()</a></code> files; <code>NULL</code> calls
+<code><a href='data_dir.html'>data_dir()</a></code> using the source name as <code>subdir</code> argument</p></td>
+    </tr>
+    <tr>
+      <th>env</th>
+      <td><p>Environment where data proxy objects are created</p></td>
+    </tr>
     <tr>
       <th>files</th>
       <td><p>File names of <code>fst</code> files that will be used to create a <code>prt</code>
@@ -201,39 +213,77 @@ prefix)</p></td>
       <th>src_env</th>
       <td><p>The data source environment (as <code>src_env</code> object)</p></td>
     </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Data source to attach</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Forwarded to further calls to <code>attach_src()</code></p></td>
-    </tr>
-    <tr>
-      <th>tbl</th>
-      <td><p>String valued table name</p></td>
-    </tr>
-    <tr>
-      <th>env</th>
-      <td><p>Environment where data proxy objects are created</p></td>
-    </tr>
-    <tr>
-      <th>assign_env</th>
-      <td><p>Environment in which the data source will become available</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p>Directory used to look for <code><a href='http://www.fstpackage.org/reference/fst.html'>fst::fst()</a></code> files; <code>NULL</code> calls
-<code><a href='data_dir.html'>data_dir()</a></code> using the source name as <code>subdir</code> argument</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p>String valued name of a config file which will be looked up in
-the default config directors</p></td>
-    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>Attaching a dataset sets up two types of S3 classes: a single <code>src_env</code>
+object, containing as many <code>src_tbl</code> objects as tables are associated with
+the dataset. A <code>src_env</code> is an environment with an <code>id_cfg</code> attribute, as
+well as sub-calsses as specified by the data source <code>class_prefix</code>
+configuration setting (see <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>). All <code>src_env</code> objects created
+by calling <code>attach_src()</code> represent environments that are direct
+descendants of the <code>data</code> environment and are bound to the respective
+dataset name within that environment. While <code>attach_src()</code> does not
+immediately instantiate a <code>src_env</code> object, it rather creates a promise
+using <code><a href='https://rdrr.io/r/base/delayedAssign.html'>base::delayedAssign()</a></code> which evaluates to a <code>src_env</code> upon first
+access. This allows for data sources to be set up where the data is missing
+in a way that prompts the user to download and import the data when first
+accessed.</p>
+<p>Additionally, <code>attach_src()</code> creates an active binding using
+<code><a href='https://rdrr.io/r/base/bindenv.html'>base::makeActiveBinding()</a></code>, binding a function to the dataset name within
+the environment passed as <code>assign_env</code>, which retrieves the respective
+<code>src_env</code> from the <code>data</code> environment. This shortcut is set up for
+convenience, such that for example the MIMIC-III demo dataset not only is
+available as <code>ricu::data::mimic_demo</code>, but also as <code><a href='data.html'>ricu::mimic_demo</a></code> (or if
+the package namespace is attached, simply as <code>mimic_demo</code>). The <code>ricu</code>
+namespace contains objects <code>mimic</code>, <code>mimic_demo</code>, <code>eicu</code>, etc. which are
+used as such links when loading the package. However, new data sets can be
+set up an accessed in the same way.</p>
+<p>If set up correctly, it is not necessary for the user to directly call
+<code>attach_src()</code>. When the package is loaded, the default data sources are
+attached automatically. This default can be controlled by setting as
+environment variable <code>RICU_SRC_LOAD</code> a comma separated list of data source
+names before loading the library. Setting this environment variable as</p><pre><span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span>(RICU_SRC_LOAD = <span class='st'>"mimic_demo,eciu_demo"</span>)
+</pre>
+
+<p>will change the default of loading both MIMIC-III and eICU, alongside the
+respective demo datasets, and HiRID, to just the two demo datasets. For
+setting an enviroment variable upon startup of the R session, refer to
+<code><a href='https://rdrr.io/r/base/Startup.html'>base::.First.sys()</a></code>.</p>
+<p>The <code>src_env</code> promise for each data source is created using the S3 generic
+function <code>setup_src_env()</code>. This function checks if all required files are
+available from <code>data_dir</code>. If files are missing the user is prompted for
+download in interactive sessions and an error is thrown otherwise. As soon
+as all required data is available, a <code>src_tbl</code> object is created per table
+and assigned to the <code>src_env</code>.</p>
+<p>The S3 class <code>src_tbl</code> inherits from <code><a href='https://rdrr.io/pkg/prt/man/new_prt.html'>prt</a></code>, which
+represents a partitioned <code><a href='http://www.fstpackage.org/reference/fst.html'>fst</a></code> file. In addition to the <code>prt</code>
+object, meta data in the form of <code>col_cfg</code> and <code>tbl_cfg</code> is associated with
+a <code>src_tbl</code> object (see <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>). Furthermore, as with <code>src_env</code>,
+sub-classes are added as specified by the source configuration
+<code>class_prefix</code> entry. This allows certain functionality, for example data
+loading, to be adapted to data source-specific requirements.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span>(RICU_SRC_LOAD = <span class='st'>""</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/septic-tank/ricu'>ricu</a></span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span>(envir = <span class='kw'>data</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/exists.html'>exists</a></span>(<span class='st'>"mimic_demo"</span>)
+
+<span class='fu'>attach_src</span>(<span class='st'>"mimic_demo"</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span>(envir = <span class='kw'>data</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/exists.html'>exists</a></span>(<span class='st'>"mimic_demo"</span>)
+
+<span class='kw'>mimic_demo</span>
+
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -249,7 +299,7 @@ the default config directors</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

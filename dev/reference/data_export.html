@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Read and write utilities — write_psv" />
-<meta property="og:description" content="Support for reading from and writing to .psv files as used for the
-Physionet Sepsis Challenge." />
+<meta property="og:description" content="Support for reading from and writing to pipe separated values (.psv)
+files as used for the Physionet Sepsis Challenge." />
 
 
 <meta name="robots" content="noindex">
@@ -130,8 +130,8 @@ Physionet Sepsis Challenge." />
     </div>
 
     <div class="ref-description">
-    <p>Support for reading from and writing to <code>.psv</code> files as used for the
-Physionet Sepsis Challenge.</p>
+    <p>Support for reading from and writing to pipe separated values (<code>.psv</code>)
+files as used for the Physionet Sepsis Challenge.</p>
     </div>
 
     <pre class="usage"><span class='fu'>write_psv</span>(<span class='kw'>x</span>, <span class='kw'>dir</span>, na_rows = <span class='kw'>NULL</span>)
@@ -165,6 +165,14 @@ if <code>NULL</code>, data is written as-is</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Data for the Physionet Sepsis Challenge is distributed as pipe separated
+values (<code>.psv</code>) files, split into separate files per patient ID, containing
+time stamped rows with measured variables as columns. Files are named with
+patient IDs and do not contain any patient identifiers as data. Functions
+<code>read_psv()</code> and <code>write_psv()</code> can be used to read from and write to such
+a data format.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Reyna, M., Josef, C., Jeter, R., Shashikumar, S., Moody, B., Westover, M.
@@ -188,7 +196,7 @@ https://doi.org/10.13026/v64v-d857.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

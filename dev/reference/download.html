@@ -138,7 +138,7 @@ format) and attaching sets up the data for use by the package." />
     <div class="ref-description">
     <p>Making a dataset available to <code>ricu</code> consists of 3 steps: downloading
 (<code>download_src()</code>), importing (<code><a href='import_src.html'>import_src()</a></code>) and attaching
-(<code><a href='new_src_tbl.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
+(<code><a href='attach_src.html'>attach_src()</a></code>). While downloading and importing are one-time procedures,
 attaching of the dataset is repeated every time the package is loaded.
 Briefly, downloading loads the raw dataset from the internet (most likely
 in <code>.csv</code> format), importing consists of some preprocessing to make the
@@ -151,7 +151,7 @@ format) and attaching sets up the data for use by the package.</p>
 <span class='co'># S3 method for src_cfg</span>
 <span class='fu'>download_src</span>(
   <span class='kw'>x</span>,
-  dir = <span class='fu'>src_data_dir</span>(<span class='kw'>x</span>),
+  data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>),
   tables = <span class='kw'>NULL</span>,
   force = <span class='fl'>FALSE</span>,
   user = <span class='kw'>NULL</span>,
@@ -171,7 +171,7 @@ format) and attaching sets up the data for use by the package.</p>
       <td><p>Generic consistency</p></td>
     </tr>
     <tr>
-      <th>dir</th>
+      <th>data_dir</th>
       <td><p>Destination directory where the downloaded data is written to.</p></td>
     </tr>
     <tr>
@@ -236,7 +236,7 @@ source configuration, refer to <code><a href='load_src_cfg.html'>load_src_cfg()<
 <span class='kw'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>dir</span>)
 
-<span class='fu'>download_datasource</span>(<span class='st'>"mimic_demo"</span>, dir = <span class='kw'>dir</span>)
+<span class='fu'>download_datasource</span>(<span class='st'>"mimic_demo"</span>, data_dir = <span class='kw'>dir</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>dir</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>dir</span>, recursive = <span class='fl'>TRUE</span>)
@@ -259,7 +259,7 @@ source configuration, refer to <code><a href='load_src_cfg.html'>load_src_cfg()<
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

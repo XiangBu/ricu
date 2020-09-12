@@ -22,13 +22,13 @@
     <loc>https://septic-tank.github.io/ricu/reference/data_concepts.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/data_env.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/data_export.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/data_items.html</loc>
-  </url>
-  <url>
-    <loc>https://septic-tank.github.io/ricu/reference/data_src.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/data_utils.html</loc>
@@ -77,6 +77,9 @@
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/msg_progress.html</loc>
+  </url>
+  <url>
+    <loc>https://septic-tank.github.io/ricu/reference/ricu-package.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/src_cfg.html</loc>
