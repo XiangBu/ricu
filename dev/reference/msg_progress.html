@@ -82,12 +82,6 @@ be used when signaling messages in callback functions." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -138,7 +132,7 @@ captured printed after progress bar completion. This function is intended to
 be used when signaling messages in callback functions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>msg_progress</span>(<span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>msg_progress</span><span class='op'>(</span><span class='va'>...</span>, envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,18 +141,22 @@ be used when signaling messages in callback functions.</p>
       <th>...</th>
       <td><p>Passed to <code><a href='https://rdrr.io/r/base/message.html'>base::.makeMessage()</a></code></p></td>
     </tr>
+    <tr>
+      <th>envir</th>
+      <td><p>Passed to <code><a href='https://glue.tidyverse.org/reference/glue.html'>glue::glue()</a></code>.</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>)
-</div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='output co'>#&gt; </div><div class='input'>
-<span class='kw'>capt_fun</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"captured: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>conditionMessage</a></span>(<span class='kw'>x</span>))
-}
+    <pre class="examples"><div class='input'><span class='fu'>msg_progress</span><span class='op'>(</span><span class='st'>"Foo"</span>, <span class='st'>"bar"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='input'>
+<span class='va'>capt_fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span><span class='op'>(</span><span class='st'>"captured: "</span>, <span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>conditionMessage</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(<span class='fu'>msg_progress</span>(<span class='st'>"Foo"</span>, <span class='st'>"bar"</span>), msg_progress = <span class='kw'>capt_fun</span>)
-</div><div class='output co'>#&gt; <span class='message'>Foobar</span></div><div class='output co'>#&gt; <span class='message'>captured: </span></div><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span><span class='op'>(</span><span class='fu'>msg_progress</span><span class='op'>(</span><span class='st'>"Foo"</span>, <span class='st'>"bar"</span><span class='op'>)</span>, msg_progress <span class='op'>=</span> <span class='va'>capt_fun</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>captured: Foobar</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

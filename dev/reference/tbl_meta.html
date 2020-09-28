@@ -85,12 +85,6 @@ series related meta data." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -144,31 +138,31 @@ special meaning, as well as query a <code>ts_tbl</code> object regarding its tim
 series related meta data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>id_vars</span>(<span class='kw'>x</span>)
+    <pre class="usage"><span class='fu'>id_vars</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>id_var</span>(<span class='kw'>x</span>)
+<span class='fu'>id_var</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>id_col</span>(<span class='kw'>x</span>)
+<span class='fu'>id_col</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>index_var</span>(<span class='kw'>x</span>)
+<span class='fu'>index_var</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>index_col</span>(<span class='kw'>x</span>)
+<span class='fu'>index_col</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>meta_vars</span>(<span class='kw'>x</span>)
+<span class='fu'>meta_vars</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>data_vars</span>(<span class='kw'>x</span>)
+<span class='fu'>data_vars</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>data_var</span>(<span class='kw'>x</span>)
+<span class='fu'>data_var</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>data_col</span>(<span class='kw'>x</span>)
+<span class='fu'>data_col</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>interval</span>(<span class='kw'>x</span>)
+<span class='fu'>interval</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>time_unit</span>(<span class='kw'>x</span>)
+<span class='fu'>time_unit</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>time_step</span>(<span class='kw'>x</span>)
+<span class='fu'>time_step</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>time_vars</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>time_vars</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -223,30 +217,29 @@ in the unit as returned by <code>time_unit()</code>.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>id_tbl</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>),
-              id_vars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>))
+    <pre class="examples"><div class='input'><span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>id_tbl</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>)</span>, c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>,
+              id_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>id_vars</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt; [1] "a" "b"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span>(<span class='fu'>id_col</span>(<span class='kw'>tbl</span>), error = <span class='fu'>function</span>(<span class='kw'>...</span>) <span class='st'>"no luck"</span>)
-</div><div class='output co'>#&gt; [1] "no luck"</div><div class='input'><span class='fu'>data_vars</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt; [1] "c"</div><div class='input'><span class='fu'>data_col</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt;  [1]  1.7335781  1.4486572  1.5181931 -0.3840073  1.8271252 -0.5514917
-#&gt;  [7] -0.8657535 -0.3438315  1.0628765  0.8130582</div><div class='input'>
-<span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>as_id_tbl</a></span>(<span class='kw'>tbl</span>, id_vars = <span class='st'>"a"</span>)
-<span class='fu'>id_vars</span>(<span class='kw'>tmp</span>)
-</div><div class='output co'>#&gt; [1] "a"</div><div class='input'><span class='fu'>id_col</span>(<span class='kw'>tmp</span>)
+<span class='fu'>id_vars</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "a" "b"</div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span><span class='op'>(</span><span class='fu'>id_col</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>, error <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span> <span class='st'>"no luck"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "no luck"</div><div class='input'><span class='fu'>data_vars</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "c"</div><div class='input'><span class='fu'>data_col</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1]  0.2589025  1.2074691 -0.2694864 -0.6983068 -1.4882559  2.4633691
+#&gt;  [7]  0.5692981 -1.1107009  1.2487550 -0.6526750</div><div class='input'>
+<span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>as_id_tbl</a></span><span class='op'>(</span><span class='va'>tbl</span>, id_vars <span class='op'>=</span> <span class='st'>"a"</span><span class='op'>)</span>
+<span class='fu'>id_vars</span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "a"</div><div class='input'><span class='fu'>id_col</span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] 1 1 1 1 1 2 2 2 2 2</div><div class='input'>
-<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>ts_tbl</a></span>(a = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), b = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>)), c = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
-</div><div class='output co'>#&gt; <span class='message'>In order to automatically determine the index column, exactly one `difftime`</span>
-#&gt; <span class='message'>column is required.</span></div><div class='input'><span class='fu'>index_var</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt; [1] "b"</div><div class='input'><span class='fu'>index_col</span>(<span class='kw'>tbl</span>)
+<span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>ts_tbl</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>, b <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, c <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>index_var</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "b"</div><div class='input'><span class='fu'>index_col</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Time differences in hours
 #&gt;  [1] 1 2 3 4 5 1 2 3 4 5</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>index_var</span>(<span class='kw'>tbl</span>), <span class='fu'>time_vars</span>(<span class='kw'>tbl</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='fu'>index_var</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>, <span class='fu'>time_vars</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'>interval</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt; Time difference of 1 hours</div><div class='input'><span class='fu'>time_unit</span>(<span class='kw'>tbl</span>)
-</div><div class='output co'>#&gt; [1] "hours"</div><div class='input'><span class='fu'>time_step</span>(<span class='kw'>tbl</span>)
+<span class='fu'>interval</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Time difference of 1 hours</div><div class='input'><span class='fu'>time_unit</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "hours"</div><div class='input'><span class='fu'>time_step</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 </div></pre>
   </div>

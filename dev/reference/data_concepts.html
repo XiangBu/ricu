@@ -83,12 +83,6 @@ by parsing a JSON formatted concept dictionary using load_dictionary()." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -140,40 +134,40 @@ constructing <code>concept</code> (and related auxillary) objects either from co
 by parsing a JSON formatted concept dictionary using <code><a href='load_dictionary.html'>load_dictionary()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_cncpt</span>(
-  <span class='kw'>name</span>,
-  <span class='kw'>items</span>,
-  description = <span class='fl'>NA_character_</span>,
-  category = <span class='fl'>NA_character_</span>,
-  aggregate = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  target = <span class='st'>"ts_tbl"</span>,
-  class = <span class='st'>"num_cncpt"</span>
-)
+    <pre class="usage"><span class='fu'>new_cncpt</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>items</span>,
+  description <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  category <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  aggregate <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  target <span class='op'>=</span> <span class='st'>"ts_tbl"</span>,
+  class <span class='op'>=</span> <span class='st'>"num_cncpt"</span>
+<span class='op'>)</span>
 
-<span class='fu'>is_cncpt</span>(<span class='kw'>x</span>)
+<span class='fu'>is_cncpt</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for num_cncpt</span>
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, unit = <span class='kw'>NULL</span>, min = <span class='kw'>NULL</span>, max = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span><span class='op'>(</span><span class='va'>x</span>, unit <span class='op'>=</span> <span class='cn'>NULL</span>, min <span class='op'>=</span> <span class='cn'>NULL</span>, max <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for fct_cncpt</span>
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>levels</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>levels</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for cncpt</span>
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for rec_cncpt</span>
-<span class='fu'>init_cncpt</span>(<span class='kw'>x</span>, callback = <span class='st'>"identity_callback"</span>, interval = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+<span class='fu'>init_cncpt</span><span class='op'>(</span><span class='va'>x</span>, callback <span class='op'>=</span> <span class='st'>"identity_callback"</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>new_concept</span>(<span class='kw'>x</span>)
+<span class='fu'>new_concept</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>concept</span>(<span class='kw'>...</span>)
+<span class='fu'>concept</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>is_concept</span>(<span class='kw'>x</span>)
+<span class='fu'>is_concept</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>as_concept</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>as_concept</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -295,37 +289,37 @@ only possible from <code>list</code> and <code>cncpt</code>, by calling <code>as
 inheritance can be checked using <code>is_concept()</code> or <code>is_cncpt()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span>(<span class='st'>"glu"</span>,
-  <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
-  description = <span class='st'>"glucose"</span>, category = <span class='st'>"chemistry"</span>,
-  unit = <span class='st'>"mg/dL"</span>, min = <span class='fl'>0</span>, max = <span class='fl'>1000</span>
-)
+    <pre class="examples"><div class='input'><span class='va'>gluc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span><span class='op'>(</span><span class='st'>"glu"</span>,
+  <span class='fu'><a href='new_itm.html'>item</a></span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>50809L</span>, <span class='fl'>50931L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+  description <span class='op'>=</span> <span class='st'>"glucose"</span>, category <span class='op'>=</span> <span class='st'>"chemistry"</span>,
+  unit <span class='op'>=</span> <span class='st'>"mg/dL"</span>, min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>1000</span>
+<span class='op'>)</span>
 
-<span class='fu'>is_concept</span>(<span class='kw'>gluc</span>)
+<span class='fu'>is_concept</span><span class='op'>(</span><span class='va'>gluc</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>gluc</span>, <span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='va'>gluc</span>, <span class='fu'><a href='load_dictionary.html'>load_dictionary</a></span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='st'>"glu"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw'>gl1</span> <span class='op'>&lt;-</span> <span class='fu'>new_cncpt</span>(<span class='st'>"glu"</span>,
-  <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
-  description = <span class='st'>"glucose"</span>
-)
+<span class='va'>gl1</span> <span class='op'>&lt;-</span> <span class='fu'>new_cncpt</span><span class='op'>(</span><span class='st'>"glu"</span>,
+  <span class='fu'><a href='new_itm.html'>item</a></span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>50809L</span>, <span class='fl'>50931L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+  description <span class='op'>=</span> <span class='st'>"glucose"</span>
+<span class='op'>)</span>
 
-<span class='fu'>is_cncpt</span>(<span class='kw'>gl1</span>)
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_concept</span>(<span class='kw'>gl1</span>)
+<span class='fu'>is_cncpt</span><span class='op'>(</span><span class='va'>gl1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_concept</span><span class='op'>(</span><span class='va'>gl1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw'>conc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"glu"</span>, <span class='st'>"lact"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50809L</span>, <span class='fl'>50931L</span>))),
-    <span class='fu'><a href='new_itm.html'>item</a></span>(<span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fl'>50813L</span>)
-  ),
-  description = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"glucose"</span>, <span class='st'>"lactate"</span>)
-)
+<span class='va'>conc</span> <span class='op'>&lt;-</span> <span class='fu'>concept</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"glu"</span>, <span class='st'>"lact"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+    <span class='fu'><a href='new_itm.html'>item</a></span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>50809L</span>, <span class='fl'>50931L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+    <span class='fu'><a href='new_itm.html'>item</a></span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='st'>"labevents"</span>, <span class='st'>"itemid"</span>, <span class='fl'>50813L</span><span class='op'>)</span>
+  <span class='op'>)</span>,
+  description <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"glucose"</span>, <span class='st'>"lactate"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='kw'>conc</span>
+<span class='va'>conc</span>
 </div><div class='output co'>#&gt; &lt;concept[2]&gt;
 #&gt;                    glu                   lact 
 #&gt; glucose &lt;num_cncpt[1]&gt; lactate &lt;num_cncpt[1]&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>as_concept</span>(<span class='kw'>gl1</span>), <span class='kw'>conc</span>[<span class='fl'>1L</span>])
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='fu'>as_concept</span><span class='op'>(</span><span class='va'>gl1</span><span class='op'>)</span>, <span class='va'>conc</span><span class='op'>[</span><span class='fl'>1L</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 </div></pre>
   </div>

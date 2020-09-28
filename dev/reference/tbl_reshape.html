@@ -79,12 +79,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -132,25 +126,25 @@
     <p>Utilities for reshaping <code>id_tbl</code> and <code>ts_tbl</code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.cbind.id_tbl</span>(
-  <span class='kw'>...</span>,
-  keep.rownames = <span class='fl'>FALSE</span>,
-  check.names = <span class='fl'>FALSE</span>,
-  key = <span class='kw'>NULL</span>,
-  stringsAsFactors = <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>.cbind.id_tbl</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  keep.rownames <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check.names <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  key <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>.rbind.id_tbl</span>(<span class='kw'>...</span>, use.names = <span class='fl'>TRUE</span>, fill = <span class='fl'>FALSE</span>, idcol = <span class='kw'>NULL</span>)
-
-<span class='co'># S3 method for id_tbl</span>
-<span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, by = <span class='kw'>NULL</span>, by.x = <span class='kw'>NULL</span>, by.y = <span class='kw'>NULL</span>, <span class='kw'>...</span>)
+<span class='fu'>.rbind.id_tbl</span><span class='op'>(</span><span class='va'>...</span>, use.names <span class='op'>=</span> <span class='cn'>TRUE</span>, fill <span class='op'>=</span> <span class='cn'>FALSE</span>, idcol <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for id_tbl</span>
-<span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, by <span class='op'>=</span> <span class='cn'>NULL</span>, by.x <span class='op'>=</span> <span class='cn'>NULL</span>, by.y <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>rbind_lst</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='co'># S3 method for id_tbl</span>
+<span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>unmerge</span>(<span class='kw'>x</span>, col_groups = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='id_vars.html'>data_vars</a></span>(<span class='kw'>x</span>)), by = <span class='fu'><a href='id_vars.html'>meta_vars</a></span>(<span class='kw'>x</span>), na_rm = <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>rbind_lst</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>unmerge</span><span class='op'>(</span><span class='va'>x</span>, col_groups <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='id_vars.html'>data_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>, by <span class='op'>=</span> <span class='fu'><a href='id_vars.html'>meta_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, na_rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

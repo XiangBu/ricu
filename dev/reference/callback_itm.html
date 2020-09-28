@@ -88,12 +88,6 @@ factories such as transform_fun(), apply_map() or convert_unit()." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -150,15 +144,15 @@ Item callback functions can be specified by their name or using function
 factories such as <code>transform_fun()</code>, <code>apply_map()</code> or <code>convert_unit()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transform_fun</span>(<span class='kw'>fun</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>transform_fun</span><span class='op'>(</span><span class='va'>fun</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>binary_op</span>(<span class='kw'>op</span>, <span class='kw'>y</span>)
+<span class='fu'>binary_op</span><span class='op'>(</span><span class='va'>op</span>, <span class='va'>y</span><span class='op'>)</span>
 
-<span class='fu'>comp_na</span>(<span class='kw'>op</span>, <span class='kw'>y</span>)
+<span class='fu'>comp_na</span><span class='op'>(</span><span class='va'>op</span>, <span class='va'>y</span><span class='op'>)</span>
 
-<span class='fu'>apply_map</span>(<span class='kw'>map</span>)
+<span class='fu'>apply_map</span><span class='op'>(</span><span class='va'>map</span><span class='op'>)</span>
 
-<span class='fu'>convert_unit</span>(<span class='kw'>rgx</span>, <span class='kw'>fun</span>, <span class='kw'>new</span>, ignore_case = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>convert_unit</span><span class='op'>(</span><span class='va'>rgx</span>, <span class='va'>fun</span>, <span class='va'>new</span>, ignore_case <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,19 +199,19 @@ their current unit of measurement</p></td>
 name. For example in eICU, age is available as character vector due to
 ages 90 and above being represented by the string "&gt; 89". A function such
 as the following turns this into a numeric vector, replacing occurrences of
-"&gt; 89" by the number 90.</p><pre><span class='kw'>eicu_age</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>, <span class='kw'>val_var</span>, <span class='kw'>...</span>) {
-  <span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set</a></span>(
-    <span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set</a></span>(<span class='kw'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='kw'>x</span>[[<span class='kw'>val_var</span>]] <span class='op'>==</span> <span class='st'>"&gt; 89"</span>), j = <span class='kw'>val_var</span>,
-                    value = <span class='fl'>90</span>),
-    j = <span class='kw'>val_var</span>,
-    value = <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='kw'>x</span>[[<span class='kw'>val_var</span>]])
-  )
-}
+"&gt; 89" by the number 90.</p><pre><span class='va'>eicu_age</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>val_var</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set</a></span><span class='op'>(</span>
+    <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[[</span><span class='va'>val_var</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>==</span> <span class='st'>"&gt; 89"</span><span class='op'>)</span>, j <span class='op'>=</span> <span class='va'>val_var</span>,
+                    value <span class='op'>=</span> <span class='fl'>90</span><span class='op'>)</span>,
+    j <span class='op'>=</span> <span class='va'>val_var</span>,
+    value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[[</span><span class='va'>val_var</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+  <span class='op'>)</span>
+<span class='op'>}</span>
 </pre>
 
 <p>This function then is specified as item callback function for items
-corresponding to eICU data sources of the <code>age</code> concept as</p><pre><span class='fu'><a href='new_itm.html'>item</a></span>(src = <span class='st'>"eicu_demo"</span>, table = <span class='st'>"patient"</span>, val_var = <span class='st'>"age"</span>,
-     callback = <span class='st'>"eicu_age"</span>, class = <span class='st'>"col_itm"</span>)
+corresponding to eICU data sources of the <code>age</code> concept as</p><pre><span class='fu'><a href='new_itm.html'>item</a></span><span class='op'>(</span>src <span class='op'>=</span> <span class='st'>"eicu_demo"</span>, table <span class='op'>=</span> <span class='st'>"patient"</span>, val_var <span class='op'>=</span> <span class='st'>"age"</span>,
+     callback <span class='op'>=</span> <span class='st'>"eicu_age"</span>, class <span class='op'>=</span> <span class='st'>"col_itm"</span><span class='op'>)</span>
 </pre>
 
 <p>The string passed as <code>callback</code> argument is evaluated, meaning that an
@@ -242,11 +236,10 @@ signal a message without disrupting the current loading status, see
 <code><a href='msg_progress.html'>msg_progress()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>ts_tbl</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each = <span class='fl'>5</span>), y = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span>)), z = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
-</div><div class='output co'>#&gt; <span class='message'>In order to automatically determine the index column, exactly one `difftime`</span>
-#&gt; <span class='message'>column is required.</span></div><div class='input'>
-<span class='kw'>subtract_3</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span>(<span class='fu'>binary_op</span>(<span class='kw'>`-`</span>, <span class='fl'>3</span>))
-<span class='fu'>subtract_3</span>(<span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span>(<span class='kw'>dat</span>), val_var = <span class='st'>"z"</span>)
+    <pre class="examples"><div class='input'><span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='id_tbl.html'>ts_tbl</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, z <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+
+<span class='va'>subtract_3</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span><span class='op'>(</span><span class='fu'>binary_op</span><span class='op'>(</span><span class='va'>`-`</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>subtract_3</span><span class='op'>(</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>, val_var <span class='op'>=</span> <span class='st'>"z"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A `ts_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>
@@ -262,8 +255,8 @@ signal a message without disrupting the current loading status, see
 #&gt; </span><span style='color: #555555;'>8</span><span>      2 3 hours     5
 #&gt; </span><span style='color: #555555;'>9</span><span>      2 4 hours     6
 #&gt; </span><span style='color: #555555;'>10</span><span>     2 5 hours     7</div><div class='input'>
-<span class='kw'>gte_4</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span>(<span class='fu'>comp_na</span>(<span class='kw'>`&gt;=`</span>, <span class='fl'>4</span>))
-<span class='fu'>gte_4</span>(<span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span>(<span class='kw'>dat</span>), val_var = <span class='st'>"z"</span>)
+<span class='va'>gte_4</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span><span class='op'>(</span><span class='fu'>comp_na</span><span class='op'>(</span><span class='va'>`&gt;=`</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>gte_4</span><span class='op'>(</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>, val_var <span class='op'>=</span> <span class='st'>"z"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>
@@ -279,9 +272,9 @@ signal a message without disrupting the current loading status, see
 #&gt; </span><span style='color: #555555;'>8</span><span>      2 3 hours TRUE 
 #&gt; </span><span style='color: #555555;'>9</span><span>      2 4 hours TRUE 
 #&gt; </span><span style='color: #555555;'>10</span><span>     2 5 hours TRUE </div><div class='input'>
-<span class='kw'>map_letters</span> <span class='op'>&lt;-</span> <span class='fu'>apply_map</span>(<span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span>(<span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span>], <span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span>))
-<span class='kw'>res</span> <span class='op'>&lt;-</span> <span class='fu'>map_letters</span>(<span class='kw'>data.table</span>::<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span>(<span class='kw'>dat</span>), val_var = <span class='st'>"z"</span>)
-<span class='kw'>res</span>
+<span class='va'>map_letters</span> <span class='op'>&lt;-</span> <span class='fu'>apply_map</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>]</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>map_letters</span><span class='op'>(</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>, val_var <span class='op'>=</span> <span class='st'>"z"</span><span class='op'>)</span>
+<span class='va'>res</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>
@@ -297,8 +290,8 @@ signal a message without disrupting the current loading status, see
 #&gt; </span><span style='color: #555555;'>8</span><span>      2 3 hours h    
 #&gt; </span><span style='color: #555555;'>9</span><span>      2 4 hours i    
 #&gt; </span><span style='color: #555555;'>10</span><span>     2 5 hours </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'>
-<span class='kw'>not_b</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span>(<span class='fu'>comp_na</span>(<span class='kw'>`!=`</span>, <span class='st'>"b"</span>))
-<span class='fu'>not_b</span>(<span class='kw'>res</span>, val_var = <span class='st'>"z"</span>)
+<span class='va'>not_b</span> <span class='op'>&lt;-</span> <span class='fu'>transform_fun</span><span class='op'>(</span><span class='fu'>comp_na</span><span class='op'>(</span><span class='va'>`!=`</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>not_b</span><span class='op'>(</span><span class='va'>res</span>, val_var <span class='op'>=</span> <span class='st'>"z"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>

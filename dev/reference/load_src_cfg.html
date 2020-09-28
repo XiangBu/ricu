@@ -87,12 +87,6 @@ types." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -148,7 +142,7 @@ dataset which includes file names and column names alongside their data
 types.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src_cfg</span>(src = <span class='kw'>NULL</span>, name = <span class='st'>"data-sources"</span>, cfg_dirs = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>load_src_cfg</span><span class='op'>(</span>src <span class='op'>=</span> <span class='cn'>NULL</span>, name <span class='op'>=</span> <span class='st'>"data-sources"</span>, cfg_dirs <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,7 +171,7 @@ argument, followed by the directory specified by the environment variable
 directory. If files with matching names are found in multiple places they
 are concatenated such that in cases of name clashes. the earlier hits take
 precedent over the later ones. The following JSON code blocks show excerpts
-of the config file available at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"data-sources.json"</span>, package = <span class='st'>"ricu"</span>)
+of the config file available at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"data-sources.json"</span>, package <span class='op'>=</span> <span class='st'>"ricu"</span><span class='op'>)</span>
 </pre>
 
 <p>A data source configuration entry in a config file starts with a name,
@@ -302,7 +296,7 @@ consequently cannot be used for data import (see <code><a href='import_src.html'
 sense, table config entries <code>files</code> and <code>cols</code> are optional as well with
 the restriction that the data source has to be already available in <code>.fst</code>
 format</p>
-<p>An example for such a slimmed down config file is available at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"demo-sources.json"</span>, package = <span class='st'>"ricu"</span>)
+<p>An example for such a slimmed down config file is available at</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"demo-sources.json"</span>, package <span class='op'>=</span> <span class='st'>"ricu"</span><span class='op'>)</span>
 </pre>
 
 <p>The <code>class_prefix</code> entry in a data source configuration is used create sub-
@@ -322,12 +316,12 @@ Phsionet, the <code><a href='download_src.html'>download_src()</a></code> generi
 class.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>cfg</span> <span class='op'>&lt;-</span> <span class='fu'>load_src_cfg</span>(<span class='st'>"mimic_demo"</span>)
-</div><div class='output co'>#&gt; <span class='message'>Invalid ID config for IDs : table name needed due to start/end args</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='output co'>#&gt; <span class='message'>expecting the index variable to be among the time variables</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>cfg</span>, max.level = <span class='fl'>1L</span>)
+    <pre class="examples"><div class='input'><span class='va'>cfg</span> <span class='op'>&lt;-</span> <span class='fu'>load_src_cfg</span><span class='op'>(</span><span class='st'>"mimic_demo"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>cfg</span>, max.level <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 1
 #&gt;  $ mimic_demo:List of 6
-#&gt;   ..- attr(*, "class")= chr [1:3] "mimic_demo_cfg" "mimic_cfg" "src_cfg"</div><div class='input'><span class='kw'>cfg</span> <span class='op'>&lt;-</span> <span class='kw'>cfg</span>[[<span class='st'>"mimic_demo"</span>]]
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>cfg</span>, max.level = <span class='fl'>1L</span>)
+#&gt;   ..- attr(*, "class")= chr [1:3] "mimic_demo_cfg" "mimic_cfg" "src_cfg"</div><div class='input'><span class='va'>cfg</span> <span class='op'>&lt;-</span> <span class='va'>cfg</span><span class='op'>[[</span><span class='st'>"mimic_demo"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>cfg</span>, max.level <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 6
 #&gt;  $ name   : chr "mimic_demo"
 #&gt;  $ url    : chr "https://physionet.org/files/mimiciii-demo/1.4"
@@ -336,11 +330,11 @@ class.</p>
 #&gt;  $ col_cfg:List of 25
 #&gt;  $ tbl_cfg:List of 25
 #&gt;  - attr(*, "class")= chr [1:3] "mimic_demo_cfg" "mimic_cfg" "src_cfg"</div><div class='input'>
-<span class='kw'>cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_src_cfg.html'>as_col_cfg</a></span>(<span class='kw'>cfg</span>)
-<span class='fu'><a href='id_vars.html'>index_var</a></span>(<span class='kw'>cols</span>[[<span class='st'>"chartevents"</span>]])
-</div><div class='output co'>#&gt; [1] "charttime"</div><div class='input'><span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>cols</span>[[<span class='st'>"chartevents"</span>]])
+<span class='va'>cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='new_src_cfg.html'>as_col_cfg</a></span><span class='op'>(</span><span class='va'>cfg</span><span class='op'>)</span>
+<span class='fu'><a href='id_vars.html'>index_var</a></span><span class='op'>(</span><span class='va'>cols</span><span class='op'>[[</span><span class='st'>"chartevents"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "charttime"</div><div class='input'><span class='fu'><a href='id_vars.html'>time_vars</a></span><span class='op'>(</span><span class='va'>cols</span><span class='op'>[[</span><span class='st'>"chartevents"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "charttime" "storetime"</div><div class='input'>
-<span class='fu'><a href='new_src_cfg.html'>as_id_cfg</a></span>(<span class='kw'>cfg</span>)
+<span class='fu'><a href='new_src_cfg.html'>as_id_cfg</a></span><span class='op'>(</span><span class='va'>cfg</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;mimic_ids{mimic_demo: patient &lt; hadm &lt; icustay}[3]&gt;
 #&gt;      patient         hadm      icustay 
 #&gt; `subject_id`    `hadm_id` `icustay_id` </div><div class='input'>

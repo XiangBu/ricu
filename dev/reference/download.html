@@ -86,12 +86,6 @@ format) and attaching sets up the data for use by the package." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -146,18 +140,18 @@ data available more efficiently (by converting it to <code><a href='http://www.f
 format) and attaching sets up the data for use by the package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>download_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>download_src</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for src_cfg</span>
-<span class='fu'>download_src</span>(
-  <span class='kw'>x</span>,
-  data_dir = <span class='fu'><a href='data_dir.html'>src_data_dir</a></span>(<span class='kw'>x</span>),
-  tables = <span class='kw'>NULL</span>,
-  force = <span class='fl'>FALSE</span>,
-  user = <span class='kw'>NULL</span>,
-  pass = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'>download_src</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  data_dir <span class='op'>=</span> <span class='fu'><a href='data_dir.html'>src_data_dir</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  tables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  user <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pass <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,10 +207,10 @@ verified using <code><a href='https://rdrr.io/pkg/openssl/man/hash.html'>openssl
 <p>Demo datasets
 <a href='https://physionet.org/content/mimiciii-demo/1.4/'>MIMIC-III demo</a> and
 <a href='https://physionet.org/content/eicu-crd-demo/2.0/'>eiCU demo</a> can either be
-installed as R packages directly by running</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mimic.demo"</span>, <span class='st'>"eicu.demo"</span>),
-  repos = <span class='st'>"https://septic-tank.github.io/physionet-demo"</span>
-)
+installed as R packages directly by running</p><pre><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mimic.demo"</span>, <span class='st'>"eicu.demo"</span><span class='op'>)</span>,
+  repos <span class='op'>=</span> <span class='st'>"https://septic-tank.github.io/physionet-demo"</span>
+<span class='op'>)</span>
 </pre>
 
 <p>or downloaded and imported using <code>download_src()</code> and <code><a href='import_src.html'>import_src()</a></code>.
@@ -231,17 +225,17 @@ inherit from or can be coerced to <code>src_cfg</code>. For more information on 
 source configuration, refer to <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='kw'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>dir</span>)
+<span class='va'>dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='va'>dir</span><span class='op'>)</span>
 
-<span class='fu'>download_datasource</span>(<span class='st'>"mimic_demo"</span>, data_dir = <span class='kw'>dir</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>dir</span>)
+<span class='fu'>download_datasource</span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, data_dir <span class='op'>=</span> <span class='va'>dir</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='va'>dir</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>dir</span>, recursive = <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>dir</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-}
+<span class='op'>}</span>
 
 </div></pre>
   </div>

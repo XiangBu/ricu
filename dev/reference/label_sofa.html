@@ -80,12 +80,6 @@ assessment tool used to track a patient's well-being in an ICU." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -134,38 +128,38 @@ assessment tool used to track a patient's well-being in an ICU." />
 assessment tool used to track a patient's well-being in an ICU.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sofa_score</span>(<span class='kw'>...</span>, interval = <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>sofa_score</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>sofa_window</span>(
-  <span class='kw'>tbl</span>,
-  pafi_win_fun = <span class='kw'>min_or_na</span>,
-  plt_win_fun = <span class='kw'>min_or_na</span>,
-  bili_win_fun = <span class='kw'>max_or_na</span>,
-  map_win_fun = <span class='kw'>min_or_na</span>,
-  dopa_win_fun = <span class='kw'>max_or_na</span>,
-  norepi_win_fun = <span class='kw'>max_or_na</span>,
-  dobu_win_fun = <span class='kw'>max_or_na</span>,
-  epi_win_fun = <span class='kw'>max_or_na</span>,
-  gcs_win_fun = <span class='kw'>min_or_na</span>,
-  crea_win_fun = <span class='kw'>max_or_na</span>,
-  urine_win_fun = <span class='kw'>min_or_na</span>,
-  explicit_wins = <span class='fl'>FALSE</span>,
-  worst_win_length = <span class='fu'><a href='secs.html'>hours</a></span>(<span class='fl'>24L</span>)
-)
+<span class='fu'>sofa_window</span><span class='op'>(</span>
+  <span class='va'>tbl</span>,
+  pafi_win_fun <span class='op'>=</span> <span class='va'>min_or_na</span>,
+  plt_win_fun <span class='op'>=</span> <span class='va'>min_or_na</span>,
+  bili_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  map_win_fun <span class='op'>=</span> <span class='va'>min_or_na</span>,
+  dopa_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  norepi_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  dobu_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  epi_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  gcs_win_fun <span class='op'>=</span> <span class='va'>min_or_na</span>,
+  crea_win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
+  urine_win_fun <span class='op'>=</span> <span class='va'>min_or_na</span>,
+  explicit_wins <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  worst_win_length <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>24L</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>sofa_compute</span>(
-  <span class='kw'>tbl</span>,
-  na_val = <span class='fl'>0L</span>,
-  na_val_resp = <span class='kw'>na_val</span>,
-  na_val_plt = <span class='kw'>na_val</span>,
-  na_val_liver = <span class='kw'>na_val</span>,
-  na_val_cardio = <span class='kw'>na_val</span>,
-  na_val_cns = <span class='kw'>na_val</span>,
-  na_val_renal = <span class='kw'>na_val</span>,
-  impute_fun = <span class='kw'>NULL</span>,
-  keep_components = <span class='fl'>FALSE</span>,
-  by_ref = <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>sofa_compute</span><span class='op'>(</span>
+  <span class='va'>tbl</span>,
+  na_val <span class='op'>=</span> <span class='fl'>0L</span>,
+  na_val_resp <span class='op'>=</span> <span class='va'>na_val</span>,
+  na_val_plt <span class='op'>=</span> <span class='va'>na_val</span>,
+  na_val_liver <span class='op'>=</span> <span class='va'>na_val</span>,
+  na_val_cardio <span class='op'>=</span> <span class='va'>na_val</span>,
+  na_val_cns <span class='op'>=</span> <span class='va'>na_val</span>,
+  na_val_renal <span class='op'>=</span> <span class='va'>na_val</span>,
+  impute_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  keep_components <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  by_ref <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

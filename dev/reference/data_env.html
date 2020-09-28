@@ -87,12 +87,6 @@ the described datasets are all publicly available." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -148,7 +142,7 @@ gained by applying for an account with <a href='https://physionet.org/register/'
 the described datasets are all publicly available.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>data</span></pre>
+    <pre class="usage"><span class='va'>data</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -167,7 +161,7 @@ can be loaded into memory.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Setting up a dataset for use with <code>ricu</code> requires a configuration object.
-For the included datasets, configuration can be loaded from</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"data-sources.json"</span>, package = <span class='st'>"ricu"</span>)
+For the included datasets, configuration can be loaded from</p><pre><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"config"</span>, <span class='st'>"data-sources.json"</span>, package <span class='op'>=</span> <span class='st'>"ricu"</span><span class='op'>)</span>
 </pre>
 
 <p>by calling <code><a href='load_src_cfg.html'>load_src_cfg()</a></code> and for dataset that are external to <code>ricu</code>,
@@ -186,9 +180,8 @@ pages.</p>
 <p>A dataset that has been successfully made available can interavtively be
 expored by typing its name into the console and individual tables can be
 inspected using the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> function. For example for the MIMIC-III demo
-dataset and the <code>icustays</code> table, this gives<div class="r"></p><pre><span class='kw'>mimic_demo</span>
-</pre><p></div></p><pre><span class='co'>## Cannot update read-only data source `mimic_demo`</span>
-</pre><pre><span class='co'>## &lt;mimic_demo_env[25]&gt;</span>
+dataset and the <code>icustays</code> table, this gives<div class="r"></p><pre><span class='va'>mimic_demo</span>
+</pre><p></div></p><pre><span class='co'>## &lt;mimic_demo_env[25]&gt;</span>
 <span class='co'>##           icustays     procedures_icd              d_cpt            d_items </span>
 <span class='co'>##         [136 ✖ 12]          [506 ✖ 5]          [134 ✖ 9]      [12,487 ✖ 10] </span>
 <span class='co'>##      diagnoses_icd     datetimeevents        chartevents         admissions </span>
@@ -203,9 +196,8 @@ dataset and the <code>icustays</code> table, this gives<div class="r"></p><pre><
 <span class='co'>##          [100 ✖ 8]       [76,074 ✖ 9]        [3,882 ✖ 4]          [163 ✖ 6] </span>
 <span class='co'>##     inputevents_mv </span>
 <span class='co'>##      [13,224 ✖ 31]</span>
-</pre><p><div class="r"></p><pre><span class='kw'>mimic_demo</span><span class='op'>$</span><span class='kw'>icustays</span>
-</pre><p></div></p><pre><span class='co'>## Cannot update read-only data source `mimic_demo`</span>
-</pre><pre><span class='co'>## # &lt;mimic_tbl&gt;: [136 ✖ 12]</span>
+</pre><p><div class="r"></p><pre><span class='va'>mimic_demo</span><span class='op'>$</span><span class='va'>icustays</span>
+</pre><p></div></p><pre><span class='co'>## # &lt;mimic_tbl&gt;: [136 ✖ 12]</span>
 <span class='co'>## # ID options:  subject_id (patient) &lt; hadm_id (hadm) &lt; icustay_id (icustay)</span>
 <span class='co'>## # Defaults:    intime (index), last_careunit (value)</span>
 <span class='co'>## # Time vars:   intime, outtime</span>
@@ -234,9 +226,8 @@ tables into memory an expensive operation. Table subsets loaded into
 memory are represented as <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code> objects.
 Extending the above example, if only ICU stays corresponding to the patient
 with <code>subject_id == 10124</code> are of interest, the respective data can be
-loaded as<div class="r"></p><pre><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='kw'>mimic_demo</span><span class='op'>$</span><span class='kw'>icustays</span>, <span class='kw'>subject_id</span> <span class='op'>==</span> <span class='fl'>10124</span>)
-</pre><p></div></p><pre><span class='co'>## Cannot update read-only data source `mimic_demo`</span>
-</pre><pre><span class='co'>##    row_id subject_id hadm_id icustay_id dbsource first_careunit last_careunit</span>
+loaded as<div class="r"></p><pre><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>mimic_demo</span><span class='op'>$</span><span class='va'>icustays</span>, <span class='va'>subject_id</span> <span class='op'>==</span> <span class='fl'>10124</span><span class='op'>)</span>
+</pre><p></div></p><pre><span class='co'>##    row_id subject_id hadm_id icustay_id dbsource first_careunit last_careunit</span>
 <span class='co'>## 1:  12863      10124  182664     261764  carevue           MICU          MICU</span>
 <span class='co'>## 2:  12864      10124  170883     222779  carevue           MICU          MICU</span>
 <span class='co'>## 3:  12865      10124  170883     295043  carevue            CCU           CCU</span>

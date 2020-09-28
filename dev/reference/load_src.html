@@ -82,12 +82,6 @@ Functions up the chain, are described in load_id()." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -138,48 +132,48 @@ lowest level, <code>load_scr</code> is called, followed by <code>load_difftime()
 Functions up the chain, are described in <code><a href='load_id.html'>load_id()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>load_src</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for src_tbl</span>
-<span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>rows</span>, cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>), <span class='kw'>...</span>)
+<span class='fu'>load_src</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>rows</span>, cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>load_src</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)
+<span class='fu'>load_src</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>src</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mimic_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>load_difftime</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>rows</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  id_hint <span class='op'>=</span> <span class='fu'><a href='id_vars.html'>id_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  time_vars <span class='op'>=</span> <span class='fu'>ricu</span><span class='fu'>::</span><span class='fu'><a href='id_vars.html'>time_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for eicu_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>load_difftime</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>rows</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  id_hint <span class='op'>=</span> <span class='fu'><a href='id_vars.html'>id_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  time_vars <span class='op'>=</span> <span class='fu'>ricu</span><span class='fu'>::</span><span class='fu'><a href='id_vars.html'>time_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for hirid_tbl</span>
-<span class='fu'>load_difftime</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>rows</span>,
-  cols = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>x</span>),
-  id_hint = <span class='fu'><a href='id_vars.html'>id_vars</a></span>(<span class='kw'>x</span>),
-  time_vars = <span class='kw'>ricu</span>::<span class='fu'><a href='id_vars.html'>time_vars</a></span>(<span class='kw'>x</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>load_difftime</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>rows</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  id_hint <span class='op'>=</span> <span class='fu'><a href='id_vars.html'>id_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  time_vars <span class='op'>=</span> <span class='fu'>ricu</span><span class='fu'>::</span><span class='fu'><a href='id_vars.html'>time_vars</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>load_difftime</span>(<span class='kw'>x</span>, <span class='kw'>src</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>src</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,11 +215,11 @@ timestamps and thus returned as <code><a href='https://rdrr.io/r/base/difftime.h
 subset of rows/columns from a tabular data source. While the column
 specification is provided as character vector of column names, the row
 subsetting involves non-standard evaluation (NSE). Data-sets that are
-included with <code>ricu</code> are represented by <code><a href='https://rdrr.io/pkg/prt/man/new_prt.html'>prt</a></code> objects,
+included with <code>ricu</code> are represented by <code><a href='https://nbenn.github.io/prt/reference/new_prt.html'>prt</a></code> objects,
 which use <code><a href='https://rlang.r-lib.org/reference/eval_tidy.html'>rlang::eval_tidy()</a></code> to evaluate NSE expressions. Furthermore,
 <code>prt</code> objects potentially represent tabular data split into partitions and
 row-subsetting expressions are evaluated per partition (see the <code>part_safe</code>
-flag in <code><a href='https://rdrr.io/pkg/prt/man/nse.html'>prt::subset.prt()</a></code>). The return value of <code>load_src()</code> is expected
+flag in <code><a href='https://nbenn.github.io/prt/reference/nse.html'>prt::subset.prt()</a></code>). The return value of <code>load_src()</code> is expected
 to be of type <code>data.table</code>.</p>
 <p>Timestamps are represented differently among the included data sources:
 while MIMIC-III and HiRID use absolute date/times, eICU provides temporal
@@ -252,10 +246,10 @@ the highest cardinality (among the available ones). Utilities such as
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>tbl</span> <span class='op'>&lt;-</span> <span class='kw'>mimic_demo</span><span class='op'>$</span><span class='kw'>labevents</span>
-</div><div class='output co'>#&gt; <span class='message'>Cannot update read-only data source `mimic_demo`</span></div><div class='input'><span class='kw'>col</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"charttime"</span>, <span class='st'>"value"</span>)
+<span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='va'>mimic_demo</span><span class='op'>$</span><span class='va'>labevents</span>
+<span class='va'>col</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"charttime"</span>, <span class='st'>"value"</span><span class='op'>)</span>
 
-<span class='fu'>load_src</span>(<span class='kw'>tbl</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>)
+<span class='fu'>load_src</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;        row_id subject_id hadm_id itemid           charttime value valuenum
 #&gt;   1:  6245910      10006      NA  50809 2165-02-22 11:36:00    77       77
 #&gt;   2:  6250050      10019  177759  50809 2163-05-14 20:07:00   146      146
@@ -280,13 +274,12 @@ the highest cardinality (among the available ones). Utilities such as
 #&gt; 281:    mg/dL abnormal
 #&gt; 282:    mg/dL abnormal
 #&gt; 283:    mg/dL     &lt;NA&gt;</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(
-  <span class='fu'>load_src</span>(<span class='st'>"labevents"</span>, <span class='st'>"mimic_demo"</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, cols = <span class='kw'>col</span>)
-)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span>
+  <span class='fu'>load_src</span><span class='op'>(</span><span class='st'>"labevents"</span>, <span class='st'>"mimic_demo"</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, cols <span class='op'>=</span> <span class='va'>col</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "charttime" "value"    </div><div class='input'>
-<span class='fu'>load_difftime</span>(<span class='kw'>tbl</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>)
-</div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 276 ✖ 9</span><span>
+<span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 276 ✖ 9</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:      `hadm_id`</span><span>
 #&gt;     hadm_id   row_id subject_id itemid charttime value valuenum valueuom flag   
 #&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
@@ -302,19 +295,17 @@ the highest cardinality (among the available ones). Utilities such as
 #&gt; </span><span style='color: #555555;'>275</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395  6</span><span style='text-decoration: underline;'>251</span><span>577      </span><span style='text-decoration: underline;'>10</span><span>027  </span><span style='text-decoration: underline;'>50</span><span>809 8270 mins 58          58 mg/dL    abnorm…
 #&gt; </span><span style='color: #555555;'>276</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395  6</span><span style='text-decoration: underline;'>251</span><span>586      </span><span style='text-decoration: underline;'>10</span><span>027  </span><span style='text-decoration: underline;'>50</span><span>809 8538 mins 88          88 mg/dL    </span><span style='color: #BB0000;'>NA</span><span>     
 #&gt; </span><span style='color: #555555;'># … with 266 more rows</span><span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(
-  <span class='fu'>load_difftime</span>(<span class='kw'>tbl</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, <span class='kw'>col</span>)
-)
-</div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; [1] "hadm_id"   "charttime" "value"    </div><div class='input'>
-<span class='fu'><a href='id_vars.html'>id_vars</a></span>(
-  <span class='fu'>load_difftime</span>(<span class='kw'>tbl</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, id_hint = <span class='st'>"icustay_id"</span>)
-)
-</div><div class='output co'>#&gt; <span class='message'>No overlap between configured id var options and available columns for table</span>
-#&gt; <span class='message'>`labevents` in mimic_demo</span></div><div class='output co'>#&gt; [1] "hadm_id"</div><div class='input'>
-<span class='fu'><a href='id_vars.html'>id_vars</a></span>(
-  <span class='fu'>load_difftime</span>(<span class='kw'>tbl</span>, <span class='kw'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, id_hint = <span class='st'>"subject_id"</span>)
-)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span>
+  <span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, <span class='va'>col</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "hadm_id"   "charttime" "value"    </div><div class='input'>
+<span class='fu'><a href='id_vars.html'>id_vars</a></span><span class='op'>(</span>
+  <span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, id_hint <span class='op'>=</span> <span class='st'>"icustay_id"</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "hadm_id"</div><div class='input'>
+<span class='fu'><a href='id_vars.html'>id_vars</a></span><span class='op'>(</span>
+  <span class='fu'>load_difftime</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, id_hint <span class='op'>=</span> <span class='st'>"subject_id"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "subject_id"</div><div class='input'>
 </div></span></pre>
   </div>

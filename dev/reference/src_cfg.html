@@ -89,12 +89,6 @@ objects are provided." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -152,65 +146,65 @@ functions, as well as functions to extract pieces of information from these
 objects are provided.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_src_cfg</span>(<span class='kw'>name</span>, <span class='kw'>id_cfg</span>, <span class='kw'>col_cfg</span>, tbl_cfg = <span class='kw'>NULL</span>, <span class='kw'>...</span>, class_prefix = <span class='kw'>name</span>)
+    <pre class="usage"><span class='fu'>new_src_cfg</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>id_cfg</span>, <span class='va'>col_cfg</span>, tbl_cfg <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, class_prefix <span class='op'>=</span> <span class='va'>name</span><span class='op'>)</span>
 
-<span class='fu'>new_id_cfg</span>(
-  <span class='kw'>name</span>,
-  <span class='kw'>src</span>,
-  <span class='kw'>id</span>,
-  <span class='kw'>pos</span>,
-  start = <span class='fl'>NA_character_</span>,
-  end = <span class='fl'>NA_character_</span>,
-  table = <span class='fl'>NA_character_</span>,
-  class_prefix = <span class='kw'>src</span>
-)
+<span class='fu'>new_id_cfg</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>src</span>,
+  <span class='va'>id</span>,
+  <span class='va'>pos</span>,
+  start <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  end <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  table <span class='op'>=</span> <span class='cn'>NA_character_</span>,
+  class_prefix <span class='op'>=</span> <span class='va'>src</span>
+<span class='op'>)</span>
 
-<span class='fu'>new_col_cfg</span>(
-  <span class='kw'>table</span>,
-  <span class='kw'>src</span>,
-  id_var = <span class='kw'>NULL</span>,
-  index_var = <span class='kw'>NULL</span>,
-  val_var = <span class='kw'>NULL</span>,
-  unit_var = <span class='kw'>NULL</span>,
-  time_vars = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  class_prefix = <span class='kw'>src</span>
-)
+<span class='fu'>new_col_cfg</span><span class='op'>(</span>
+  <span class='va'>table</span>,
+  <span class='va'>src</span>,
+  id_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  index_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  val_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  unit_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  time_vars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  class_prefix <span class='op'>=</span> <span class='va'>src</span>
+<span class='op'>)</span>
 
-<span class='fu'>new_tbl_cfg</span>(
-  <span class='kw'>table</span>,
-  <span class='kw'>src</span>,
-  files = <span class='kw'>NULL</span>,
-  cols = <span class='kw'>NULL</span>,
-  num_rows = <span class='kw'>NULL</span>,
-  partitioning = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>,
-  class_prefix = <span class='kw'>src</span>
-)
+<span class='fu'>new_tbl_cfg</span><span class='op'>(</span>
+  <span class='va'>table</span>,
+  <span class='va'>src</span>,
+  files <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num_rows <span class='op'>=</span> <span class='cn'>NULL</span>,
+  partitioning <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  class_prefix <span class='op'>=</span> <span class='va'>src</span>
+<span class='op'>)</span>
 
-<span class='fu'>is_src_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>is_src_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>is_id_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>is_id_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>is_col_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>is_col_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>is_tbl_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>is_tbl_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>as_src_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>as_src_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>as_id_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>as_id_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>as_col_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>as_col_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>as_tbl_cfg</span>(<span class='kw'>x</span>)
+<span class='fu'>as_tbl_cfg</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>src_url</span>(<span class='kw'>x</span>)
+<span class='fu'>src_url</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>id_var_opts</span>(<span class='kw'>x</span>)
+<span class='fu'>id_var_opts</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>src_name</span>(<span class='kw'>x</span>)
+<span class='fu'>src_name</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>tbl_name</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>tbl_name</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
