@@ -43,7 +43,7 @@
 <meta property="og:description" content="Item objects are used in ricu as a way to specify how individual data
 items corresponding to clinical concepts (see also concept()), such as
 heart rate can be loaded from a data source. Several functions are
-available for constructing item (and related auxillary) objects either
+available for constructing item (and related auxiliary) objects either
 from code or by parsing a JSON formatted concept dictionary using
 load_dictionary()." />
 
@@ -77,7 +77,7 @@ load_dictionary()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@ load_dictionary()." />
     <p>Item objects are used in <code>ricu</code> as a way to specify how individual data
 items corresponding to clinical concepts (see also <code><a href='new_cncpt.html'>concept()</a></code>), such as
 heart rate can be loaded from a data source. Several functions are
-available for constructing <code>item</code> (and related auxillary) objects either
+available for constructing <code>item</code> (and related auxiliary) objects either
 from code or by parsing a JSON formatted concept dictionary using
 <code><a href='load_dictionary.html'>load_dictionary()</a></code>.</p>
     </div>
@@ -255,7 +255,7 @@ example for insulin in <code>eicu</code>, where the regular expression <code>^in
 of <code>infusiondrug</code>. The regular expression is evaluated by <code><a href='https://rdrr.io/r/base/grep.html'>base::grepl()</a></code>
 with <code>ignore.case = TRUE</code>.</p></li>
 <li><p><code>fun_itm</code>: Intended for the scenario where data of interest is not
-directly available from a table, this <code>itm</code> class offers most flexbility.
+directly available from a table, this <code>itm</code> class offers most flexibility.
 A function can be specified as <code>callback</code> and this function will be called
 with arguments <code>x</code> (the object itself), <code>patient_ids</code>, <code>id_type</code> and
 <code>interval</code> (see <code><a href='load_concepts.html'>load_concepts()</a></code>) and is expected to return an object as
@@ -268,7 +268,7 @@ units fixed per concept.</p></li>
 <p>All <code>itm</code> objects have to specify a data source (<code>src</code>) as well as a
 sub-class. Further arguments then are specific to the respective sub-class
 and encode information that define data loading, such as the table to
-query, the column name and values to use for idenfifying relevant rows,
+query, the column name and values to use for identifying relevant rows,
 etc. The S3 generic function <code>init_itm()</code> is responsible for input
 validation of class-specific arguments as well as class initialization. A
 list of <code>itm</code> objects, created by calls to <code>new_itm()</code> can be passed to

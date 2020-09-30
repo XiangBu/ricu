@@ -45,7 +45,7 @@ multiple ID systems such as patient IDs, hospital stay IDs and ICU
 admission IDs. Even if the raw data is available in only one such ID
 system, given a mapping of IDs alongside start and end times, it is
 possible to convert data from one ID system to another. The function
-change_id() provides such a conversion utiltity, internally either
+change_id() provides such a conversion utility, internally either
 calling upgrade_id() when moving to an ID system with higher cardinality
 and downgrade_id() when the target ID system is of lower cardinality" />
 
@@ -79,7 +79,7 @@ and downgrade_id() when the target ID system is of lower cardinality" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@ multiple ID systems such as patient IDs, hospital stay IDs and ICU
 admission IDs. Even if the raw data is available in only one such ID
 system, given a mapping of IDs alongside start and end times, it is
 possible to convert data from one ID system to another. The function
-<code>change_id()</code> provides such a conversion utiltity, internally either
+<code>change_id()</code> provides such a conversion utility, internally either
 calling <code>upgrade_id()</code> when moving to an ID system with higher cardinality
 and <code>downgrade_id()</code> when the target ID system is of lower cardinality</p>
     </div>
@@ -197,7 +197,7 @@ destination ID columns as well as start and end columns corresponding to
 the destination ID, relative to the source ID system. In the following
 example, we request for <code>mimic_demo</code>, with ICU stay IDs as source and
 hospital admissions as destination IDs.<div class="r"></p><pre><span class='fu'><a href='id_origin.html'>id_map_helper</a></span><span class='op'>(</span><span class='va'>mimic_demo</span>, <span class='st'>"icustay_id"</span>, <span class='st'>"hadm_id"</span><span class='op'>)</span>
-</pre><p></div></p><pre><span class='co'>## # An `id_tbl`: 136 ✖ 4</span>
+</pre><p></div></p><pre><span class='co'>## # An `id_tbl`: 136 x 4</span>
 <span class='co'>## # Id var:      `icustay_id`</span>
 <span class='co'>##     icustay_id hadm_id hadm_id_start hadm_id_end</span>
 <span class='co'>##          &lt;int&gt;   &lt;int&gt; &lt;drtn&gt;        &lt;drtn&gt;     </span>
@@ -206,13 +206,13 @@ hospital admissions as destination IDs.<div class="r"></p><pre><span class='fu'>
 <span class='co'>## 3       203766  126949  -1336 mins    8818 mins </span>
 <span class='co'>## 4       204132  157609     -1 mins   10103 mins </span>
 <span class='co'>## 5       204201  177678   -368 mins    9445 mins </span>
-<span class='co'>## …          </span>
+<span class='co'>## ...        </span>
 <span class='co'>## 132     295043  170883 -10413 mins   31258 mins </span>
 <span class='co'>## 133     295741  176805     -1 mins    3153 mins </span>
 <span class='co'>## 134     296804  110244  -1294 mins    4599 mins </span>
 <span class='co'>## 135     297782  167612     -1 mins     207 mins </span>
 <span class='co'>## 136     298685  151323     -1 mins   19082 mins </span>
-<span class='co'>## # … with 126 more rows</span>
+<span class='co'>## # ... with 126 more rows</span>
 </pre>
 
 <p>Both start and end columns encode the hospital admission windows relative

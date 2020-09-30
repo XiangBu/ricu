@@ -79,7 +79,7 @@ format) and attaching sets up the data for use by the package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -176,7 +176,7 @@ format) and attaching sets up the data for use by the package.</p>
     </tr>
     <tr>
       <th>user, pass</th>
-      <td><p>Physionet credentials; if <code>NULL</code> and environment
+      <td><p>PhysioNet credentials; if <code>NULL</code> and environment
 variables <code>RICU_PHYSIONET_USER</code>/<code>RICU_PHYSIONET_PASS</code> are not set, user
 input is required</p></td>
     </tr>
@@ -194,11 +194,11 @@ credentials are required for downloading any of the three datasets, demo
 dataset for both MIMIC-III and eICU are available without having to log in.
 Even though access to full dataset is credentialed, the datasets are in
 fact publicly available. For setting up an account, please refer to <a href='https://physionet.org/register/'>the registration form</a>.</p>
-<p>Physionet credentials can either be entered in an interactive session,
+<p>PhysioNet credentials can either be entered in an interactive session,
 passed as function arguments <code>user</code>/<code>pass</code> or as environment
 variables <code>RICU_PHYSIONET_USER</code>/<code>RICU_PHYSIONET_PASS</code>. For setting
 environment variables on session startup, refer to <code><a href='https://rdrr.io/r/base/Startup.html'>base::.First.sys()</a></code> and
-for setting environment varaibles in general, refer to <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>base::Sys.setenv()</a></code>
+for setting environment variables in general, refer to <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>base::Sys.setenv()</a></code>
 If the openssl package is available, SHA256 hashes of downloaded files are
 verified using <code><a href='https://rdrr.io/pkg/openssl/man/hash.html'>openssl::sha256()</a></code>.</p>
 <p>Demo datasets

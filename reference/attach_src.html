@@ -79,7 +79,7 @@ the package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -211,7 +211,7 @@ prefix)</p></td>
     <p>Attaching a dataset sets up two types of S3 classes: a single <code>src_env</code>
 object, containing as many <code>src_tbl</code> objects as tables are associated with
 the dataset. A <code>src_env</code> is an environment with an <code>id_cfg</code> attribute, as
-well as sub-calsses as specified by the data source <code>class_prefix</code>
+well as sub-classes as specified by the data source <code>class_prefix</code>
 configuration setting (see <code><a href='load_src_cfg.html'>load_src_cfg()</a></code>). All <code>src_env</code> objects created
 by calling <code>attach_src()</code> represent environments that are direct
 descendants of the <code>data</code> environment and are bound to the respective
@@ -240,7 +240,7 @@ names before loading the library. Setting this environment variable as</p><pre><
 
 <p>will change the default of loading both MIMIC-III and eICU, alongside the
 respective demo datasets, and HiRID, to just the two demo datasets. For
-setting an enviroment variable upon startup of the R session, refer to
+setting an environment variable upon startup of the R session, refer to
 <code><a href='https://rdrr.io/r/base/Startup.html'>base::.First.sys()</a></code>.</p>
 <p>The <code>src_env</code> promise for each data source is created using the S3 generic
 function <code>setup_src_env()</code>. This function checks if all required files are

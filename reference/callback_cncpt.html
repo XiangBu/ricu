@@ -75,7 +75,7 @@ steps." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -167,17 +167,18 @@ steps.</p>
     </tr>
     <tr>
       <th>match_win</th>
-      <td><p>Default ventilation window if no stop time can be
-matched to a start time</p></td>
+      <td><p>Time-span during which matching of values is allowed</p></td>
     </tr>
     <tr>
       <th>mode</th>
-      <td><p>Method for matching PaO₂ and FiO₂ values</p></td>
+      <td><p>Method for matching PaO
+<sub>2</sub> and FiO<sub>2</sub> values</p></td>
     </tr>
     <tr>
       <th>fix_na_fio2</th>
-      <td><p>Logical flag indicating whether to impute missing FiO₂
-values with 21</p></td>
+      <td><p>Logical flag indicating whether to impute missing
+FiO
+<sub>2</sub> values with 21</p></td>
     </tr>
     <tr>
       <th>interval</th>
@@ -227,22 +228,71 @@ investigating stability with respect to such choices. Furthermore, default
 values might not be ideal for some datasets and/or analysis tasks.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>pafi</code></h3>
 
 
-<p>In order to calculate the PaO₂/FiO₂ (or Horowitz index), for a given time
-point, both a PaO₂ and a FiO₂ measurement is required. As the two are often
+<p>In order to calculate the PaO
+<sub>2</sub>/FiO<sub>2</sub> (or
+Horowitz index), for a given time point, both a PaO<sub>2</sub> and a
+FiO
+<sub>2</sub> measurement is required. As the two are often
 not measured at the same time, some form of imputation or matching
 procedure is required. Several options are available:</p><ul>
 <li><p><code>match_vals</code> allows for a time difference of maximally <code>match_win</code>
 between two measurements for calculating their ratio</p></li>
-<li><p><code>extreme_vals</code> uses the worst PaO₂ and a FiO₂ values within the time
-window spanned by <code>match_win</code></p></li>
+<li><p><code>extreme_vals</code> uses the worst PaO
+  <sub>2</sub> and a FiO<sub>2</sub>
+values within the time window spanned by <code>match_win</code></p></li>
 <li><p><code>fill_gaps</code> represents a variation of <code>extreme_vals</code>, where ratios are
 evaluated at every time-point as specified by <code>interval</code>as opposed to
-only the time points where either a PaO₂ or a FiO₂ measurement is
-available</p></li>
+only the time points where either a PaO<sub>2</sub> or a
+FiO
+  <sub>2</sub> measurement is available</p></li>
 </ul>
 
-<p>Finally, <code>fix_na_fio2</code> imputes all remaining missing FiO₂ with 21, the
-percentage (by volume) of oxygen in (tropospheric) air.</p>
+<p>Finally, <code>fix_na_fio2</code> imputes all remaining missing FiO<sub>2</sub> with 21,
+the percentage (by volume) of oxygen in (tropospheric) air.</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>vent</code></h3>
+
+
+<p>Building on the atomic concepts <code>vent_start</code> and <code>vent_end</code>, an binary
+indicator for ventilation status is constructed by combining start and end
+events that are separated by at most <code>match_win</code> and at least <code>min_length</code>.
+Time-points (as determined by <code>interval</code>) that fall into such ventilation
+windows are set to <code>TRUE</code>, while missingness (<code>NA</code>) or <code>FALSE</code> indicate no
+mechanical ventilation. Currently, no clear distinction between invasive
+an non-invasive ventilation is made.</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>sed</code></h3>
+
+
+<p>In order to construct an indicator for patient sedation, information from
+the two concepts <code>trach</code> and <code>rass</code> is pooled: A patient is considered
+sedated if intubated or has less or equal to -2 on the Richmond
+Agitation-Sedation Scale.</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>gcs</code></h3>
+
+
+<p>Aggregating components of the Glasgow Coma Scale into a total score
+(whenever the total score <code>tgcs</code> is not already available) requires
+coinciding availability of an eye (<code>egcs</code>), verbal (<code>vgcs</code>) and motor
+(<code>mgcs</code>) score. In order to match values, a last observation carry forward
+imputation scheme over the time span specified by <code>valid_win</code> is performed.
+Furthermore passing <code>TRUE</code> as <code>set_sed_max</code> will assume maximal points for
+time steps where the patient is sedated (as indicated by <code>sed</code>) and passing
+<code>TRUE</code> as <code>set_na_max</code> will assume maximal points for missing values (after
+matching and potentially applying <code>set_sed_max</code>).</p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>urine24</code></h3>
+
+
+<p>Single urine output events are aggregated into a 24 hour moving window sum.
+At default value of <code>limits = NULL</code>, moving window evaluation begins with
+the first and ends with the last available measurement. This can however be
+extended by passing an <code>id_tbl</code> object, such as for example returned by
+<code><a href='stay_windows.html'>stay_windows()</a></code> to full stay windows. In order to provide data earlier
+than 24 hours before the evaluation start point, <code>min_win</code> specifies the
+minimally required data window and the evaluation scheme is adjusted for
+shorter than 24 hour windows.</p>
 
 
   </div>

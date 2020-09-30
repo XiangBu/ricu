@@ -13,6 +13,9 @@
     <loc>https://septic-tank.github.io/ricu/reference/callback_itm.html</loc>
   </url>
   <url>
+    <loc>https://septic-tank.github.io/ricu/reference/callback_sofa.html</loc>
+  </url>
+  <url>
     <loc>https://septic-tank.github.io/ricu/reference/change_id.html</loc>
   </url>
   <url>
@@ -50,9 +53,6 @@
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/item_utils.html</loc>
-  </url>
-  <url>
-    <loc>https://septic-tank.github.io/ricu/reference/label_sofa.html</loc>
   </url>
   <url>
     <loc>https://septic-tank.github.io/ricu/reference/load_concepts.html</loc>

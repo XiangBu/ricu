@@ -82,7 +82,7 @@ loading using load_id() and load_ts() via change_id()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -215,7 +215,7 @@ with the data loading function <code>id_win_helper()</code>. The function
 <code>id_map_helper()</code> is then implemented in a data source agnostic manner
 (dispatching on the <code>src_env</code> class), providing subsetting of this larger
 ID map table and ensuring timestamps are relative to the correct ID system.
-FOr adding a new data source however, this layer can be forgone. Similarly
+For adding a new data source however, this layer can be forgone. Similarly
 for <code>id_origin()</code>, this is used for the internal datasets in
 <code><a href='load_src.html'>load_difftime()</a></code>. An implementation of <code><a href='load_src.html'>load_difftime()</a></code>, specific to a
 new data source can be provided that does not rely on <code>id_windows()</code>,
