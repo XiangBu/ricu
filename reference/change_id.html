@@ -100,6 +100,9 @@ and downgrade_id() when the target ID system is of lower cardinality" />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -255,27 +258,14 @@ stamps -4h, 3h and 11h, while data points 4-8 are assigned to -10h, -2h,
 efficient <code>data.table</code> rolling join.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='va'>mimic_demo</span><span class='op'>$</span><span class='va'>labevents</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://physionet.org/content/mimiciii-demo/1.4'>mimic.demo</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='va'>mimic_demo</span><span class='op'>$</span><span class='va'>labevents</span>
 <span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='load_src.html'>load_difftime</a></span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>itemid</span> <span class='op'>==</span> <span class='fl'>50809</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"charttime"</span>, <span class='st'>"valuenum"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>dat</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 276 ✖ 3</span><span>
-#&gt; </span><span style='color: #555555;'># Id var:      `hadm_id`</span><span>
-#&gt;     hadm_id charttime valuenum
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>    </span><span style='text-decoration: underline;'>100</span><span>969 -177 mins      273
-#&gt; </span><span style='color: #555555;'>2</span><span>    </span><span style='text-decoration: underline;'>104</span><span>697  128 mins      118
-#&gt; </span><span style='color: #555555;'>3</span><span>    </span><span style='text-decoration: underline;'>107</span><span>689 -178 mins      105
-#&gt; </span><span style='color: #555555;'>4</span><span>    </span><span style='text-decoration: underline;'>110</span><span>244 1932 mins      105
-#&gt; </span><span style='color: #555555;'>5</span><span>    </span><span style='text-decoration: underline;'>110</span><span>958 -220 mins       99
-#&gt; </span><span style='color: #555555;'>…</span><span>        
-#&gt; </span><span style='color: #555555;'>272</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395 5488 mins      152
-#&gt; </span><span style='color: #555555;'>273</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395 6705 mins      146
-#&gt; </span><span style='color: #555555;'>274</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395 6960 mins      108
-#&gt; </span><span style='color: #555555;'>275</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395 8270 mins       58
-#&gt; </span><span style='color: #555555;'>276</span><span>  </span><span style='text-decoration: underline;'>199</span><span>395 8538 mins       88
-#&gt; </span><span style='color: #555555;'># … with 266 more rows</span><span></div><div class='input'>
+
 <span class='fu'>change_id</span><span class='op'>(</span><span class='va'>dat</span>, <span class='st'>"icustay_id"</span>, <span class='va'>tbl</span>, keep_old_id <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># An `id_tbl`: 284 ✖ 3</span><span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: mimic.demo</span></div><div class='output co'>#&gt; <span style='color: #555555;'># An `id_tbl`: 284 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:      `icustay_id`</span><span>
 #&gt;     icustay_id charttime valuenum
 #&gt;          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

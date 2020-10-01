@@ -96,6 +96,9 @@ steps." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -171,14 +174,13 @@ steps.</p>
     </tr>
     <tr>
       <th>mode</th>
-      <td><p>Method for matching PaO
-<sub>2</sub> and FiO<sub>2</sub> values</p></td>
+      <td><p>Method for matching PaO<sub>2</sub> and
+FiO2 values</p></td>
     </tr>
     <tr>
       <th>fix_na_fio2</th>
       <td><p>Logical flag indicating whether to impute missing
-FiO
-<sub>2</sub> values with 21</p></td>
+FiO2 values with 21</p></td>
     </tr>
     <tr>
       <th>interval</th>
@@ -228,23 +230,20 @@ investigating stability with respect to such choices. Furthermore, default
 values might not be ideal for some datasets and/or analysis tasks.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>pafi</code></h3>
 
 
-<p>In order to calculate the PaO
-<sub>2</sub>/FiO<sub>2</sub> (or
+<p>In order to calculate the PaO<sub>2</sub>/FiO<sub>2</sub> (or
 Horowitz index), for a given time point, both a PaO<sub>2</sub> and a
-FiO
-<sub>2</sub> measurement is required. As the two are often
+FiO2 measurement is required. As the two are often
 not measured at the same time, some form of imputation or matching
 procedure is required. Several options are available:</p><ul>
 <li><p><code>match_vals</code> allows for a time difference of maximally <code>match_win</code>
 between two measurements for calculating their ratio</p></li>
-<li><p><code>extreme_vals</code> uses the worst PaO
-  <sub>2</sub> and a FiO<sub>2</sub>
-values within the time window spanned by <code>match_win</code></p></li>
+<li><p><code>extreme_vals</code> uses the worst PaO<sub>2</sub> and a
+FiO2 values within the time window spanned by
+<code>match_win</code></p></li>
 <li><p><code>fill_gaps</code> represents a variation of <code>extreme_vals</code>, where ratios are
 evaluated at every time-point as specified by <code>interval</code>as opposed to
 only the time points where either a PaO<sub>2</sub> or a
-FiO
-  <sub>2</sub> measurement is available</p></li>
+FiO2 measurement is available</p></li>
 </ul>
 
 <p>Finally, <code>fix_na_fio2</code> imputes all remaining missing FiO<sub>2</sub> with 21,

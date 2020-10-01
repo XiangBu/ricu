@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Stays — stay_windows • ICU data with R</title>
+<title>Changelog • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,7 @@
 
 
 
-<meta property="og:title" content="Stays — stay_windows" />
-<meta property="og:description" content="Building on functionality offered by the (internal) function id_map(),
-stay windows as well as (in case of differing values being passed as
-id_type and win_type) an ID mapping is computed." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -61,7 +58,7 @@ id_type and win_type) an ID mapping is computed." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -119,62 +116,26 @@ id_type and win_type) an ID mapping is computed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Stays</h1>
-    
-    <div class="hidden name"><code>stay_windows.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      
     </div>
 
-    <div class="ref-description">
-    <p>Building on functionality offered by the (internal) function <code><a href='id_origin.html'>id_map()</a></code>,
-stay windows as well as (in case of differing values being passed as
-<code>id_type</code> and <code>win_type</code>) an ID mapping is computed.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>stay_windows</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  id_type <span class='op'>=</span> <span class='st'>"icustay"</span>,
-  win_type <span class='op'>=</span> <span class='va'>id_type</span>,
-  in_time <span class='op'>=</span> <span class='st'>"start"</span>,
-  out_time <span class='op'>=</span> <span class='st'>"end"</span>,
-  interval <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>1L</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>Passed to <code><a href='new_src_cfg.html'>as_id_cfg()</a></code> and <code><a href='attach_src.html'>as_src_env()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>id_type</th>
-      <td><p>Type of ID all returned times are relative to</p></td>
-    </tr>
-    <tr>
-      <th>win_type</th>
-      <td><p>Type of ID for which the in/out times is returned</p></td>
-    </tr>
-    <tr>
-      <th>in_time, out_time</th>
-      <td><p>column names of the returned in/out times</p></td>
-    </tr>
-    <tr>
-      <th>interval</th>
-      <td><p>The time interval used to discretize time stamps with,
-specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> object</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>change_id</p></div>
-
+    <div id="ricu-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#ricu-010" class="anchor"></a>ricu 0.1.0</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>CRAN submission</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 

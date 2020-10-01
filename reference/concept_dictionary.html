@@ -98,6 +98,9 @@ section)." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -216,14 +219,10 @@ dictionary by specifying a character vector of data sources and/or concept
 names.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>load_dictionary</span><span class='op'>(</span><span class='st'>"mimic_demo"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;concept[6]&gt;
-#&gt;                                   abx                                   adh 
-#&gt;            antibiotics &lt;lgl_cncpt[2]&gt;            vasopressin &lt;num_cncpt[1]&gt; 
-#&gt;                                   adm                                   age 
-#&gt; patient admission type &lt;fct_cncpt[1]&gt;            patient age &lt;num_cncpt[1]&gt; 
-#&gt;                                   alb                                   alp 
-#&gt;                albumin &lt;num_cncpt[1]&gt;   alkaline phosphatase &lt;num_cncpt[1]&gt; </div><div class='input'><span class='fu'>load_dictionary</span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"glu"</span>, <span class='st'>"lact"</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://physionet.org/content/mimiciii-demo/1.4'>mimic.demo</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>load_dictionary</span><span class='op'>(</span><span class='st'>"mimic_demo"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>load_dictionary</span><span class='op'>(</span><span class='st'>"mimic_demo"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"glu"</span>, <span class='st'>"lact"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; &lt;concept[2]&gt;
 #&gt;                    glu                   lact 
 #&gt; glucose &lt;num_cncpt[1]&gt; lactate &lt;num_cncpt[1]&gt; </div><div class='input'>
