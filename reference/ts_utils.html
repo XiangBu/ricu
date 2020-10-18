@@ -82,13 +82,19 @@ over time-windows selected in absolute terms." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -188,8 +194,8 @@ over time-windows selected in absolute terms.</p>
   upr_col <span class='op'>=</span> <span class='st'>"max_time"</span>,
   left_closed <span class='op'>=</span> <span class='cn'>TRUE</span>,
   right_closed <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  nomatch <span class='op'>=</span> <span class='cn'>NULL</span>,
-  eval_env <span class='op'>=</span> <span class='cn'>NULL</span>
+  eval_env <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -228,7 +234,8 @@ expressions passes as <code>...</code></p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passed to <code>hop_quo()</code></p></td>
+      <td><p>Passed to <code>hop_quo()</code> and ultimately to
+<code>data.table::[()</code></p></td>
     </tr>
     <tr>
       <th>limits</th>
@@ -266,10 +273,6 @@ window bounds</p></td>
       <th>left_closed, right_closed</th>
       <td><p>Logical flag indicating whether intervals
 are closed (default) or open.</p></td>
-    </tr>
-    <tr>
-      <th>nomatch</th>
-      <td><p>Forwarded to <code>data.table::[()</code></p></td>
     </tr>
     <tr>
       <th>eval_env</th>
@@ -326,18 +329,21 @@ certain time-points, specified by <code>index</code>.</p>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     3 3 hours 2 hours    11
 #&gt; </span><span style='color: #555555;'>2</span><span>     4 4 hours 1 hours    34</div><div class='input'><span class='fu'>slide_index</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>, before <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 7 ✖ 3</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 10 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>
-#&gt;       x y           z
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     2 4 hours     3
-#&gt; </span><span style='color: #555555;'>2</span><span>     3 4 hours    11
-#&gt; </span><span style='color: #555555;'>3</span><span>     3 5 hours     6
-#&gt; </span><span style='color: #555555;'>4</span><span>     4 4 hours    27
-#&gt; </span><span style='color: #555555;'>5</span><span>     4 5 hours    19
-#&gt; </span><span style='color: #555555;'>6</span><span>     5 4 hours    39
-#&gt; </span><span style='color: #555555;'>7</span><span>     5 5 hours    42</div><div class='input'><span class='fu'>slide</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>, before <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;        x y           z
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;drtn&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1 4 hours    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>      1 5 hours    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>      2 4 hours     3
+#&gt; </span><span style='color: #555555;'>4</span><span>      2 5 hours    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span>      3 4 hours    11
+#&gt; </span><span style='color: #555555;'>6</span><span>      3 5 hours     6
+#&gt; </span><span style='color: #555555;'>7</span><span>      4 4 hours    27
+#&gt; </span><span style='color: #555555;'>8</span><span>      4 5 hours    19
+#&gt; </span><span style='color: #555555;'>9</span><span>      5 4 hours    39
+#&gt; </span><span style='color: #555555;'>10</span><span>     5 5 hours    42</div><div class='input'><span class='fu'>slide</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>, before <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A `ts_tbl`: 15 ✖ 3</span><span>
 #&gt; </span><span style='color: #555555;'># Id var:     `x`</span><span>
 #&gt; </span><span style='color: #555555;'># Index var:  `y` (1 hours)</span><span>
@@ -386,7 +392,7 @@ certain time-points, specified by <code>index</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

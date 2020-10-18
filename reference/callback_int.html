@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Difftime utilities — secs • ICU data with R</title>
+<title>Internal item callback utilities — add_weight • ICU data with R</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,13 @@
 
 
 
-<meta property="og:title" content="Difftime utilities — secs" />
-<meta property="og:description" content="As base::difftime() vectors are used throughout ricu, a set of wrapper
-functions are exported for convenience of instantiation base::difftime()
-vectors with given time units." />
+<meta property="og:title" content="Internal item callback utilities — add_weight" />
+<meta property="og:description" content="The utility function add_weight() is exported for convenience when adding
+external datasets and integrating concepts such as vasopressor rates which
+rely on patient weight. For this to function, the newly added dataset must
+offer a weight concept. For performance reasons, the weight concept is
+internally cached, as this might be used unchanged many times, when loading
+several concepts that need to pull in patient weight data." />
 
 
 
@@ -125,45 +128,55 @@ vectors with given time units." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Difftime utilities</h1>
+    <h1>Internal item callback utilities</h1>
     
-    <div class="hidden name"><code>difftime.Rd</code></div>
+    <div class="hidden name"><code>callback_int.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>As <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> vectors are used throughout <code>ricu</code>, a set of wrapper
-functions are exported for convenience of instantiation <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code>
-vectors with given time units.</p>
+    <p>The utility function <code>add_weight()</code> is exported for convenience when adding
+external datasets and integrating concepts such as vasopressor rates which
+rely on patient weight. For this to function, the newly added dataset must
+offer a <code>weight</code> concept. For performance reasons, the weight concept is
+internally cached, as this might be used unchanged many times, when loading
+several concepts that need to pull in patient weight data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>secs</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>add_weight</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>env</span>, weight_var <span class='op'>=</span> <span class='st'>"weight"</span><span class='op'>)</span>
 
-<span class='fu'>mins</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='fu'>hours</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='fu'>days</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='fu'>weeks</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='fu'>calc_dur</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>val_var</span>, <span class='va'>min_var</span>, <span class='va'>max_var</span>, grp_var <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Numeric vector to coerce to <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code></p></td>
+      <td><p>Object in loading</p></td>
+    </tr>
+    <tr>
+      <th>env</th>
+      <td><p>Data source environment as available as <code>env</code> in callback
+functions</p></td>
+    </tr>
+    <tr>
+      <th>weight_var</th>
+      <td><p>String valued name of the newly added weight column</p></td>
+    </tr>
+    <tr>
+      <th>val_var</th>
+      <td><p>String valued column name corresponding to the value variable</p></td>
+    </tr>
+    <tr>
+      <th>min_var, max_var</th>
+      <td><p>Column names denoting start and end times</p></td>
+    </tr>
+    <tr>
+      <th>grp_var</th>
+      <td><p>Optional grouping variable (for example linking infusions)</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>hours</span><span class='op'>(</span><span class='fl'>1L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Time difference of 1 hours</div><div class='input'><span class='fu'>mins</span><span class='op'>(</span><span class='cn'>NA_real_</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Time difference of NA mins</div><div class='input'><span class='fu'>secs</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Time differences in secs
-#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>hours</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='fl'>0L</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Time difference of  hours</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

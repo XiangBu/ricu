@@ -81,13 +81,19 @@ respective internally called function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -144,46 +150,32 @@ Internally, <code>sofa_score()</code> calls first <code>sofa_window()</code>, fo
 respective internally called function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sofa_score</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='fu'>sofa_window</span><span class='op'>(</span>
-  <span class='va'>tbl</span>,
-  pafi_wf <span class='op'>=</span> <span class='va'>min_or_na</span>,
-  plt_wf <span class='op'>=</span> <span class='va'>min_or_na</span>,
-  bili_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  map_wf <span class='op'>=</span> <span class='va'>min_or_na</span>,
-  dopa_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  norepi_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  dobu_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  epi_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  gcs_wf <span class='op'>=</span> <span class='va'>min_or_na</span>,
-  crea_wf <span class='op'>=</span> <span class='va'>max_or_na</span>,
-  urine_wf <span class='op'>=</span> <span class='va'>min_or_na</span>,
+    <pre class="usage"><span class='fu'>sofa_score</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  interval <span class='op'>=</span> <span class='cn'>NULL</span>,
+  win_fun <span class='op'>=</span> <span class='va'>max_or_na</span>,
   explicit_wins <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  worst_win_length <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>24L</span><span class='op'>)</span>
+  win_length <span class='op'>=</span> <span class='fu'><a href='secs.html'>hours</a></span><span class='op'>(</span><span class='fl'>24L</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='fu'>sofa_compute</span><span class='op'>(</span>
-  <span class='va'>tbl</span>,
-  na_val <span class='op'>=</span> <span class='fl'>0L</span>,
-  na_resp <span class='op'>=</span> <span class='va'>na_val</span>,
-  na_plt <span class='op'>=</span> <span class='va'>na_val</span>,
-  na_liver <span class='op'>=</span> <span class='va'>na_val</span>,
-  na_cardio <span class='op'>=</span> <span class='va'>na_val</span>,
-  na_cns <span class='op'>=</span> <span class='va'>na_val</span>,
-  na_renal <span class='op'>=</span> <span class='va'>na_val</span>,
-  impute_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
-  keep_components <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  by_ref <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+<span class='fu'>sofa_resp</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>sofa_coag</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>sofa_liver</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>sofa_cardio</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>sofa_cns</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>sofa_renal</span><span class='op'>(</span><span class='va'>...</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Data and further arguments passed to <code>sofa_window()</code> or
-<code>sofa_compute()</code></p></td>
+      <td><p>Concept data, either passed as list or individual argument</p></td>
     </tr>
     <tr>
       <th>interval</th>
@@ -191,11 +183,7 @@ respective internally called function.</p>
 of input data, <code>NULL</code> will use the interval of the first data object)</p></td>
     </tr>
     <tr>
-      <th>tbl</th>
-      <td><p>Table holding SOFA covariates</p></td>
-    </tr>
-    <tr>
-      <th>pafi_wf, plt_wf, bili_wf, map_wf, dopa_wf, norepi_wf, dobu_wf, epi_wf, gcs_wf, crea_wf, urine_wf</th>
+      <th>win_fun</th>
       <td><p>functions used to calculate worst values over windows</p></td>
     </tr>
     <tr>
@@ -205,45 +193,21 @@ of input data, <code>NULL</code> will use the interval of the first data object)
 iterate over these explicit time points</p></td>
     </tr>
     <tr>
-      <th>worst_win_length</th>
-      <td><p>Time-frame to look back and apply the <code>*_wf</code>s</p></td>
-    </tr>
-    <tr>
-      <th>na_val</th>
-      <td><p>Value to use for missing data</p></td>
-    </tr>
-    <tr>
-      <th>na_resp, na_plt, na_liver, na_cardio, na_cns, na_renal</th>
-      <td><p>Feature-specific values to use in case of missing data; default is <code>na_val</code></p></td>
-    </tr>
-    <tr>
-      <th>impute_fun</th>
-      <td><p>Function used to impute missing data; default is NULL</p></td>
-    </tr>
-    <tr>
-      <th>keep_components</th>
-      <td><p>Logical flag indicating whether to return individual
-SOFA components as columns</p></td>
-    </tr>
-    <tr>
-      <th>by_ref</th>
-      <td><p>Logical flag indicating whether to perform the operation by
-reference</p></td>
+      <th>win_length</th>
+      <td><p>Time-frame to look back and apply the <code>win_fun</code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function <code>sofa_window()</code> calculates, for each covariate, the worst
-value over a moving window as specified by <code>worst_win_length</code>, using the
-respective function passed as <code>*_wf</code> (e.g. <code>pafi_wf</code> for the
-<code>pafi</code> component. The default functions <code><a href='min_or_na.html'>min_or_na()</a></code> and <code><a href='min_or_na.html'>max_or_na()</a></code>
-return <code>NA</code> instead of <code>-Inf/Inf</code> in the case where no measurement is
-available over an entire window.</p>
-<p>Using data imputed by <code>sofa_window()</code>, the function <code>sofa_compute()</code>
-performs the actual score calculation. First, for each time step and
-component, measurements are converted to a component score using the
-definition by Vincent et. al.:</p><table class='table'>
+    <p>The function <code>sofa_score()</code> calculates, for each component, the worst value
+over a moving window as specified by <code>win_length</code>, using the function
+passed as <code>win_fun</code>. The default functions <code><a href='min_or_na.html'>max_or_na()</a></code> return <code>NA</code>
+instead of <code>-Inf/Inf</code> in the case where no measurement is available over an
+entire window. When calculating the overall score by summing up components
+per time-step, a <code>NA</code> value is treated as 0.</p>
+<p>Building on separate concepts, measurements for each component are
+converted to a component score using the definition by Vincent et. al.:</p><table class='table'>
 <tr><td><strong>SOFA score</strong></td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
 <tr><td><strong>Respiration</strong></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>PaO2/FiO2 [mmHg]</td><td>&lt; 400</td><td>&lt; 300</td><td>&lt; 200</td><td>&lt; 100</td></tr>
@@ -251,31 +215,30 @@ definition by Vincent et. al.:</p><table class='table'>
 <tr><td><strong>Coagulation</strong></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Platelets [x103/mm3]</td><td>&lt; 150</td><td>&lt; 100</td><td>&lt; 50</td><td>&lt; 20</td></tr>
 <tr><td><strong>Liver</strong></td><td></td><td></td><td></td><td></td></tr>
-<tr><td>Bilirubin [mg/dl] ([umol/ul])</td><td>1.2-1.9 (20-32)</td><td>2.0-5.9 (33-101)</td><td>6.0-11.9 (102-204)</td><td>&gt; 12.0 (&gt; 204)</td></tr>
+<tr><td>Bilirubin [mg/dl]</td><td>1.2-1.9</td><td>2.0-5.9</td><td>6.0-11.9</td><td>&gt; 12.0</td></tr>
 <tr><td><strong>Cardiovascular</strong>a</td><td></td><td></td><td></td><td></td></tr>
 <tr><td>MAP</td><td>&lt; 70 mmHg</td><td></td><td></td><td></td></tr>
 <tr><td>or dopamine</td><td></td><td>&lt;=                           5</td><td>&gt; 5</td><td>&gt; 15</td></tr>
 <tr><td>or dobutamine</td><td></td><td>any dose</td><td></td><td></td></tr>
-<tr><td>or epinephrine</td><td></td><td></td><td>&lt;=                                    0.1</td><td>&gt; 0.1</td></tr>
-<tr><td>or norepinephrine</td><td></td><td></td><td>&lt;=                                    0.1</td><td>&gt; 0.1</td></tr>
+<tr><td>or epinephrine</td><td></td><td></td><td>&lt;=                                      0.1</td><td>&gt; 0.1</td></tr>
+<tr><td>or norepinephrine</td><td></td><td></td><td>&lt;=                                      0.1</td><td>&gt; 0.1</td></tr>
 <tr><td><strong>Central nervous system</strong></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Glasgow Coma Score</td><td>13-14</td><td>10-12</td><td>6-9</td><td>&lt; 6</td></tr>
 <tr><td><strong>Renal</strong></td><td></td><td></td><td></td><td></td></tr>
-<tr><td>Creatinine [mg/dl] ([umol/ul])</td><td>1.2-1.9 (110-170)</td><td>2.0-3.4 (171-299)</td><td>3.5-4.9 (300-440)</td><td>&gt; 5.0 (&lt; 440)</td></tr>
+<tr><td>Creatinine [mg/dl]</td><td>1.2-1.9</td><td>2.0-3.4</td><td>3.5-4.9</td><td>&gt; 5.0</td></tr>
 <tr><td>or urine output [ml/day]</td><td></td><td></td><td>&lt; 500</td><td>&lt; 200</td></tr>
 </table>
 
 
 
-<p><sup>a</sup>Adrenergic agents administered for at least 1h (doses
-given are in [&mu;g/kg
-&middot; min]</p>
-<p>In case, for a given time step and component, no measurement is available,
-the corresponding <code>na_*</code> value is used (e.g. <code>na_resp</code> for the
-respiratory component). At default, this is 0 (the lowest possible score
-for a SOFA component). It is possible to retain missingness by passing <code>NA</code>
-as <code>na_*</code> value and using a function passed as <code>impute_fun()</code> in order
-to perform an additional imputation step.</p>
+<p>aAdrenergic agents administered for at least 1h
+(doses given are in [ug/kg . min]</p>
+<p>At default, for each patient, a score is calculated for every time step,
+from the first available measurement to the last. In instead of a regularly
+evaluated score, only certain time points are of interest, this can be
+specified using the <code>explicit_wins</code> argument: passing for example
+<code><a href='secs.html'>hours(24, 48)</a></code> will yield for every patient a score at hours 24 and 48
+relative to the orgin of the current ID system (for example ICU stay).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Vincent, J.-L., Moreno, R., Takala, J. et al. The SOFA (Sepsis-related Organ
@@ -297,7 +260,7 @@ Care Med 22, 707–710 (1996). https://doi.org/10.1007/BF01709751</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

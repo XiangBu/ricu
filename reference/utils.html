@@ -72,13 +72,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -136,6 +142,8 @@
 
 <span class='fu'>is_true</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
+<span class='fu'>is_false</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
 <span class='fu'>last_elem</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='fu'>first_elem</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
@@ -160,11 +168,11 @@
     <p>The two functions <code>min_or_na()</code> and <code>max_or_na()</code> overcome a design choice
 of <code><a href='https://rdrr.io/r/base/Extremes.html'>base::min()</a></code> (or <code><a href='https://rdrr.io/r/base/Extremes.html'>base::max()</a></code><code>) that can yield undesirable results. If called on a vector of all missing values with </code>na.rm = TRUE<code>, </code>Inf<code>(and</code>-Inf<code>respectively) are returned. This is changed to returning a missing value of the same type as</code>x`.</p>
 <p>The functions <code>is_val()</code> and <code>not_val()</code> (as well as analogously
-<code>is_true()</code>) return logical vectors of the same length as the value passed
-as <code>x</code>, with non-base R semanticists of comparing against <code>NA</code>: instead of
-returning <code><a href='https://rdrr.io/r/base/c.html'>c(NA, TRUE)</a></code> for <code>c(NA, 5) == 5</code>, <code>is_val()</code> will return
-<code>c(FALSE TRUE)</code>. Passing <code>NA</code> as <code>val</code> might lead to unintended results but
-no warning is thrown.</p>
+<code>is_true()</code> and <code>is_false()</code>) return logical vectors of the same length as
+the value passed as <code>x</code>, with non-base R semanticists of comparing against
+<code>NA</code>: instead of returning <code><a href='https://rdrr.io/r/base/c.html'>c(NA, TRUE)</a></code> for <code>c(NA, 5) == 5</code>, <code>is_val()</code>
+will return <code>c(FALSE TRUE)</code>. Passing <code>NA</code> as <code>val</code> might lead to unintended
+results but no warning is thrown.</p>
 <p>Finally, <code>first_elem()</code> and <code>last_elem()</code> has the same semantics as
 <code><a href='https://rdrr.io/r/utils/head.html'>utils::head()</a></code> and <code><a href='https://rdrr.io/r/utils/head.html'>utils::tail()</a></code> with <code>n = 1L</code> and <code>replace_na()</code> will
 replace all occurrences of <code>NA</code> in <code>x</code> with <code>val.</code></p>
@@ -205,7 +213,7 @@ replace all occurrences of <code>NA</code> in <code>x</code> with <code>val.</co
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

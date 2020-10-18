@@ -75,13 +75,19 @@ steps." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ICU data with R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -159,7 +165,9 @@ steps.</p>
   start_var <span class='op'>=</span> <span class='st'>"start"</span>,
   end_var <span class='op'>=</span> <span class='st'>"end"</span>,
   interval <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span>
+
+<span class='fu'>vaso60</span><span class='op'>(</span><span class='va'>...</span>, max_gap <span class='op'>=</span> <span class='fu'><a href='secs.html'>mins</a></span><span class='op'>(</span><span class='fl'>5L</span><span class='op'>)</span>, interval <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,6 +226,11 @@ beyond first and last measurements</p></td>
     <tr>
       <th>start_var, end_var</th>
       <td><p>Passed to <code><a href='expand.html'>fill_gaps()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>max_gap</th>
+      <td><p>Maximum time gap between administration windows that are
+merged (can be negative).</p></td>
     </tr>
     </table>
 
@@ -293,6 +306,16 @@ than 24 hours before the evaluation start point, <code>min_win</code> specifies 
 minimally required data window and the evaluation scheme is adjusted for
 shorter than 24 hour windows.</p>
 
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a><code>vaso60</code></h3>
+
+
+<p>Building on concepts for drug administration rate and drug administration
+durations, administration events are filtered if they do not fall into
+administrations windows of at least 1h. The <code>max_gap</code> argument can be used
+to control how far apart windows can be in order to be merged (negative
+times are possible as well, meaning that even overlapping windows can be
+considered as individual windows).</p>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -309,7 +332,7 @@ shorter than 24 hour windows.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
