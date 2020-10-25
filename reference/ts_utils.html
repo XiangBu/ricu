@@ -281,6 +281,10 @@ to the environment in which <code>expr</code> was created</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Most functions return <code>ts_tbl</code> objects with the exception of
+<code>has_gaps()</code>/<code>has_no_gaps()</code>/<code>is_regular()</code>, which return logical flags.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A gap in a <code>ts_tbl</code> object is a missing time step, i.e. a missing entry in

@@ -214,6 +214,19 @@ column</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+<ul>
+<li><p><code>id_origin()</code>/<code>id_orig_helper()</code>: an <code>id_tbl</code> with admission time stamps
+corresponding to the selected ID</p></li>
+<li><p><code>id_windows()</code>/<code>id_win_helper()</code>: an <code>id_tbl</code> holding all IDs and their
+respective start and end times</p></li>
+<li><p><code>id_map()</code>/<code>id_map_helper()</code>: an <code>id_tbl</code> containing the selected IDs and
+depending on values passed as <code>in_time</code> and <code>out_time</code>, start and end
+times of the ID passed as <code>win_var</code></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For the internal datasets, <code>id_map_helper()</code> relies on yet another S3

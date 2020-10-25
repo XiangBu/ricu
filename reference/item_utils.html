@@ -40,7 +40,12 @@
 
 
 <meta property="og:title" content="Internal utilities for item/concept objects — prepare_query" />
-<meta property="og:description" content="Internal utilities for item/concept objects" />
+<meta property="og:description" content="Several internal utilities for modifying and querying item and concept
+objects, including getters and setters for itm variables, callback
+functions, cncpt target classes, as well as utilities for data loading
+such as prepare_query() which creates a row-subsetting expression,
+do_callback(), which applies a callback function to data or
+do_itm_load(), which performs data loading corresponding to an itm." />
 
 
 
@@ -129,7 +134,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Internal utilities for <code>item</code>/<code>concept</code> objects</p>
+    <p>Several internal utilities for modifying and querying item and concept
+objects, including getters and setters for <code>itm</code> variables, callback
+functions, <code>cncpt</code> target classes, as well as utilities for data loading
+such as <code>prepare_query()</code> which creates a row-subsetting expression,
+<code>do_callback()</code>, which applies a callback function to data or
+<code>do_itm_load()</code>, which performs data loading corresponding to an <code>itm</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>prepare_query</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
@@ -175,6 +185,23 @@
 specified as <code><a href='https://rdrr.io/r/base/difftime.html'>base::difftime()</a></code> object</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+<ul>
+<li><p><code>prepare_query()</code>: an unevaluated expression used for row-subsetting</p></li>
+<li><p><code>try_add_vars()</code>: a (potentially) modified item object with added
+variables</p></li>
+<li><p><code>get_itm_var()</code>: character vector of <code>itm</code> variables</p></li>
+<li><p><code>set_callback()</code>: a modified object with added callback function</p></li>
+<li><p><code>do_callback()</code>: result of the callback function applied to data, most
+likely (<code>id_tbl</code>/<code>ts_tbl</code>)</p></li>
+<li><p><code>do_itm_load()</code>: result of item loading (<code>id_tbl</code>/<code>ts_tbl</code>)</p></li>
+<li><p><code>n_tick()</code>: Integer valued number of progress bar ticks</p></li>
+<li><p><code>set_target()</code>: a modified object with newly set target class</p></li>
+<li><p><code>get_target()</code>: string valued target class of an object</p></li>
+</ul>
 
 
   </div>

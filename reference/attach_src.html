@@ -215,6 +215,13 @@ prefix)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The constructors <code>new_src_env()</code>/<code>new_src_tbl()</code> as well as coercion
+functions <code>as_src_env()</code>/<code>as_src_tbl()</code> return <code>src_env</code> and <code>src_tbl</code>
+objects respectively. The function <code>attach_src()</code> is called for side
+effects and returns <code>NULL</code> invisibly, while <code>setup_src_env()</code> instantiates
+and returns a <code>src_env</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Attaching a dataset sets up two types of S3 classes: a single <code>src_env</code>
